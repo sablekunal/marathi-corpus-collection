@@ -12,12 +12,12 @@ const QuestionSchema = z.object({
   question: z.string().min(5),
   description: z.string().optional().default(''),
   required: z.boolean().optional().default(true),
-  minWords: z.number().int().min(1).optional().default(50),
-  maxWords: z.number().int().min(1).optional().default(250),
+  minWords: z.number().int().min(1).optional().default(8),
+  maxWords: z.number().int().min(1).optional().default(50),
   language: z.string().optional().default('marathi'),
   enabled: z.boolean().optional().default(true),
   difficulty: z.enum(['easy', 'medium', 'hard']).optional().default('easy'),
-  estimatedTime: z.number().int().optional().default(60),
+  estimatedTime: z.number().int().optional().default(30),
   tags: z.array(z.string()).optional().default([]),
 })
 

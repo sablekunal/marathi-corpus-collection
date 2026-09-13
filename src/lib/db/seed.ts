@@ -10,124 +10,178 @@ const client = createClient({
 
 const db = drizzle(client, { schema })
 
-const SAMPLE_QUESTIONS = [
-  // Opinion
+export const SAMPLE_QUESTIONS = [
+  // Opinion (मत)
   {
     category: 'Opinion',
-    question: 'ऑनलाइन शिक्षणाचे फायदे आणि तोटे याविषयी तुमचे मत सविस्तर मांडा.',
-    description: 'विद्यार्थी, पालक आणि शिक्षक यांच्या दृष्टिकोनातून विचार करा.',
-    minWords: 40,
-    maxWords: 200,
+    question: 'आजच्या काळात लोकांची वाचनाची सवय का कमी होत चालली आहे?',
+    description: 'आपले मत १ किंवा २ वाक्यांत स्पष्ट करा.',
+    minWords: 8,
+    maxWords: 45,
     difficulty: 'easy',
+    estimatedTime: 30,
   },
   {
     category: 'Opinion',
-    question: 'सोशल मीडियाचा आजच्या तरुण पिढीच्या मानसिक आरोग्यावर काय परिणाम होत आहे?',
-    description: 'सकारात्मक व नकारात्मक अशा दोन्ही बाजू स्पष्ट करा.',
-    minWords: 45,
-    maxWords: 250,
-    difficulty: 'medium',
-  },
-  // Description
-  {
-    category: 'Description',
-    question: 'तुमच्या गावातील किंवा शहरातील आठवडे बाजाराचे सजीव वर्णन करा.',
-    description: 'भाजीपाल्याचे स्टॉल्स, माणसांची लगबग, आवाज आणि वातावरण यांचे चित्रण करा.',
-    minWords: 50,
-    maxWords: 250,
-    difficulty: 'medium',
+    question: 'सोशल मीडियामुळे माणसांमधील प्रत्यक्ष भेटणे आणि संवाद कमी झाला आहे का?',
+    description: 'तुमचे स्पष्ट मत १ ते २ वाक्यांत नोंदवा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
   },
   {
-    category: 'Description',
-    question: 'महाराष्ट्रातील कोणत्याही एका ऐतिहासिक किल्ल्याचे भौगोलिक व ऐतिहासिक वर्णन करा.',
-    description: 'किल्ल्याचे प्रवेशद्वार, तटबंदी आणि निसर्गरम्य दृश्य यावर लिहा.',
-    minWords: 45,
-    maxWords: 250,
-    difficulty: 'medium',
+    category: 'Opinion',
+    question: 'शहरात राहणे अधिक आवडते की गावामध्ये, आणि का?',
+    description: 'कारणासह आपले मत १ किंवा २ वाक्यांत सांगा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
   },
-  // Experience
+
+  // Experience (अनुभव)
   {
     category: 'Experience',
-    question: 'तुम्ही केलेल्या एका अविस्मरणीय प्रवासाचा किंवा सहलीचा अनुभव सांगा.',
-    description: 'तो प्रवास का खास ठरला आणि त्यातून तुम्हाला काय शिकायला मिळाले?',
-    minWords: 50,
-    maxWords: 250,
+    question: 'पावसाळ्यातील पहिल्या पावसाचा तुमच्या मनावर काय परिणाम होतो?',
+    description: 'तुमची उत्स्फूर्त भावना १ किंवा २ वाक्यांत सांगा.',
+    minWords: 8,
+    maxWords: 45,
     difficulty: 'easy',
+    estimatedTime: 30,
   },
   {
     category: 'Experience',
-    question: 'पावसाळ्यातील पहिल्या पावसाचा तुमच्या मनावर आणि परिसरावर झालेला अनुभव लिहा.',
-    description: 'मातीचा सुगंध, झाडांची ताजी पाने आणि तुमची वैयक्तिक भावना व्यक्त करा.',
-    minWords: 40,
-    maxWords: 200,
+    question: 'लहानपणीचा कोणता खेळ किंवा खोडी तुम्हाला आजही आठवते?',
+    description: 'ती आठवण १ किंवा २ वाक्यांत लिहा.',
+    minWords: 8,
+    maxWords: 45,
     difficulty: 'easy',
-  },
-  // Imagination
-  {
-    category: 'Imagination',
-    question: 'जर तुम्हाला एका दिवसासाठी अदृश्य होण्याची शक्ती मिळाली, तर तुम्ही काय कराल?',
-    description: 'तुमच्या कल्पकतेला पूर्ण वाव देऊन मजेशीर प्रसंग लिहा.',
-    minWords: 45,
-    maxWords: 250,
-    difficulty: 'medium',
+    estimatedTime: 30,
   },
   {
-    category: 'Imagination',
-    question: 'वर्ष 2050 मधील महाराष्ट्रातील शाळा आणि शिक्षण पद्धती कशी असेल?',
-    description: 'रोबोट शिक्षक, आभासी वर्ग आणि आधुनिक तंत्रज्ञान यावर कल्पना करा.',
-    minWords: 50,
-    maxWords: 250,
-    difficulty: 'medium',
-  },
-  // Instruction
-  {
-    category: 'Instruction',
-    question: 'घरी चवदार आणि पारंपारिक कांदेपोहे बनवण्याची संपूर्ण कृती पायरीनुसार सांगा.',
-    description: 'लागणारे साहित्य, फोडणीची पद्धत आणि सजवण्याची कृती स्पष्ट लिहा.',
-    minWords: 40,
-    maxWords: 200,
+    category: 'Experience',
+    question: 'तुम्ही नुकताच अनुभवलेला एखादा मनाला आनंद देणारा प्रसंग कोणता?',
+    description: 'त्या प्रसंगाविषयी १ ते २ वाक्यांत सांगा.',
+    minWords: 8,
+    maxWords: 45,
     difficulty: 'easy',
+    estimatedTime: 30,
   },
-  // Dialogue
+
+  // Description (वर्णन)
   {
-    category: 'Dialogue',
-    question: 'दुकानदार आणि ग्राहक यांच्यात भाजीपाल्याच्या दरावरून झालेला मजेशीर संवाद लिहा.',
-    description: 'दोघांच्या संवादात स्थानिक भाषेचा गोडवा असावा.',
-    minWords: 40,
-    maxWords: 200,
-    difficulty: 'medium',
+    category: 'Description',
+    question: 'तुमच्या घराच्या खिडकीतून किंवा दारातून दिसणाऱ्या सकाळच्या वातावरणाचे वर्णन करा.',
+    description: 'सकाळचे दृश्य १ किंवा २ वाक्यांत शब्दबद्ध करा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
   },
-  // Regional
+  {
+    category: 'Description',
+    question: 'संध्याकाळचा सूर्यास्त पाहताना निसर्गात कोणते बदल दिसतात?',
+    description: 'आकाश आणि वातावरण १ किंवा २ वाक्यांत वर्णन करा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
+  },
+  {
+    category: 'Description',
+    question: 'तुमच्या आवडत्या गरमागरम चहाची किंवा कॉफीची चव कशी वाटते?',
+    description: 'त्या अनुभवाचे १ किंवा २ वाक्यांत वर्णन करा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
+  },
+
+  // Regional (स्थानिक संस्कृती व भाषा)
   {
     category: 'Regional',
-    question: 'तुमच्या परिसरातील किंवा जिल्ह्यातील कोणत्याही एका प्रसिद्ध सणाबद्दल सविस्तर माहिती द्या.',
-    description: 'सण साजरा करण्याची पद्धत, पारंपारिक खाद्यपदार्थ आणि स्थानिक प्रथा यावर प्रकाश टाका.',
-    minWords: 50,
-    maxWords: 250,
-    difficulty: 'medium',
+    question: 'तुमच्या गावातील किंवा शहराची सर्वात प्रसिद्ध ओळख कोणती आहे?',
+    description: 'स्थानिक वैशिष्ट्य १ किंवा २ वाक्यांत सांगा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
   },
-  // Comparison
   {
-    category: 'Comparison',
-    question: 'गावाकडचे जीवन आणि शहरामधील धावपळीचे जीवन यामधील फरक आणि साम्य स्पष्ट करा.',
-    description: 'शांतता, प्रदूषण, सुविधा आणि नातेसंबंध या मुद्द्यांवर तुलना करा.',
-    minWords: 50,
-    maxWords: 250,
-    difficulty: 'medium',
+    category: 'Regional',
+    question: 'तुमच्या भागात खूप आनंद किंवा नवल वाटल्यावर कोणता स्थानिक शब्द वापरतात?',
+    description: 'तो शब्द किंवा वाक्प्रचार १ ते २ वाक्यांत सांगा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
   },
-  // Future
   {
-    category: 'Future',
-    question: 'कृत्रिम बुद्धिमत्ता (AI) मुळे भविष्यात मराठी भाषेचा वापर आणि डिजिटल स्वरूप कसे बदलेल?',
-    description: 'मराठी भाषा तंत्रज्ञान, अनुवाद आणि शिक्षण क्षेत्रातील बदलांवर विचार मांडा.',
-    minWords: 50,
-    maxWords: 250,
-    difficulty: 'hard',
+    category: 'Regional',
+    question: 'तुमचा सर्वात आवडता पारंपारिक महाराष्ट्रीयन खाद्यपदार्थ कोणता आणि तो का आवडतो?',
+    description: 'त्याचे कारण १ किंवा २ वाक्यांत स्पष्ट करा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
+  },
+
+  // Imagination (कल्पकता)
+  {
+    category: 'Imagination',
+    question: 'जर तुम्हाला हवे तिथे एका क्षणात पोहोचण्याची अदृश्य शक्ती मिळाली, तर कुठे जाल?',
+    description: 'तुमची कल्पकता १ किंवा २ वाक्यांत मांडा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
+  },
+  {
+    category: 'Imagination',
+    question: 'भविष्यात रोबोट किंवा AI मानवाची सर्व कामे करू शकेल का?',
+    description: 'तुमचा विचार एका किंवा दोन वाक्यांत स्पष्ट करा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'medium',
+    estimatedTime: 30,
+  },
+
+  // Dialogue (संवाद व म्हणी)
+  {
+    category: 'Dialogue',
+    question: 'घरी रात्री उशीर झाल्यावर आई किंवा वडील सामान्यतः काय म्हणतात?',
+    description: 'तो घरगुती संवाद १ किंवा २ वाक्यांत लिहा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
+  },
+  {
+    category: 'Dialogue',
+    question: 'तुमची सर्वात आवडती मराठी म्हण कोणती आणि ती कोणत्या प्रसंगी वापरली जाते?',
+    description: 'म्हण आणि तिचा प्रसंग १ ते २ वाक्यांत सांगा.',
+    minWords: 8,
+    maxWords: 45,
+    difficulty: 'easy',
+    estimatedTime: 30,
   },
 ]
 
 async function seed() {
-  console.log('Seeding Marathi Corpus database...')
+  console.log('Seeding Marathi Corpus database with short 1-2 sentence questions...')
+
+  // Clear existing rules, assignments, responses, and questions for a clean seed
+  try {
+    await db.delete(schema.formQuestionRules)
+    await db.delete(schema.assignedQuestionSets)
+    await db.delete(schema.responses)
+    await db.delete(schema.questions)
+    await db.delete(schema.forms)
+    console.log('Cleared existing pilot tables for fresh 1-2 sentence questions.')
+  } catch (cleanErr) {
+    console.warn('Note during clean:', cleanErr)
+  }
 
   // Insert sample questions
   for (const q of SAMPLE_QUESTIONS) {
@@ -143,12 +197,12 @@ async function seed() {
       language: 'marathi',
       enabled: true,
       difficulty: q.difficulty,
-      estimatedTime: 90,
-      tags: JSON.stringify([q.category.toLowerCase(), 'sample']),
+      estimatedTime: q.estimatedTime,
+      tags: JSON.stringify([q.category.toLowerCase(), 'sample', 'concise']),
     })
   }
 
-  console.log(`Inserted ${SAMPLE_QUESTIONS.length} sample questions across 9 categories.`)
+  console.log(`Inserted ${SAMPLE_QUESTIONS.length} concise 1-2 sentence questions across 6 categories.`)
 
   // Create default Pilot Form
   const formId = nanoid()
@@ -157,7 +211,7 @@ async function seed() {
   await db.insert(schema.forms).values({
     id: formId,
     title: 'मराठी भाषा संशोधन सर्वेक्षण २०२६',
-    description: 'मराठी भाषेच्या अत्याधुनिक संगणकीय भाषिक संशोधनासाठी आपला सहभाग नोंदवा.',
+    description: 'मराठी भाषेच्या अत्याधुनिक संगणकीय संशोधनासाठी १-२ वाक्यांत आपली मते नोंदवा.',
     slug: formSlug,
     isPublished: true,
     isClosed: false,
@@ -191,7 +245,7 @@ async function seed() {
   }
 
   console.log(`Created default form "/f/${formSlug}" with 3 randomized rules.`)
-  console.log('Seeding completed successfully.')
+  console.log('Seeding completed successfully with short 1-2 sentence questions.')
 }
 
 seed().catch(err => {

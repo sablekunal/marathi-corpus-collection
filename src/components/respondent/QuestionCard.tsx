@@ -106,7 +106,9 @@ export function QuestionCard({
         </div>
         {question.estimatedTime && (
           <span className="text-[11px] text-slate-400 font-medium">
-            ~{Math.round(question.estimatedTime / 60)} मिनिट
+            {question.estimatedTime < 60
+              ? `~${question.estimatedTime} सेकंद`
+              : `~${Math.round(question.estimatedTime / 60)} मिनिट`}
           </span>
         )}
       </div>

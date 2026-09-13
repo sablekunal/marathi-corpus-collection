@@ -14,12 +14,12 @@ export const questions = sqliteTable('questions', {
   question: text('question').notNull(),
   description: text('description').default(''),
   required: integer('required', { mode: 'boolean' }).default(true),
-  minWords: integer('min_words').default(50),
-  maxWords: integer('max_words').default(250),
+  minWords: integer('min_words').default(8),
+  maxWords: integer('max_words').default(50),
   language: text('language').default('marathi'),
   enabled: integer('enabled', { mode: 'boolean' }).default(true),
   difficulty: text('difficulty').default('easy'),
-  estimatedTime: integer('estimated_time').default(60),
+  estimatedTime: integer('estimated_time').default(30),
   tags: text('tags').default('[]'), // JSON array string
   createdAt: text('created_at').default(sql`(datetime('now'))`),
   updatedAt: text('updated_at').default(sql`(datetime('now'))`),
@@ -64,6 +64,9 @@ export const respondentSessions = sqliteTable('respondent_sessions', {
   ipHash: text('ip_hash').default(''), // hashed for privacy
   metadata: text('metadata').default('{}'), // JSON: district, age, etc.
   pasteAttempts: integer('paste_attempts').default(0),
+  consentResearch: integer('consent_research', { mode: 'boolean' }).default(false),
+  consentAI: integer('consent_ai', { mode: 'boolean' }).default(false),
+  consentTimestamp: text('consent_timestamp').default(sql`(datetime('now'))`),
 })
 
 // ── Assigned Question Sets ────────────────────────────────────────────────────

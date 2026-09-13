@@ -21,6 +21,9 @@ import {
   ShieldAlert,
   HelpCircle,
   Loader2,
+  Languages,
+  Zap,
+  ShieldCheck,
 } from 'lucide-react'
 
 const COLORS = [
@@ -46,6 +49,17 @@ interface AnalyticsData {
   totalPasteAttempts: number
   categoryDistribution: { category: string; count: number }[]
   dailyTrend: { date: string; count: number }[]
+  transliterationMetrics?: {
+    totalAttempts: number
+    cacheHits: number
+    googleHits: number
+    fallbackHits: number
+    avgLatencyMs: number
+    cacheHitRate: number
+    googleHitRate: number
+    fallbackHitRate: number
+    successRate: number
+  }
 }
 
 export default function AnalyticsAdminPage() {
@@ -204,6 +218,98 @@ export default function AnalyticsAdminPage() {
           </div>
         </div>
       </div>
+
+      {/* ── Transliteration Robustness (3-Tier Reliability) ── */}
+      {data.transliterationMetrics && (
+        <div className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 shadow-xs space-y-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-blue-50 text-[oklch(0.42_0.16_250)] flex items-center justify-center">
+                <Languages className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base text-slate-800">
+                  Transliteration Robustness &amp; 3-Tier Telemetry
+                </h3>
+                <p className="text-xs text-slate-400">
+                  Real-time uptime and latency across Cache, Google Input Tools, and Local Fallback
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              {data.transliterationMetrics.successRate}% Success Rate
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-center">
+              <div className="text-2xl font-bold text-emerald-600">
+                {data.transliterationMetrics.cacheHitRate}%
+              </div>
+              <div className="text-xs font-semibold text-slate-700 mt-0.5">Tier 1: Cache Hit Rate</div>
+              <div className="text-[11px] text-slate-400 mt-1">
+                ({data.transliterationMetrics.cacheHits} / {data.transliterationMetrics.totalAttempts} words)
+              </div>
+            </div>
+
+            <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-center">
+              <div className="text-2xl font-bold text-blue-600">
+                {data.transliterationMetrics.googleHitRate}%
+              </div>
+              <div className="text-xs font-semibold text-slate-700 mt-0.5">Tier 2: Google API Rate</div>
+              <div className="text-[11px] text-slate-400 mt-1">
+                ({data.transliterationMetrics.googleHits} words via API)
+              </div>
+            </div>
+
+            <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-center">
+              <div className="text-2xl font-bold text-amber-600 flex items-center justify-center gap-1">
+                <Zap className="w-4 h-4 text-amber-500" />
+                <span>{data.transliterationMetrics.avgLatencyMs}ms</span>
+              </div>
+              <div className="text-xs font-semibold text-slate-700 mt-0.5">Average Latency</div>
+              <div className="text-[11px] text-slate-400 mt-1">
+                (Cache: &lt;1ms, Google: ~90ms)
+              </div>
+            </div>
+          </div>
+
+          {/* 3-Tier Breakdown Table */}
+          <div className="border border-slate-200 rounded-xl overflow-hidden text-xs">
+            <table className="w-full text-left">
+              <thead className="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+                <tr>
+                  <th className="p-2.5">Tier</th>
+                  <th className="p-2.5">Engine Strategy</th>
+                  <th className="p-2.5 text-right">Hits</th>
+                  <th className="p-2.5 text-right">Share (%)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td className="p-2.5 font-semibold text-slate-800">Tier 1</td>
+                  <td className="p-2.5">300-Word High Frequency In-Memory Cache</td>
+                  <td className="p-2.5 text-right font-mono">{data.transliterationMetrics.cacheHits}</td>
+                  <td className="p-2.5 text-right font-semibold text-emerald-700">{data.transliterationMetrics.cacheHitRate}%</td>
+                </tr>
+                <tr>
+                  <td className="p-2.5 font-semibold text-slate-800">Tier 2</td>
+                  <td className="p-2.5">Google Input Tools API (with 3s timeout)</td>
+                  <td className="p-2.5 text-right font-mono">{data.transliterationMetrics.googleHits}</td>
+                  <td className="p-2.5 text-right font-semibold text-blue-700">{data.transliterationMetrics.googleHitRate}%</td>
+                </tr>
+                <tr>
+                  <td className="p-2.5 font-semibold text-slate-800">Tier 3</td>
+                  <td className="p-2.5">Local Rule-Based Offline Engine (mapper.ts)</td>
+                  <td className="p-2.5 text-right font-mono">{data.transliterationMetrics.fallbackHits}</td>
+                  <td className="p-2.5 text-right font-semibold text-amber-700">{data.transliterationMetrics.fallbackHitRate}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

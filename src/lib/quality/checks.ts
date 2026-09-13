@@ -44,7 +44,7 @@ export function checkQuality(text: string, minWords: number): QualityReport {
     score -= 50
   }
   if (flags.belowMinWords && !flags.emptyContent) {
-    warnings.push(`किमान ${minWords} शब्द आवश्यक आहेत. तुम्ही ${wordCount} शब्द लिहिले आहेत.`)
+    warnings.push(`किमान ${minWords} शब्द (१-२ वाक्ये) आवश्यक आहेत. तुम्ही ${wordCount} शब्द लिहिले आहेत.`)
     score -= 30
   }
   if (flags.repeatedText) {

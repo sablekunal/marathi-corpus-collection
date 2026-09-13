@@ -51,6 +51,16 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Footer */}
+        <div className="text-center pt-6">
+          <Link
+            href="/privacy"
+            className="text-xs text-[oklch(0.52_0.04_250)] hover:text-[oklch(0.35_0.14_250)] underline transition-colors"
+          >
+            गोपनीयता धोरण व डेटा प्रशासन (Privacy Policy & Ethics)
+          </Link>
+        </div>
       </div>
     </main>
   )

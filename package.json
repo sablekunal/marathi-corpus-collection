@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "tsx scripts/test-all.ts",
     "db:init": "tsx src/lib/db/init-db.ts",
     "db:seed": "tsx src/lib/db/seed.ts",
     "db:setup": "tsx src/lib/db/init-db.ts && tsx src/lib/db/seed.ts"

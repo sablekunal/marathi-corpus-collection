@@ -88,8 +88,40 @@ export default function ResponsesAdminPage() {
   }, [])
 
   useEffect(() => {
-    fetchResponses()
-  }, [fetchResponses])
+    let ignore = false
+    fetch('/api/admin/export?format=json')
+      .then(res => res.json())
+      .then(json => {
+        if (!ignore && Array.isArray(json)) {
+          const mapped: ResponseItem[] = json.map((r: Record<string, unknown>) => ({
+            responseId: String(r.response_id || ''),
+            sessionId: String(r.session_id || ''),
+            category: String(r.category || ''),
+            questionText: String(r.question_text || ''),
+            responseText: String(r.response_text || ''),
+            wordCount: Number(r.word_count || 0),
+            charCount: Number(r.char_count || 0),
+            submittedAt: String(r.submitted_at || ''),
+            qualityScore: Number(r.quality_score || 100),
+            pasteAttempts: Number(r.paste_attempts || 0),
+            flagged: Boolean(r.flagged),
+            flagReason: String(r.flag_reason || ''),
+            typingSpeedWpm: Number(r.typing_speed_wpm || 0),
+            activeDurationMs: Number(r.active_duration_ms || 0),
+            metadata: (r.metadata as Record<string, string>) || {},
+          }))
+          setData(mapped)
+          setLoading(false)
+        }
+      })
+      .catch(err => {
+        console.error(err)
+        if (!ignore) setLoading(false)
+      })
+    return () => {
+      ignore = true
+    }
+  }, [])
 
   const filtered = data.filter(
     item =>
