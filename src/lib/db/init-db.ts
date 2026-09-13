@@ -15,12 +15,12 @@ async function init() {
       question TEXT NOT NULL,
       description TEXT DEFAULT '',
       required INTEGER DEFAULT 1,
-      min_words INTEGER DEFAULT 50,
-      max_words INTEGER DEFAULT 250,
+      min_words INTEGER DEFAULT 8,
+      max_words INTEGER DEFAULT 50,
       language TEXT DEFAULT 'marathi',
       enabled INTEGER DEFAULT 1,
       difficulty TEXT DEFAULT 'easy',
-      estimated_time INTEGER DEFAULT 60,
+      estimated_time INTEGER DEFAULT 30,
       tags TEXT DEFAULT '[]',
       created_at TEXT DEFAULT (datetime('now')),
       updated_at TEXT DEFAULT (datetime('now'))
@@ -64,7 +64,10 @@ async function init() {
       user_agent TEXT DEFAULT '',
       ip_hash TEXT DEFAULT '',
       metadata TEXT DEFAULT '{}',
-      paste_attempts INTEGER DEFAULT 0
+      paste_attempts INTEGER DEFAULT 0,
+      consent_research INTEGER DEFAULT 0,
+      consent_ai INTEGER DEFAULT 0,
+      consent_timestamp TEXT DEFAULT (datetime('now'))
     );
   `)
 
@@ -117,6 +120,19 @@ async function init() {
       typing_speed_wpm REAL DEFAULT 0
     );
   `)
+
+  // Migrate existing databases if columns are missing
+  try {
+    await client.execute(`ALTER TABLE respondent_sessions ADD COLUMN consent_research INTEGER DEFAULT 0;`)
+  } catch {}
+  try {
+    await client.execute(`ALTER TABLE respondent_sessions ADD COLUMN consent_ai INTEGER DEFAULT 0;`)
+  } catch {}
+  try {
+    await client.execute(`ALTER TABLE respondent_sessions ADD COLUMN consent_timestamp TEXT DEFAULT '';`)
+  } catch (e) {
+    console.error('Migration error for consent_timestamp:', e)
+  }
 
   console.log('Database tables verified/created successfully.')
 }

@@ -23,7 +23,7 @@ const TypingMetricsSchema = z.object({
 const ResponseItemSchema = z.object({
   questionId: z.string(),
   responseText: z.string(),
-  minWords: z.number().int().optional().default(50),
+  minWords: z.number().int().optional().default(8),
   pasteAttempts: z.number().int().optional().default(0),
   typingMetrics: TypingMetricsSchema.optional(),
 })
@@ -53,19 +53,27 @@ export async function POST(req: NextRequest) {
     if (!session) return NextResponse.json({ error: 'Invalid session' }, { status: 404 })
     if (session.submittedAt) return NextResponse.json({ error: 'Already submitted' }, { status: 409 })
 
-    // Update session metadata and paste attempts
+    // Update session metadata, paste attempts, and consent
     const totalPasteAttempts = data.responses.reduce((acc, r) => acc + (r.pasteAttempts ?? 0), 0)
+    const meta = (data.metadata || {}) as Record<string, unknown>
+    const consentResearch = meta.consentResearch === true || meta.consentResearch === 'true'
+    const consentAI = meta.consentAI === true || meta.consentAI === 'true'
+    const consentTimestamp = typeof meta.consentTimestamp === 'string' ? meta.consentTimestamp : new Date().toISOString()
+
     await db.update(respondentSessions).set({
       metadata: JSON.stringify(data.metadata),
       pasteAttempts: totalPasteAttempts,
       submittedAt: new Date().toISOString(),
+      consentResearch,
+      consentAI,
+      consentTimestamp,
     }).where(eq(respondentSessions.id, sessionId))
 
     // Insert each response
     for (const resp of data.responses) {
       const responseId = nanoid()
       const text = resp.responseText.trim()
-      const quality = checkQuality(text, resp.minWords ?? 50)
+      const quality = checkQuality(text, resp.minWords ?? 8)
 
       // Insert response
       await db.insert(responses).values({

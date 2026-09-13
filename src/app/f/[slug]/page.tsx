@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, use } from 'react'
+import Link from 'next/link'
 import { Progress } from '@/components/ui/progress'
 import { QuestionCard } from '@/components/respondent/QuestionCard'
 import { MetadataForm } from '@/components/respondent/MetadataForm'
@@ -303,6 +304,17 @@ export default function FormRespondentPage({
             sessionId={sessionId || ''}
           />
         )}
+
+        {/* Footer */}
+        <div className="text-center pt-2">
+          <Link
+            href="/privacy"
+            target="_blank"
+            className="text-[11px] text-slate-400 hover:text-slate-600 underline transition-colors"
+          >
+            गोपनीयता धोरण व डेटा हक्क (Privacy Policy & Data Ethics)
+          </Link>
+        </div>
       </div>
     </div>
   )

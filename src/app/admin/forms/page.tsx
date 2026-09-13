@@ -100,8 +100,23 @@ export default function FormsAdminPage() {
   }, [])
 
   useEffect(() => {
-    fetchForms()
-  }, [fetchForms])
+    let ignore = false
+    fetch('/api/admin/forms')
+      .then(res => res.json())
+      .then(data => {
+        if (!ignore && Array.isArray(data)) {
+          setForms(data)
+          setLoading(false)
+        }
+      })
+      .catch(err => {
+        console.error(err)
+        if (!ignore) setLoading(false)
+      })
+    return () => {
+      ignore = true
+    }
+  }, [])
 
   const handleSlugify = (text: string) => {
     return text

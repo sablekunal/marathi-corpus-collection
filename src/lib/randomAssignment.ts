@@ -103,9 +103,9 @@ export async function assignQuestions(
         question: q.question,
         description: q.description || '',
         required: q.required ?? true,
-        minWords: q.minWords ?? 50,
-        maxWords: q.maxWords ?? 250,
-        estimatedTime: q.estimatedTime ?? 60,
+        minWords: q.minWords ?? 8,
+        maxWords: q.maxWords ?? 50,
+        estimatedTime: q.estimatedTime ?? 30,
         order: order++,
       })
     }
@@ -145,9 +145,9 @@ export async function getAssignedQuestions(
     question: r.question,
     description: r.description || '',
     required: r.required ?? true,
-    minWords: r.minWords ?? 50,
-    maxWords: r.maxWords ?? 250,
-    estimatedTime: r.estimatedTime ?? 60,
+    minWords: r.minWords ?? 8,
+    maxWords: r.maxWords ?? 50,
+    estimatedTime: r.estimatedTime ?? 30,
     order: r.questionOrder,
   }))
 }

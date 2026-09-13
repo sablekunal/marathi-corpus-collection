@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
-import { UserCheck, ArrowRight } from 'lucide-react'
+import { UserCheck, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react'
 
 export const MAHARASHTRA_DISTRICTS = [
   'अहमदनगर', 'अकोला', 'अमरावती', 'छत्रपती संभाजीनगर (औरंगाबाद)', 'बीड', 'भंडारा',
@@ -39,9 +39,10 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
   const [ageGroup, setAgeGroup] = useState('')
   const [gender, setGender] = useState('')
   const [education, setEducation] = useState('')
-  const [occupation, setOccupation] = useState('')
   const [dialect, setDialect] = useState('')
   const [isNativeSpeaker, setIsNativeSpeaker] = useState('होय')
+  const [consentResearch, setConsentResearch] = useState(false)
+  const [consentAI, setConsentAI] = useState(false)
 
   // Check if at least some fields are enabled
   const showDistrict = metadataConfig.district !== false
@@ -53,15 +54,18 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (!consentResearch || !consentAI) return
     onSubmit({
       district,
       taluka,
       ageGroup,
       gender,
       education,
-      occupation,
       dialect,
       isNativeSpeaker,
+      consentResearch: 'true',
+      consentAI: 'true',
+      consentTimestamp: new Date().toISOString(),
     })
   }
 
@@ -226,14 +230,87 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
         )}
       </div>
 
+      {/* ── Consent Section (Ethics & Data Governance) ── */}
+      <div className="bg-slate-50 border-l-4 border-[oklch(0.42_0.16_250)] p-4 rounded-r-xl space-y-3.5 shadow-2xs">
+        <div>
+          <h4 className="font-semibold text-slate-900 text-sm flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-[oklch(0.42_0.16_250)]" />
+            <span>मजकूर वापराची परवानगी (Data Consent & Ethics) *</span>
+          </h4>
+          <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+            आपले प्रतिसाद निनावी ठेवले जातील आणि केवळ भाषिक संशोधनासाठी वापरले जातील.
+            <span className="text-[11px] text-slate-500 block">
+              (Your responses will be anonymized and used solely for linguistic research.)
+            </span>
+          </p>
+        </div>
+
+        {/* Research Consent Checkbox */}
+        <label className="flex items-start gap-3 cursor-pointer bg-white p-2.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors">
+          <input
+            type="checkbox"
+            checked={consentResearch}
+            onChange={e => setConsentResearch(e.target.checked)}
+            className="mt-1 w-4 h-4 accent-[oklch(0.42_0.16_250)] rounded cursor-pointer"
+            required
+          />
+          <div className="flex-1">
+            <span className="block text-xs font-semibold text-slate-900">
+              मी माझा मजकूर शैक्षणिक व भाषिक संशोधनासाठी खुला (CC-BY-4.0) करण्यास संमती देतो/देते.
+            </span>
+            <span className="text-[11px] text-slate-500 block mt-0.5">
+              I consent to my text being used for academic research under CC-BY-4.0 license
+            </span>
+          </div>
+        </label>
+
+        {/* AI Training Consent Checkbox */}
+        <label className="flex items-start gap-3 cursor-pointer bg-white p-2.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors">
+          <input
+            type="checkbox"
+            checked={consentAI}
+            onChange={e => setConsentAI(e.target.checked)}
+            className="mt-1 w-4 h-4 accent-[oklch(0.42_0.16_250)] rounded cursor-pointer"
+            required
+          />
+          <div className="flex-1">
+            <span className="block text-xs font-semibold text-slate-900">
+              सदर डेटा कृत्रिम बुद्धिमत्ता (AI) मॉडेल्सच्या प्रशिक्षणासाठी वापरण्यास माझी हरकत नाही.
+            </span>
+            <span className="text-[11px] text-slate-500 block mt-0.5">
+              I understand this data may be used to train AI language models
+            </span>
+          </div>
+        </label>
+
+        {/* Privacy Notice */}
+        <div className="bg-amber-50/80 border border-amber-200/80 rounded-lg p-2.5 flex items-start gap-2.5 text-amber-900 text-xs">
+          <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <div className="space-y-0.5 text-[11px]">
+            <div>
+              <strong>गोपनीयता (Privacy):</strong> आपला IP पत्ता सुरक्षितपणे SHA-256 हॅश केला जाईल आणि १८० दिवसांनंतर हटवला जाईल.
+            </div>
+            <div className="text-amber-700">
+              Your IP address will be hashed (SHA-256) and automatically deleted after 180 days.
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="pt-2">
         <Button
           type="submit"
-          className="w-full h-12 bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.14_250)] text-white text-base font-medium rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
+          disabled={!consentResearch || !consentAI}
+          className="w-full h-12 bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.14_250)] disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed text-white text-base font-medium rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
         >
           <span>प्रश्नांची उत्तरे देण्यास प्रारंभ करा</span>
           <ArrowRight className="w-4 h-4" />
         </Button>
+        {(!consentResearch || !consentAI) && (
+          <p className="text-center text-[11px] text-rose-500 mt-2 font-medium">
+            * पुढे जाण्यासाठी कृपया वरील दोन्ही संमती (Consent) चौकटी निवडा.
+          </p>
+        )}
       </div>
     </form>
   )

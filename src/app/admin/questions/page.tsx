@@ -81,10 +81,10 @@ export default function QuestionsAdminPage() {
     category: 'Opinion',
     question: '',
     description: '',
-    minWords: 50,
-    maxWords: 250,
+    minWords: 8,
+    maxWords: 50,
     difficulty: 'easy',
-    estimatedTime: 60,
+    estimatedTime: 30,
     enabled: true,
   })
 
@@ -115,8 +115,27 @@ export default function QuestionsAdminPage() {
   }, [selectedCategory, search])
 
   useEffect(() => {
-    fetchQuestions()
-  }, [fetchQuestions])
+    let ignore = false
+    const params = new URLSearchParams()
+    if (selectedCategory !== 'All') params.append('category', selectedCategory)
+    if (search) params.append('search', search)
+
+    fetch(`/api/admin/questions?${params.toString()}`)
+      .then(res => res.json())
+      .then(data => {
+        if (!ignore && Array.isArray(data)) {
+          setQuestions(data)
+          setLoading(false)
+        }
+      })
+      .catch(err => {
+        console.error(err)
+        if (!ignore) setLoading(false)
+      })
+    return () => {
+      ignore = true
+    }
+  }, [selectedCategory, search])
 
   const handleSaveQuestion = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -216,10 +235,10 @@ export default function QuestionsAdminPage() {
       category: 'Opinion',
       question: '',
       description: '',
-      minWords: 50,
-      maxWords: 250,
+      minWords: 8,
+      maxWords: 50,
       difficulty: 'easy',
-      estimatedTime: 60,
+      estimatedTime: 30,
       enabled: true,
     })
     setIsFormOpen(true)

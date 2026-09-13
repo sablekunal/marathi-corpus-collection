@@ -9,6 +9,7 @@ import {
   forms,
 } from '@/lib/db/schema'
 import { eq, count, avg, sql, and } from 'drizzle-orm'
+import { getTransliterationMetrics } from '@/lib/transliteration/metrics'
 
 // GET /api/admin/analytics
 export async function GET(req: NextRequest) {
@@ -84,6 +85,9 @@ export async function GET(req: NextRequest) {
       ? Math.round((totalSubmissions / totalStarted) * 100)
       : 0
 
+    // Transliteration telemetry metrics
+    const transliterationMetrics = getTransliterationMetrics()
+
     return NextResponse.json({
       totalSubmissions,
       totalStarted,
@@ -95,6 +99,7 @@ export async function GET(req: NextRequest) {
       totalPasteAttempts: totalPasteAttempts || 0,
       categoryDistribution: categoryDist,
       dailyTrend,
+      transliterationMetrics,
     })
   } catch (err) {
     console.error('[GET /api/admin/analytics]', err)
