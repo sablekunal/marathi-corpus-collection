@@ -8,9 +8,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  PieChart,
-  Pie,
-  Cell,
   AreaChart,
   Area,
 } from 'recharts'
@@ -19,24 +16,13 @@ import {
   CheckCircle,
   FileText,
   ShieldAlert,
-  HelpCircle,
   Loader2,
   Languages,
   Zap,
   ShieldCheck,
 } from 'lucide-react'
 
-const COLORS = [
-  '#3b82f6',
-  '#8b5cf6',
-  '#ec4899',
-  '#f59e0b',
-  '#10b981',
-  '#06b6d4',
-  '#6366f1',
-  '#14b8a6',
-  '#f97316',
-]
+
 
 interface AnalyticsData {
   totalSubmissions: number

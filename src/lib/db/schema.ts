@@ -119,6 +119,15 @@ export const typingMetrics = sqliteTable('typing_metrics', {
   typingSpeedWpm: real('typing_speed_wpm').default(0),
 })
 
+// ── Transliteration Overrides ───────────────────────────────────────────────────
+
+export const transliterationOverrides = sqliteTable('transliteration_overrides', {
+  id: text('id').primaryKey(),
+  word: text('word').notNull().unique(), // lowercase romanized word
+  override: text('override').notNull(), // Exact Marathi output
+  createdAt: text('created_at').default(sql`(datetime('now'))`),
+})
+
 // ── Type exports ──────────────────────────────────────────────────────────────
 
 export type Question = typeof questions.$inferSelect
@@ -131,3 +140,5 @@ export type AssignedQuestionSet = typeof assignedQuestionSets.$inferSelect
 export type Response = typeof responses.$inferSelect
 export type ResponseQualityMetric = typeof responseQualityMetrics.$inferSelect
 export type TypingMetric = typeof typingMetrics.$inferSelect
+export type TransliterationOverride = typeof transliterationOverrides.$inferSelect
+export type NewTransliterationOverride = typeof transliterationOverrides.$inferInsert

@@ -29,7 +29,12 @@ export async function GET(req: NextRequest) {
     const enabled = searchParams.get('enabled')
     const search = searchParams.get('search')
 
+    const page = parseInt(searchParams.get('page') || '1', 10)
+    const limit = parseInt(searchParams.get('limit') || '20', 10)
+    const offset = (page - 1) * limit
+
     let query = db.select().from(questions).$dynamic()
+    let countQuery = db.select({ count: sql<number>`count(*)` }).from(questions).$dynamic()
 
     const conditions = []
     if (category) conditions.push(eq(questions.category, category))
@@ -38,10 +43,23 @@ export async function GET(req: NextRequest) {
 
     if (conditions.length > 0) {
       query = query.where(and(...conditions))
+      countQuery = countQuery.where(and(...conditions))
     }
 
-    const rows = await query.orderBy(desc(questions.createdAt))
-    return NextResponse.json(rows)
+    const [totalResult, dataResult] = await Promise.all([
+      countQuery,
+      query.orderBy(desc(questions.createdAt)).limit(limit).offset(offset)
+    ])
+
+    const total = totalResult[0].count
+
+    return NextResponse.json({
+      data: dataResult,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit)
+    })
   } catch (err) {
     console.error('[GET /api/admin/questions]', err)
     return NextResponse.json({ error: 'Failed to fetch questions' }, { status: 500 })

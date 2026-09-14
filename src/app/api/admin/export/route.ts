@@ -6,8 +6,12 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)
     const format = searchParams.get('format') || 'json'
     const formId = searchParams.get('formId') || undefined
+    const minQualityStr = searchParams.get('minQuality')
+    const startDate = searchParams.get('startDate') || undefined
+    const endDate = searchParams.get('endDate') || undefined
+    const minQuality = minQualityStr ? parseInt(minQualityStr, 10) : undefined
 
-    const data = await getExportData(formId)
+    const data = await getExportData({ formId, minQuality, startDate, endDate })
 
     const dateStr = new Date().toISOString().split('T')[0]
 

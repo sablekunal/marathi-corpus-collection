@@ -72,7 +72,11 @@ export default function QuestionsAdminPage() {
   const [questions, setQuestions] = useState<QuestionRecord[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalRecords, setTotalRecords] = useState(0)
 
   // Create / Edit modal state
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -95,47 +99,41 @@ export default function QuestionsAdminPage() {
   const [importing, setImporting] = useState(false)
   const [importSuccess, setImportSuccess] = useState<string | null>(null)
 
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(search), 500)
+    return () => clearTimeout(timer)
+  }, [search])
+
+  useEffect(() => {
+    setPage(1)
+  }, [debouncedSearch, selectedCategory])
+
   const fetchQuestions = useCallback(async () => {
     try {
       setLoading(true)
       const params = new URLSearchParams()
       if (selectedCategory !== 'All') params.append('category', selectedCategory)
-      if (search) params.append('search', search)
+      if (debouncedSearch) params.append('search', debouncedSearch)
+      params.append('page', String(page))
+      params.append('limit', '20')
 
       const res = await fetch(`/api/admin/questions?${params.toString()}`)
-      const data = await res.json()
-      if (Array.isArray(data)) {
-        setQuestions(data)
+      const json = await res.json()
+      if (json.data) {
+        setQuestions(json.data)
+        setTotalPages(json.totalPages || 1)
+        setTotalRecords(json.total || 0)
       }
     } catch (err) {
       console.error(err)
     } finally {
       setLoading(false)
     }
-  }, [selectedCategory, search])
+  }, [selectedCategory, debouncedSearch, page])
 
   useEffect(() => {
-    let ignore = false
-    const params = new URLSearchParams()
-    if (selectedCategory !== 'All') params.append('category', selectedCategory)
-    if (search) params.append('search', search)
-
-    fetch(`/api/admin/questions?${params.toString()}`)
-      .then(res => res.json())
-      .then(data => {
-        if (!ignore && Array.isArray(data)) {
-          setQuestions(data)
-          setLoading(false)
-        }
-      })
-      .catch(err => {
-        console.error(err)
-        if (!ignore) setLoading(false)
-      })
-    return () => {
-      ignore = true
-    }
-  }, [selectedCategory, search])
+    fetchQuestions()
+  }, [fetchQuestions])
 
   const handleSaveQuestion = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -413,6 +411,21 @@ export default function QuestionsAdminPage() {
             )}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex items-center justify-between bg-white p-4 rounded-xl border border-[oklch(0.88_0.02_250)] shadow-xs">
+        <div className="text-sm text-slate-500">
+          Showing page {page} of {totalPages} ({totalRecords} total questions)
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>
+            Previous
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page >= totalPages}>
+            Next
+          </Button>
+        </div>
       </div>
 
       {/* Create / Edit Question Dialog */}

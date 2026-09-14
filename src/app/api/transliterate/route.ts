@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getFromCache } from '@/lib/transliteration/highFreqCache'
 import { romanToMarathi } from '@/lib/transliteration/mapper'
 import { recordTransliterationAttempt } from '@/lib/transliteration/metrics'
+import { db } from '@/lib/db'
+import { transliterationOverrides } from '@/lib/db/schema'
+import { eq } from 'drizzle-orm'
 
 interface TransliterateResult {
   word: string
   transliteration: string
   candidates: string[]
-  source: 'cache' | 'google' | 'fallback'
+  source: 'override' | 'cache' | 'google' | 'fallback'
   latencyMs: number
 }
 
@@ -23,6 +26,27 @@ async function processTransliteration(rawWord: string): Promise<TransliterateRes
       source: 'cache',
       latencyMs: 0,
     }
+  }
+
+  // ── Tier 0: Custom Admin Overrides ──
+  try {
+    const overrideResult = await db
+      .select()
+      .from(transliterationOverrides)
+      .where(eq(transliterationOverrides.word, word.toLowerCase()))
+    
+    if (overrideResult.length > 0) {
+      const latencyMs = Date.now() - startTime
+      return {
+        word,
+        transliteration: overrideResult[0].override,
+        candidates: [overrideResult[0].override],
+        source: 'override',
+        latencyMs,
+      }
+    }
+  } catch (err) {
+    console.error('[Transliteration] Failed to check overrides', err)
   }
 
   // ── Tier 1: High-Frequency Cache (Instant, 0 Network) ──
@@ -89,7 +113,7 @@ async function processTransliteration(rawWord: string): Promise<TransliterateRes
       source: 'fallback',
       latencyMs,
     }
-  } catch (err) {
+  } catch {
     const latencyMs = Date.now() - startTime
     recordTransliterationAttempt('fallback', latencyMs)
     return {

@@ -1,6 +1,20 @@
 import type { Metadata, Viewport } from 'next'
+import { Inter, Noto_Serif_Devanagari } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/toast'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-ui',
+  display: 'swap',
+})
+
+const noto = Noto_Serif_Devanagari({
+  subsets: ['devanagari'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-marathi',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -33,15 +47,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="mr" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
+      <body className={`${inter.variable} ${noto.variable} font-sans`}>
         {children}
         <Toaster />
       </body>

@@ -14,6 +14,7 @@ import {
   LogOut,
   Menu,
   X,
+  BookType,
 } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
@@ -23,6 +24,7 @@ const navItems = [
   { href: '/admin/questions', label: 'Questions', icon: HelpCircle },
   { href: '/admin/forms', label: 'Forms', icon: FileText },
   { href: '/admin/responses', label: 'Responses', icon: MessageSquare },
+  { href: '/admin/dictionary', label: 'Dictionary', icon: BookType },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/admin/export', label: 'Export', icon: Download },
 ]

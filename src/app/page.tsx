@@ -38,18 +38,22 @@ export default function HomePage() {
             <ArrowRight className="w-4 h-4 mt-3 opacity-70 group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          <div className="bg-white rounded-xl p-5 text-left border border-[oklch(0.88_0.02_250)] shadow-sm">
-            <BookOpen className="w-5 h-5 mb-3 text-[oklch(0.52_0.04_250)]" />
+          <Link
+            href="/f/marathi-pilot-2026"
+            className="group bg-white rounded-xl p-5 text-left border border-[oklch(0.88_0.02_250)] hover:border-[oklch(0.42_0.16_250)] shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <BookOpen className="w-5 h-5 mb-3 text-[oklch(0.42_0.16_250)]" />
             <div className="font-semibold text-base text-[oklch(0.20_0.04_250)]">
-              Respondent Forms
+              Respondent Form (प्रतिसाद फॉर्म)
             </div>
             <div className="text-xs text-[oklch(0.52_0.04_250)] mt-1">
-              Access via the form link shared with you
+              सहभागी व्हा व मराठी भाषा संवर्धनास हातभार लावा
             </div>
-            <div className="text-xs text-[oklch(0.42_0.16_250)] mt-3 font-mono">
-              /f/[form-slug]
+            <div className="flex items-center justify-between mt-3 text-xs text-[oklch(0.42_0.16_250)] font-medium">
+              <span>सर्वेक्षण सुरू करा (Start Survey)</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Footer */}

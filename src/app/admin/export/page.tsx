@@ -1,22 +1,46 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
   Download,
   FileSpreadsheet,
   FileCode,
   Layers,
   Database,
-  CheckCircle2,
+  Filter,
 } from 'lucide-react'
 
 export default function ExportAdminPage() {
   const [downloading, setDownloading] = useState<string | null>(null)
+  const [forms, setForms] = useState<{id: string, title: string}[]>([])
+  const [selectedForm, setSelectedForm] = useState<string>('all')
+  const [minQuality, setMinQuality] = useState<string>('0')
+  const [startDate, setStartDate] = useState<string>('')
+  const [endDate, setEndDate] = useState<string>('')
+
+  useEffect(() => {
+    fetch('/api/admin/forms')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setForms(data)
+      })
+      .catch(console.error)
+  }, [])
 
   const handleDownload = (format: 'csv' | 'json' | 'jsonl') => {
     setDownloading(format)
-    window.location.href = `/api/admin/export?format=${format}`
+    const params = new URLSearchParams()
+    params.append('format', format)
+    if (selectedForm && selectedForm !== 'all') params.append('formId', selectedForm)
+    if (minQuality && Number(minQuality) > 0) params.append('minQuality', minQuality)
+    if (startDate) params.append('startDate', startDate)
+    if (endDate) params.append('endDate', endDate)
+
+    window.open(`/api/admin/export?${params.toString()}`, '_blank')
     setTimeout(() => setDownloading(null), 2000)
   }
 
@@ -30,6 +54,42 @@ export default function ExportAdminPage() {
         <p className="text-sm text-[oklch(0.52_0.04_250)] mt-0.5">
           Download formatted Marathi corpus data for LLM training, fine-tuning, and linguistic research
         </p>
+      </div>
+
+      {/* Filters */}
+      <div className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 shadow-xs space-y-4">
+        <div className="flex items-center gap-2 text-sm font-bold text-slate-800">
+          <Filter className="w-4 h-4 text-blue-600" />
+          <span>Export Filters</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="space-y-1.5">
+            <Label className="text-xs font-semibold text-slate-600">Form / Campaign</Label>
+            <Select value={selectedForm} onValueChange={setSelectedForm}>
+              <SelectTrigger className="h-9 text-xs">
+                <SelectValue placeholder="All Forms" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Forms</SelectItem>
+                {forms.map(f => (
+                  <SelectItem key={f.id} value={f.id}>{f.title}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-1.5">
+            <Label className="text-xs font-semibold text-slate-600">Start Date</Label>
+            <Input type="date" className="h-9 text-xs" value={startDate} onChange={e => setStartDate(e.target.value)} />
+          </div>
+          <div className="space-y-1.5">
+            <Label className="text-xs font-semibold text-slate-600">End Date</Label>
+            <Input type="date" className="h-9 text-xs" value={endDate} onChange={e => setEndDate(e.target.value)} />
+          </div>
+          <div className="space-y-1.5">
+            <Label className="text-xs font-semibold text-slate-600">Min Quality Score</Label>
+            <Input type="number" min="0" max="100" className="h-9 text-xs" value={minQuality} onChange={e => setMinQuality(e.target.value)} />
+          </div>
+        </div>
       </div>
 
       {/* Format cards */}

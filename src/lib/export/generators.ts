@@ -8,11 +8,10 @@ import {
   responses,
   questions,
   respondentSessions,
-  assignedQuestionSets,
   responseQualityMetrics,
   typingMetrics,
 } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { eq, gte, lte, and } from 'drizzle-orm'
 
 interface ExportRecord {
   response_id: string
@@ -34,9 +33,17 @@ interface ExportRecord {
   metadata: Record<string, unknown>
 }
 
-export async function getExportData(formId?: string): Promise<ExportRecord[]> {
+export interface ExportFilters {
+  formId?: string
+  minQuality?: number
+  startDate?: string
+  endDate?: string
+}
+
+export async function getExportData(filters: ExportFilters = {}): Promise<ExportRecord[]> {
+  const { formId, minQuality, startDate, endDate } = filters
   // Build query
-  const allResponses = await db
+  let query = db
     .select({
       responseId: responses.id,
       sessionId: responses.sessionId,
@@ -61,6 +68,19 @@ export async function getExportData(formId?: string): Promise<ExportRecord[]> {
     .innerJoin(questions, eq(responses.questionId, questions.id))
     .leftJoin(responseQualityMetrics, eq(responseQualityMetrics.responseId, responses.id))
     .leftJoin(typingMetrics, eq(typingMetrics.responseId, responses.id))
+    .$dynamic()
+
+  const conditions = []
+  if (formId) conditions.push(eq(respondentSessions.formId, formId))
+  if (minQuality !== undefined) conditions.push(gte(responseQualityMetrics.qualityScore, minQuality))
+  if (startDate) conditions.push(gte(responses.submittedAt, startDate))
+  if (endDate) conditions.push(lte(responses.submittedAt, endDate))
+
+  if (conditions.length > 0) {
+    query = query.where(and(...conditions))
+  }
+
+  const allResponses = await query
 
   return allResponses.map(r => ({
     response_id: r.responseId,

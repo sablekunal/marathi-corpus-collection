@@ -5,8 +5,6 @@ import {
   questions,
   respondentSessions,
   responseQualityMetrics,
-  typingMetrics,
-  forms,
 } from '@/lib/db/schema'
 import { eq, count, avg, sql, and } from 'drizzle-orm'
 import { getTransliterationMetrics } from '@/lib/transliteration/metrics'

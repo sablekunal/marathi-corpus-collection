@@ -28,6 +28,86 @@ export const MARATHI_DIALECTS = [
   'इतर (Other)'
 ]
 
+export const MAHARASHTRA_TALUKAS: Record<string, string[]> = {
+  'अहमदनगर': ['अकोले', 'जामखेड', 'कर्जत', 'कोपरगाव', 'नगर', 'नेवासा', 'पारनेर', 'पाथर्डी', 'राहाता', 'राहुरी', 'संगमनेर', 'शेवगाव', 'श्रीगोंदा', 'श्रीरामपूर'],
+  'अकोला': ['अकोट', 'अकोला', 'तेल्हारा', 'पातूर', 'बार्शीटाकळी', 'बाळापूर', 'मूर्तीजापूर'],
+  'अमरावती': ['अचलपूर', 'अमरावती', 'अंजनगाव सुर्जी', 'चांदूर बाजार', 'चांदूर रेल्वे', 'चिखलदरा', 'दर्यापूर', 'धामणगाव रेल्वे', 'धारणी', 'नांदगाव खंडेश्वर', 'भातकुली', 'मोर्शी', 'वरुड'],
+  'छत्रपती संभाजीनगर (औरंगाबाद)': ['औरंगाबाद', 'कन्नड', 'खुलताबाद', 'गंगापूर', 'पैठण', 'फुलंब्री', 'वैजापूर', 'सिल्लोड', 'सोयगाव'],
+  'बीड': ['आंबेजोगाई', 'आष्टी', 'केज', 'गेवराई', 'धारूर', 'पाटोदा', 'परळी', 'बीड', 'माजलगाव', 'शिरूर (कासार)', 'वडवणी'],
+  'भंडारा': ['भंडारा', 'लाखांदूर', 'लाखनी', 'मोहाडी', 'पवनी', 'साकोली', 'तुमसर'],
+  'बुलढाणा': ['बुलढाणा', 'चिखली', 'देऊळगाव राजा', 'जळगाव जामोद', 'खामगाव', 'लोणार', 'मलकापूर', 'मेहकर', 'मोताळा', 'नांदुरा', 'संग्रामपूर', 'शेगाव', 'सिंदखेड राजा'],
+  'चंद्रपूर': ['बल्लारपूर', 'भद्रावती', 'ब्रह्मपुरी', 'चंद्रपूर', 'चिमूर', 'गोंडपिपरी', 'जिवती', 'कोरपना', 'मूल', 'नागभीड', 'पोंभुर्णा', 'राजुरा', 'सावली', 'सिंदेवाही', 'वरोरा'],
+  'धुळे': ['धुळे', 'साक्री', 'शिरपूर', 'शिंदखेडा'],
+  'गडचिरोली': ['अहेरी', 'आरमोरी', 'भामरागड', 'चामोर्शी', 'देसाईगंज', 'धानोरा', 'एटापल्ली', 'गडचिरोली', 'कोरची', 'कुरखेडा', 'मुलचेरा', 'सिरोंचा'],
+  'गोंदिया': ['आमगाव', 'अर्जुनी मोरगाव', 'देवरी', 'गोंदिया', 'गोरेगाव', 'सडक अर्जुनी', 'सालेकसा', 'तिरोडा'],
+  'हिंगोली': ['औंढा नागनाथ', 'बसमत', 'हिंगोली', 'कळमनुरी', 'सेनगाव'],
+  'जळगाव': ['अमळनेर', 'भडगाव', 'भुसावळ', 'बोदवड', 'चाळीसगाव', 'चोपडा', 'धरणगाव', 'एरंडोल', 'जळगाव', 'जामनेर', 'मुक्ताईनगर', 'पाचोरा', 'पारोळा', 'रावेर', 'यावल'],
+  'जालना': ['अंबड', 'बदनापूर', 'भोकरदन', 'घनसावंगी', 'जालना', 'मंठा', 'परतूर', 'जाफ्राबाद'],
+  'कोल्हापूर': ['आजरा', 'भुदरगड', 'चंदगड', 'गडहिंग्लज', 'गगनबावडा', 'हातकणंगले', 'कागल', 'करवीर', 'पन्हाळा', 'राधानगरी', 'शाहूवाडी', 'शिरोळ'],
+  'लातूर': ['अहमदपूर', 'औसा', 'चाकूर', 'देवणी', 'जळकोट', 'लातूर', 'निलंगा', 'रेणापूर', 'शिरूर अनंतपाळ', 'उदगीर'],
+  'मुंबई शहर': ['मुंबई शहर'],
+  'मुंबई उपनगर': ['कुर्ला', 'अंधेरी', 'बोरिवली', 'मालाड'],
+  'नागपूर': ['भिवापूर', 'हिंगणा', 'कळमेश्वर', 'कामठी', 'काटोल', 'कुही', 'मौदा', 'नागपूर (ग्रामिण)', 'नागपूर (शहर)', 'नरखेड', 'पारशिवनी', 'रामटेक', 'सावनेर', 'उमरेड'],
+  'नांदेड': ['अर्धापूर', 'भोकर', 'बिलोली', 'देगलूर', 'धर्माबाद', 'हदगाव', 'हिमायतनगर', 'कंधार', 'किनवट', 'लोहा', 'माहूर', 'मुदखेड', 'मुखेड', 'नांदेड', 'नायगाव', 'उमरी'],
+  'नंदुरबार': ['अक्कलकुवा', 'अक्राणी', 'नंदुरबार', 'नवापूर', 'शहादा', 'तळोदा'],
+  'नाशिक': ['बागलाण', 'चांदवड', 'देवळा', 'दिंडोरी', 'इगतपुरी', 'कळवण', 'मालेगाव', 'नांदगाव', 'नाशिक', 'निफाड', 'पेठ', 'सिन्नर', 'सुरगाणा', 'त्र्यंबकेश्वर', 'येवला'],
+  'धाराशिव (उस्मानाबाद)': ['भूम', 'कळंब', 'लोहारा', 'उमरगा', 'उस्मानाबाद', 'परंडा', 'तुळजापूर', 'वाशी'],
+  'पालघर': ['डहाणू', 'जव्हार', 'मोखाडा', 'पालघर', 'तलासरी', 'वसई', 'वाडा', 'विक्रमगड'],
+  'परभणी': ['गंगाखेड', 'जिंतूर', 'मानवत', 'पाथरी', 'परभणी', 'पालम', 'पूर्णा', 'सोनपेठ', 'सेलू'],
+  'पुणे': ['आंबेगाव', 'बारामती', 'भोर', 'दौंड', 'हवेली', 'इंदापूर', 'जुन्नर', 'खेड', 'मावळ', 'मुळशी', 'पुरंदर', 'शिरूर', 'वेल्हे', 'पुणे शहर'],
+  'रायगड': ['अलिबाग', 'कर्जत', 'खालापूर', 'महाड', 'माणगाव', 'म्हासळा', 'मुरुड', 'पनवेल', 'पेण', 'पोलादपूर', 'रोहा', 'श्रीवर्धन', 'सुधागड', 'तळा', 'उरण'],
+  'रत्नागिरी': ['चिपळूण', 'दापोली', 'गुहागर', 'खेड', 'लांजा', 'मंडणगड', 'राजापूर', 'रत्नागिरी', 'संगमेश्वर'],
+  'सांगली': ['आटपाडी', 'जत', 'कड़ेगाव', 'कवठे महांकाळ', 'खानापूर', 'मिरज', 'पलूस', 'शिराळा', 'तासगाव', 'वाळवा'],
+  'सातारा': ['खटाव', 'कोरेगाव', 'खंडाळा', 'महाबळेश्वर', 'माण', 'पाटण', 'फलटण', 'सातारा', 'कराड', 'जावळी', 'वाई'],
+  'सिंधुदुर्ग': ['देवगड', 'दोडामार्ग', 'कणकवली', 'कुडाळ', 'मालवण', 'वेंगुर्ला', 'वैभववाडी', 'सावंतवाडी'],
+  'सोलापूर': ['अक्कलकोट', 'बार्शी', 'करमाळा', 'माढा', 'माळशिरस', 'मंगळवेढा', 'मोहोळ', 'पंढरपूर', 'सांगोला', 'दक्षिण सोलापूर', 'उत्तर सोलापूर'],
+  'ठाणे': ['अंबरनाथ', 'भिवंडी', 'कल्याण', 'मुरबाड', 'शहापूर', 'ठाणे', 'उल्हासनगर'],
+  'वर्धा': ['आर्वी', 'आष्टी', 'देवळी', 'हिंगणघाट', 'कारंजा', 'समुद्रपूर', 'सेलू', 'वर्धा'],
+  'वाशीम': ['कारंजा', 'मालेगाव', 'मंगरूळपीर', 'मानोरा', 'रिसोड', 'वाशीम'],
+  'यवतमाळ': ['आर्णी', 'बाभूळगाव', 'दारव्हा', 'दिग्रस', 'घाटंजी', 'कळंब', 'केळापूर', 'महागाव', 'मारेगाव', 'नेर', 'पुसद', 'राळेगाव', 'उमरखेड', 'वणी', 'यवतमाळ', 'झरी जामणी'],
+  'महाराष्ट्र बाहेरील': []
+}
+
+export const DISTRICT_DIALECT_MAP: Record<string, string> = {
+  'अहमदनगर': 'देशी / पश्चिम महाराष्ट्र (Deshi / Western Maharashtra)',
+  'अकोला': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'अमरावती': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'छत्रपती संभाजीनगर (औरंगाबाद)': 'मराठवाड्यातील मराठी (Marathwada)',
+  'बीड': 'मराठवाड्यातील मराठी (Marathwada)',
+  'भंडारा': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'बुलढाणा': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'चंद्रपूर': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'धुळे': 'खानदेशी / अहिराणी (Khandeshi / Ahirani)',
+  'गडचिरोली': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'गोंदिया': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'हिंगोली': 'मराठवाड्यातील मराठी (Marathwada)',
+  'जळगाव': 'खानदेशी / अहिराणी (Khandeshi / Ahirani)',
+  'जालना': 'मराठवाड्यातील मराठी (Marathwada)',
+  'कोल्हापूर': 'कोल्हापुरी / चंदगडी (Kolhapuri / Chandgadi)',
+  'लातूर': 'मराठवाड्यातील मराठी (Marathwada)',
+  'मुंबई शहर': 'कोकणी (Konkani Marathi)',
+  'मुंबई उपनगर': 'कोकणी (Konkani Marathi)',
+  'नागपूर': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'नांदेड': 'मराठवाड्यातील मराठी (Marathwada)',
+  'नंदुरबार': 'खानदेशी / अहिराणी (Khandeshi / Ahirani)',
+  'नाशिक': 'देशी / पश्चिम महाराष्ट्र (Deshi / Western Maharashtra)',
+  'धाराशिव (उस्मानाबाद)': 'मराठवाड्यातील मराठी (Marathwada)',
+  'पालघर': 'कोकणी (Konkani Marathi)',
+  'परभणी': 'मराठवाड्यातील मराठी (Marathwada)',
+  'पुणे': 'देशी / पश्चिम महाराष्ट्र (Deshi / Western Maharashtra)',
+  'रायगड': 'कोकणी (Konkani Marathi)',
+  'रत्नागिरी': 'कोकणी (Konkani Marathi)',
+  'सांगली': 'देशी / पश्चिम महाराष्ट्र (Deshi / Western Maharashtra)',
+  'सातारा': 'देशी / पश्चिम महाराष्ट्र (Deshi / Western Maharashtra)',
+  'सिंधुदुर्ग': 'मालवणी (Malvani)',
+  'सोलापूर': 'देशी / पश्चिम महाराष्ट्र (Deshi / Western Maharashtra)',
+  'ठाणे': 'कोकणी (Konkani Marathi)',
+  'वर्धा': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'वाशीम': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'यवतमाळ': 'वऱ्हाडी (Varhadi / Vidarbha)',
+  'महाराष्ट्र बाहेरील': 'इतर (Other)'
+}
+
 interface MetadataFormProps {
   metadataConfig?: Record<string, boolean>
   onSubmit: (data: Record<string, string>) => void
@@ -36,10 +116,10 @@ interface MetadataFormProps {
 export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProps) {
   const [district, setDistrict] = useState('')
   const [taluka, setTaluka] = useState('')
+  const [customTaluka, setCustomTaluka] = useState('')
   const [ageGroup, setAgeGroup] = useState('')
   const [gender, setGender] = useState('')
   const [education, setEducation] = useState('')
-  const [dialect, setDialect] = useState('')
   const [isNativeSpeaker, setIsNativeSpeaker] = useState('होय')
   const [consentResearch, setConsentResearch] = useState(false)
   const [consentAI, setConsentAI] = useState(false)
@@ -49,19 +129,27 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
   const showAge = metadataConfig.ageGroup !== false
   const showGender = metadataConfig.gender !== false
   const showEducation = metadataConfig.education !== false
-  const showDialect = metadataConfig.dialect !== false
   const showNative = metadataConfig.nativeSpeaker !== false
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!consentResearch || !consentAI) return
+
+    const finalTaluka = taluka === 'इतर (Other)' ? customTaluka : taluka
+    let computedDialect = DISTRICT_DIALECT_MAP[district] || 'इतर (Other)'
+    
+    // Fine-tune dialect based on taluka if needed
+    if (district === 'कोल्हापूर' && finalTaluka === 'चंदगड') {
+      computedDialect = 'कोल्हापुरी / चंदगडी (Kolhapuri / Chandgadi)'
+    }
+
     onSubmit({
       district,
-      taluka,
+      taluka: finalTaluka,
       ageGroup,
       gender,
       education,
-      dialect,
+      dialect: computedDialect,
       isNativeSpeaker,
       consentResearch: 'true',
       consentAI: 'true',
@@ -88,7 +176,11 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
             <Select
               value={district}
               onValueChange={(val: string | null) => {
-                if (val) setDistrict(val)
+                if (val) {
+                  setDistrict(val)
+                  setTaluka('')
+                  setCustomTaluka('')
+                }
               }}
               required
             >
@@ -108,36 +200,40 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
 
         {showDistrict && (
           <div className="space-y-1.5">
-            <Label className="text-xs font-semibold text-slate-700">तालुका / शहर (Taluka / City)</Label>
-            <Input
+            <Label className="text-xs font-semibold text-slate-700">तालुका / शहर (Taluka / City) *</Label>
+            <Select
               value={taluka}
-              onChange={e => setTaluka(e.target.value)}
-              placeholder="उदा. हवेली, बारामती, नागपूर"
-              className="bg-white"
-            />
+              onValueChange={(val: string | null) => {
+                if (val) setTaluka(val)
+              }}
+              disabled={!district}
+              required
+            >
+              <SelectTrigger className="w-full bg-white">
+                <SelectValue placeholder={district ? "आपला तालुका निवडा" : "प्रथम जिल्हा निवडा"} />
+              </SelectTrigger>
+              <SelectContent>
+                {(MAHARASHTRA_TALUKAS[district] || []).map(t => (
+                  <SelectItem key={t} value={t}>
+                    {t}
+                  </SelectItem>
+                ))}
+                <SelectItem value="इतर (Other)">इतर (Other)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         )}
 
-        {showDialect && (
+        {showDistrict && taluka === 'इतर (Other)' && (
           <div className="space-y-1.5">
-            <Label className="text-xs font-semibold text-slate-700">बोलीभाषा (Primary Marathi Dialect)</Label>
-            <Select
-              value={dialect}
-              onValueChange={(val: string | null) => {
-                if (val) setDialect(val)
-              }}
-            >
-              <SelectTrigger className="w-full bg-white">
-                <SelectValue placeholder="बोलीभाषा निवडा" />
-              </SelectTrigger>
-              <SelectContent>
-                {MARATHI_DIALECTS.map(d => (
-                  <SelectItem key={d} value={d}>
-                    {d}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Label className="text-xs font-semibold text-slate-700">इतर तालुका / शहर (Other Taluka / City) *</Label>
+            <Input
+              value={customTaluka}
+              onChange={e => setCustomTaluka(e.target.value)}
+              placeholder="कृपया आपला तालुका प्रविष्ट करा"
+              className="bg-white"
+              required
+            />
           </div>
         )}
 

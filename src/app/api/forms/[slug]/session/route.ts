@@ -3,15 +3,9 @@ import { db } from '@/lib/db'
 import {
   forms,
   respondentSessions,
-  responses,
-  assignedQuestionSets,
-  questions,
-  responseQualityMetrics,
-  typingMetrics,
 } from '@/lib/db/schema'
-import { eq, and, sql, count, avg } from 'drizzle-orm'
+import { eq, and, sql, count } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
-import { z } from 'zod'
 import { assignQuestions, getAssignedQuestions } from '@/lib/randomAssignment'
 
 // GET /api/forms/[slug]/session — init or retrieve session, get assigned questions

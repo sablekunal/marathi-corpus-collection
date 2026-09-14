@@ -310,6 +310,21 @@ export const HIGH_FREQ_MARATHI_CACHE: Record<string, string[]> = {
   'hajar': ['हजार'],
   'lakh': ['लाख'],
   'koti': ['कोटी'],
+
+  // ── Common English Loanwords (इंग्रजी शब्द) ─────────────────
+  'social': ['सोशल'],
+  'online': ['ऑनलाईन', 'ऑनलाइन'],
+  'offline': ['ऑफलाईन', 'ऑफलाइन'],
+  'internet': ['इंटरनेट'],
+  'computer': ['कॉम्प्युटर', 'संगणक'],
+  'mobile': ['मोबाईल', 'मोबाइल'],
+  'phone': ['फोन'],
+  'whatsapp': ['व्हॉट्सॲप', 'व्हॉट्सअप'],
+  'facebook': ['फेसबुक'],
+  'instagram': ['इंस्टाग्राम'],
+  'twitter': ['ट्विटर'],
+  'youtube': ['यूट्यूब'],
+  'google': ['गुगल'],
 }
 
 /**
