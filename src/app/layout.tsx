@@ -25,6 +25,28 @@ export const metadata: Metadata = {
     'मराठी भाषेच्या संगणकीय प्रक्रियेसाठी मजकूर डेटासंच संकलन व्यासपीठ. A specialized platform for collecting Marathi text corpus for LLM research.',
   keywords: ['Marathi', 'corpus', 'NLP', 'LLM', 'language', 'data collection'],
   authors: [{ name: 'Marathi Corpus Research Team' }],
+  openGraph: {
+    title: 'मराठी भाषा संग्रह | Marathi Corpus Collection',
+    description: 'मराठी भाषेच्या संगणकीय प्रक्रियेसाठी मजकूर डेटासंच संकलन व्यासपीठ. Participate in building the future of Marathi AI.',
+    url: 'https://marathi-corpus.vercel.app',
+    siteName: 'मराठी भाषा संग्रह',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Marathi Language Corpus - AI Research Project',
+      },
+    ],
+    locale: 'mr_IN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'मराठी भाषा संग्रह | Marathi Corpus Collection',
+    description: 'मराठी भाषेच्या संगणकीय प्रक्रियेसाठी मजकूर डेटासंच संकलन व्यासपीठ.',
+    images: ['/og-image.jpg'],
+  },
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,

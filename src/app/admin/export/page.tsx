@@ -65,7 +65,7 @@ export default function ExportAdminPage() {
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div className="space-y-1.5">
             <Label className="text-xs font-semibold text-slate-600">Form / Campaign</Label>
-            <Select value={selectedForm} onValueChange={setSelectedForm}>
+            <Select value={selectedForm} onValueChange={(val: string | null) => val && setSelectedForm(val)}>
               <SelectTrigger className="h-9 text-xs">
                 <SelectValue placeholder="All Forms" />
               </SelectTrigger>

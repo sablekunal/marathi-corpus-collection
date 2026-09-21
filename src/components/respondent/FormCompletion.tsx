@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CheckCircle2, HeartHandshake, Sparkles, Home } from 'lucide-react'
+import { CheckCircle2, HeartHandshake, Sparkles, Home, Target } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ShareButtons } from '@/components/ShareButtons'
 
 interface FormCompletionProps {
   totalQuestions: number
@@ -12,6 +13,10 @@ interface FormCompletionProps {
 }
 
 export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCompletionProps) {
+  const formUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}${window.location.pathname}`
+    : ''
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -67,6 +72,21 @@ export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCo
         </div>
       </div>
 
+      {/* ── Share CTA (Viral Loop) ───────────────────────────────────── */}
+      <div className="bg-blue-50/80 border border-blue-200/60 rounded-xl p-5 space-y-3">
+        <div className="flex items-center justify-center gap-2 text-sm font-semibold text-blue-900">
+          <Target className="w-4 h-4 text-blue-600" />
+          <span>आम्हाला ५०० प्रतिसाद मिळवायला मदत करा!</span>
+        </div>
+        <p className="text-xs text-blue-800 leading-relaxed">
+          तुमचे मित्र, कुटुंबीय आणि सहकाऱ्यांना या प्रकल्पात सहभागी होण्यासाठी शेअर करा.
+          <span className="block text-blue-700 mt-0.5">
+            Help us reach 500 responses — share with friends and family!
+          </span>
+        </p>
+        <ShareButtons formUrl={formUrl} compact />
+      </div>
+
       <div className="space-y-3 pt-2">
         <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
           <HeartHandshake className="w-4 h-4 text-rose-500" />
@@ -77,11 +97,16 @@ export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCo
           Session ID: {sessionId}
         </div>
 
-        <div className="pt-4">
+        <div className="flex items-center justify-center gap-3 pt-4">
           <Link href="/">
             <Button variant="outline" className="gap-2 text-xs">
               <Home className="w-3.5 h-3.5" />
               मुख्य पानावर जा
+            </Button>
+          </Link>
+          <Link href="/stats">
+            <Button variant="outline" className="gap-2 text-xs">
+              आकडेवारी पहा
             </Button>
           </Link>
         </div>

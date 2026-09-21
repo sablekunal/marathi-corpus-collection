@@ -10,7 +10,9 @@
     "test": "tsx scripts/test-all.ts",
     "db:init": "tsx src/lib/db/init-db.ts",
     "db:seed": "tsx src/lib/db/seed.ts",
-    "db:setup": "tsx src/lib/db/init-db.ts && tsx src/lib/db/seed.ts"
+    "db:setup": "tsx src/lib/db/init-db.ts && tsx src/lib/db/seed.ts",
+    "db:seed-questions": "tsx scripts/seed-questions.ts",
+    "monitor:report": "tsx scripts/daily-report.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

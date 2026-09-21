@@ -21,7 +21,7 @@ export function WordProgressRing({
 
   // Percentage towards minimum words
   const percentage = Math.min(100, Math.round((currentWords / minWords) * 100)) || 0
-  const progressRatio = Math.min(1, currentWords / minWords)
+  const progressRatio = isNaN(currentWords / minWords) ? 0 : Math.min(1, currentWords / minWords)
   const strokeDashoffset = circumference - progressRatio * circumference
 
   // Dynamic Color
@@ -68,6 +68,7 @@ export function WordProgressRing({
             stroke={strokeColor}
             strokeWidth={strokeWidth}
             strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
             strokeLinecap="round"

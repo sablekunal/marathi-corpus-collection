@@ -126,7 +126,10 @@ export function QuestionCard({
       </div>
 
       {/* Word progress ring indicator */}
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between">
+        <span className="text-[11px] text-slate-400 italic font-marathi">
+          💡 आपल्या स्वतःच्या बोलीभाषेत लिहा (Write in your dialect)
+        </span>
         <WordProgressRing
           currentWords={currentWords}
           minWords={question.minWords}

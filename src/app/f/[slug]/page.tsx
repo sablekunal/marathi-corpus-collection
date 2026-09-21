@@ -1,12 +1,13 @@
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect, use, useCallback } from 'react'
 import Link from 'next/link'
 import { Progress } from '@/components/ui/progress'
 import { QuestionCard } from '@/components/respondent/QuestionCard'
 import { MetadataForm } from '@/components/respondent/MetadataForm'
 import { FormCompletion } from '@/components/respondent/FormCompletion'
-import { BookOpen, Sparkles, Loader2, AlertCircle } from 'lucide-react'
+import { BookOpen, Sparkles, Loader2, AlertCircle, RotateCcw } from 'lucide-react'
+import { useDraftAutoSave } from '@/hooks/useDraftAutoSave'
 
 interface QuestionItem {
   questionId: string
@@ -46,11 +47,19 @@ export default function FormRespondentPage({
   
   // Step flow: 'metadata' -> 'questions' -> 'completed'
   const [step, setStep] = useState<'metadata' | 'questions' | 'completed'>('metadata')
-  const [currentIndex, setCurrentIndex] = useState(0)
 
-  // Answers & metrics state
-  const [metadata, setMetadata] = useState<Record<string, string>>({})
-  const [answers, setAnswers] = useState<Record<string, string>>({})
+  // ── Draft Auto-Save ─────────────────────────────────────────────────
+  const {
+    answers,
+    setAnswers,
+    currentIndex,
+    setCurrentIndex,
+    metadata,
+    setMetadata,
+    clearDraft,
+    hasDraft,
+  } = useDraftAutoSave(slug, sessionId)
+
   const [pasteCounts, setPasteCounts] = useState<Record<string, number>>({})
   const [typingMetricsMap, setTypingMetricsMap] = useState<
     Record<
@@ -112,6 +121,14 @@ export default function FormRespondentPage({
 
     initSession()
   }, [slug])
+
+  // If draft has saved answers and we have questions loaded, resume from questions step
+  useEffect(() => {
+    if (hasDraft && questions.length > 0 && Object.keys(answers).length > 0 && step === 'metadata') {
+      // Draft exists with answers — skip metadata, resume questions
+      setStep('questions')
+    }
+  }, [hasDraft, questions, answers, step])
 
   // Handle Metadata submit
   const handleMetadataSubmit = (meta: Record<string, string>) => {
@@ -183,6 +200,7 @@ export default function FormRespondentPage({
       }
 
       setStep('completed')
+      clearDraft() // Clear saved draft after successful submission
     } catch (err) {
       console.error(err)
       alert('इंटरनेट त्रुटी आली. कृपया पुन्हा प्रयत्न करा.')

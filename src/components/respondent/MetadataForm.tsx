@@ -169,6 +169,22 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
         </div>
       </div>
 
+      {/* ── Dialect Reassurance Banner ──────────────────────────────── */}
+      <div className="bg-amber-50/70 border border-amber-200/60 rounded-xl p-4 flex items-start gap-3 text-sm text-amber-900">
+        <span className="text-lg shrink-0">✍️</span>
+        <div>
+          <p className="font-semibold font-marathi text-amber-900">
+            तुम्ही तुमच्या घरगुती, स्थानिक किंवा दैनंदिन बोलीभाषेत लिहू शकता.
+          </p>
+          <p className="text-xs text-amber-800 mt-1 leading-relaxed">
+            व्याकरणाच्या किंवा शुद्धलेखनाच्या चुकांची काळजी करू नका — आम्हाला आपली नैसर्गिक मराठी हवी आहे!
+            <span className="block text-amber-700 mt-0.5">
+              You can write in your everyday, local dialect. Don&apos;t worry about grammar or spelling — we want your natural Marathi!
+            </span>
+          </p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {showDistrict && (
           <div className="space-y-1.5">

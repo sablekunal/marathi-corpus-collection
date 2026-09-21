@@ -5,10 +5,10 @@ import { eq } from 'drizzle-orm'
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params
+    const { id } = await params
     await db.delete(transliterationOverrides).where(eq(transliterationOverrides.id, id))
     return NextResponse.json({ success: true })
   } catch (err) {
