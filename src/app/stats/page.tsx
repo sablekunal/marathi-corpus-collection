@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import Link from 'next/link'
 import { BookOpen, ArrowLeft, Target, Users, Globe, BarChart3 } from 'lucide-react'
 import { ShareButtons } from '@/components/ShareButtons'
