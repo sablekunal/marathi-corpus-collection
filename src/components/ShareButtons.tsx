@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Share2, Copy, Check, MessageCircle } from 'lucide-react'
 
 interface ShareButtonsProps {
