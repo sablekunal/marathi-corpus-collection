@@ -126,7 +126,7 @@ export default function PrivacyPolicyPage() {
             <div className="text-xs text-blue-900 space-y-1">
               <div className="font-semibold">संपर्क व अधिक माहिती (Research Inquiry & Data Requests)</div>
               <div>
-                डेटा संरक्षण किंवा संशोधनाविषयी कोणत्याही शंकेसाठी संपर्क: <a href="mailto:marathi.nlp.research@gmail.com" className="font-medium text-blue-700 underline">marathi.nlp.research@gmail.com</a>
+                डेटा संरक्षण किंवा संशोधनाविषयी कोणत्याही शंकेसाठी संपर्क: <a href="mailto:parshv.runwal24@vit.edu" className="font-medium text-blue-700 underline">parshv.runwal24@vit.edu</a>
               </div>
             </div>
           </div>
