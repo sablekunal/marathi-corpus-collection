@@ -58,8 +58,13 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ slug
     const assignedQs = await assignQuestions(form.id, newSessionId)
 
     return NextResponse.json({ form, session: { id: newSessionId }, questions: assignedQs })
-  } catch (err) {
-    console.error('[GET /api/forms/[slug]/session]', err)
-    return NextResponse.json({ error: 'Internal error' }, { status: 500 })
+  } catch (err: unknown) {
+    const error = err as Error
+    console.error('[GET /api/forms/[slug]/session]', error)
+    const isDbMissing = !process.env.DATABASE_URL
+    const message = isDbMissing && process.env.NODE_ENV === 'production'
+      ? 'Database not configured. Please set DATABASE_URL and DATABASE_AUTH_TOKEN in Vercel environment variables.'
+      : (error?.message || 'Internal server error')
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

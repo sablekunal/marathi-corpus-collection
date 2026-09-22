@@ -87,10 +87,21 @@ export default function FormRespondentPage({
           : `/api/forms/${slug}/session`
 
         const res = await fetch(url)
-        const data = await res.json()
+        let data: any = null
+        try {
+          data = await res.json()
+        } catch {
+          // Response body was empty or not JSON (e.g. serverless error)
+        }
 
         if (!res.ok) {
-          setError(data.error || 'फॉर्म लोड करण्यात अडचण आली.')
+          setError(data?.error || `सर्व्हर त्रुटी आली (${res.status}). कृपया डेटाबेस कनेक्शन (DATABASE_URL) तपासा.`)
+          setLoading(false)
+          return
+        }
+
+        if (!data || !data.form || !data.session) {
+          setError('फॉर्म माहिती लोड करता आली नाही.')
           setLoading(false)
           return
         }
@@ -192,9 +203,15 @@ export default function FormRespondentPage({
         }),
       })
 
-      const result = await res.json()
+      let result: any = null
+      try {
+        result = await res.json()
+      } catch {
+        // Response body not valid JSON
+      }
+
       if (!res.ok) {
-        alert(result.error || 'सबमिशन अयशस्वी झाले.')
+        alert(result?.error || `सबमिशन अयशस्वी झाले (सर्व्हर त्रुटी ${res.status}).`)
         setIsSubmitting(false)
         return
       }

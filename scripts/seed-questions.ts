@@ -34,11 +34,11 @@ async function seedQuestions() {
   console.log('📚 Seeding question bank...\n')
 
   // Read the question bank JSON
-  const jsonPath = resolve(__dirname, '../Claude recommended files/files/questions-bulk-import.json')
+  const jsonPath = resolve(__dirname, '../src/lib/data/questions.json')
   let data: { questions: QuestionImport[] }
 
   try {
-    const raw = readFileSync(jsonPath, 'utf-8')
+    const raw = readFileSync(jsonPath, 'utf-8').replace(/^\uFEFF/, '')
     data = JSON.parse(raw)
   } catch (err) {
     console.error('❌ Failed to read questions-bulk-import.json:', err)
