@@ -63,6 +63,9 @@ export function TransliterateTextarea({
   const activeDurationRef = useRef<number>(0)
   const idleDurationRef = useRef<number>(0)
   const keyPressCountRef = useRef<number>(0)
+  
+  // Ref to prevent API race conditions during fast typing
+  const latestFetchRef = useRef<string>('')
 
   // ── Metrics Loop (Active / Idle duration) ───────────────────
   useEffect(() => {
@@ -109,6 +112,7 @@ export function TransliterateTextarea({
     }
 
     const lower = trimmed.toLowerCase()
+    latestFetchRef.current = lower
 
     // 1. Check local in-memory client cache
     if (clientCache.has(lower)) {
@@ -139,8 +143,12 @@ export function TransliterateTextarea({
           // Include original english word as the last option
           const fullCandidates = Array.from(new Set([...data.candidates, trimmed]))
           clientCache.set(lower, fullCandidates)
-          setCandidates(fullCandidates)
-          setSelectedIndex(0)
+          
+          // Only update UI if the user hasn't typed further letters
+          if (latestFetchRef.current === lower) {
+            setCandidates(fullCandidates)
+            setSelectedIndex(0)
+          }
         }
       }
     } catch {
