@@ -1,8 +1,8 @@
 export default function PrivacyCard() {
   return (
-    <section className="py-12 px-4 bg-gray-50">
+    <section className="py-8 md:py-12 px-4 bg-gray-50">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-sm border-2 border-green-200 p-8">
+        <div className="bg-white rounded-lg shadow-sm border-2 border-green-200 p-5 md:p-8">
           {/* Header */}
           <div className="flex items-center gap-3 mb-6">
             <span className="text-3xl">🔒</span>

@@ -48,10 +48,10 @@ const dialects: Dialect[] = [
 
 export default function DialectCards() {
   return (
-    <section className="py-12 px-4 bg-white">
+    <section className="py-8 md:py-12 px-4 bg-white">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-2 font-marathi">
             तुमची बोलीही मराठीच आहे
           </h2>

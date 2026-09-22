@@ -36,8 +36,8 @@ export default async function HomePage() {
       <DialectCards />
 
       {/* ── Info Cards ─────────────────────────────────────────────── */}
-      <div className="max-w-3xl mx-auto px-4 mt-12 mb-12">
-        <div className="grid sm:grid-cols-3 gap-4 mb-10">
+      <div className="max-w-3xl mx-auto px-4 mt-8 md:mt-12 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 md:mb-10">
           <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm">
             <div className="w-9 h-9 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
               <Globe className="w-4.5 h-4.5 text-[oklch(0.42_0.16_250)]" />
@@ -84,7 +84,7 @@ export default async function HomePage() {
 
       {/* ── Footer ───────────────────────────────────────────────── */}
       <div className="max-w-3xl mx-auto px-4">
-        <div className="text-center pt-6 border-t border-slate-100 space-y-2 mt-12">
+        <div className="text-center pt-6 border-t border-slate-100 space-y-2 mt-8 md:mt-12">
           <div className="flex items-center justify-center gap-4 text-xs text-slate-500 font-marathi">
             <Link href="/privacy" className="hover:text-[oklch(0.42_0.16_250)] underline transition-colors">
               गोपनीयता धोरण (Privacy Policy)

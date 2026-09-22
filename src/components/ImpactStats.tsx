@@ -44,7 +44,7 @@ export default function ImpactStats() {
   if (loading || !stats) return null;
 
   return (
-    <section className="py-12 px-4 bg-gradient-to-b from-blue-50 to-white">
+    <section className="py-8 md:py-12 px-4 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-center text-2xl font-bold text-gray-900 mb-2">
           आजपर्यंतचे योगदान
@@ -53,41 +53,41 @@ export default function ImpactStats() {
           Last updated: {stats.lastUpdated ? new Date(stats.lastUpdated).toLocaleDateString('mr-IN') : new Date().toLocaleDateString('mr-IN')}
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {/* Responses Card */}
-          <div className="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
-            <div className="text-3xl font-bold text-blue-600">
+          <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+            <div className="text-2xl md:text-3xl font-bold text-blue-600">
               {stats.totalResponses.toLocaleString()}
             </div>
-            <p className="text-gray-700 text-sm font-medium mt-2">उत्तरे</p>
-            <p className="text-gray-500 text-xs">Responses</p>
+            <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">उत्तरे</p>
+            <p className="text-gray-500 text-[10px] md:text-xs">Responses</p>
           </div>
 
           {/* Contributors Card */}
-          <div className="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
-            <div className="text-3xl font-bold text-green-600">
+          <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+            <div className="text-2xl md:text-3xl font-bold text-green-600">
               {stats.totalSubmissions.toLocaleString()}
             </div>
-            <p className="text-gray-700 text-sm font-medium mt-2">सहभागी</p>
-            <p className="text-gray-500 text-xs">Contributors</p>
+            <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">सहभागी</p>
+            <p className="text-gray-500 text-[10px] md:text-xs">Contributors</p>
           </div>
 
           {/* Districts Card */}
-          <div className="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
-            <div className="text-3xl font-bold text-orange-600">
+          <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+            <div className="text-2xl md:text-3xl font-bold text-orange-600">
               {stats.districtCount.toLocaleString()}
             </div>
-            <p className="text-gray-700 text-sm font-medium mt-2">जिल्हे</p>
-            <p className="text-gray-500 text-xs">Districts</p>
+            <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">जिल्हे</p>
+            <p className="text-gray-500 text-[10px] md:text-xs">Districts</p>
           </div>
 
           {/* Words Card */}
-          <div className="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
-            <div className="text-3xl font-bold text-purple-600">
+          <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+            <div className="text-2xl md:text-3xl font-bold text-purple-600">
               {stats.totalWords > 1000 ? `${(stats.totalWords / 1000).toFixed(0)}K` : stats.totalWords}
             </div>
-            <p className="text-gray-700 text-sm font-medium mt-2">शब्द</p>
-            <p className="text-gray-500 text-xs">Words</p>
+            <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">शब्द</p>
+            <p className="text-gray-500 text-[10px] md:text-xs">Words</p>
           </div>
         </div>
 
