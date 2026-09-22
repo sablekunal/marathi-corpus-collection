@@ -18,12 +18,14 @@ export default function HeroSection({ formSlug }: { formSlug: string }) {
         </p>
 
         {/* CTA Button */}
-        <a
-          href={`/f/${formSlug}`}
-          className="inline-block px-8 py-4 md:px-10 md:py-5 bg-white text-blue-600 font-bold text-lg md:text-2xl rounded-xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1 hover:shadow-2xl font-marathi"
-        >
-          योगदान द्या →
-        </a>
+        <div className="flex justify-center w-full px-4 sm:px-0">
+          <a
+            href={`/f/${formSlug}`}
+            className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 md:px-12 md:py-5 bg-white text-blue-600 font-bold text-xl md:text-2xl rounded-xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1 hover:shadow-2xl font-marathi"
+          >
+            योगदान द्या →
+          </a>
+        </div>
 
         {/* Badges Below CTA */}
         <div className="flex justify-center gap-2 sm:gap-4 mt-6 text-xs sm:text-sm text-blue-100 flex-wrap font-marathi">

@@ -325,6 +325,11 @@ export function TransliterateTextarea({
     onChange(newValue)
     lastConversionRef.current = null
     setCanUndo(false)
+
+    // Instantly update active word on mobile where keyUp might be delayed/skipped
+    requestAnimationFrame(() => {
+      updateActiveWord()
+    })
   }
 
   const handleKeyUp = () => {
