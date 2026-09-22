@@ -20,7 +20,7 @@ export default function HeroSection({ formSlug }: { formSlug: string }) {
         {/* CTA Button */}
         <a
           href={`/f/${formSlug}`}
-          className="inline-block px-6 py-3 md:px-8 md:py-4 bg-white text-blue-600 font-bold text-base md:text-lg rounded-lg hover:bg-blue-50 transition shadow-lg font-marathi"
+          className="inline-block px-8 py-4 md:px-10 md:py-5 bg-white text-blue-600 font-bold text-lg md:text-2xl rounded-xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1 hover:shadow-2xl font-marathi"
         >
           योगदान द्या →
         </a>

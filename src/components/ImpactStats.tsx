@@ -97,7 +97,7 @@ export default function ImpactStats() {
           </p>
           <a
             href="/f/marathi-pilot-2026"
-            className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+            className="inline-block px-8 py-4 md:px-10 md:py-5 bg-blue-600 text-white font-bold text-lg md:text-xl rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:-translate-y-1 hover:shadow-xl font-marathi"
           >
             योगदान द्या →
           </a>

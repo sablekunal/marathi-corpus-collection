@@ -284,7 +284,45 @@ export function TransliterateTextarea({
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     lastKeyTimeRef.current = Date.now()
     keyPressCountRef.current += 1
-    onChange(e.target.value)
+    const newValue = e.target.value
+
+    // Check for mobile transliteration commit (e.g. spacebar press)
+    if (isTransliterationOn && activeWord && candidates.length > 0) {
+      const pos = e.target.selectionStart
+      const lastChar = newValue.slice(pos - 1, pos)
+
+      if (/[\s,.?!\n]/.test(lastChar)) {
+        const textBeforeSpace = newValue.slice(0, pos - 1)
+        if (textBeforeSpace.endsWith(activeWord)) {
+          const chosen = candidates[selectedIndex] || candidates[0] || activeWord
+          const startIndex = pos - 1 - activeWord.length
+          const newText = newValue.slice(0, startIndex) + chosen + lastChar + newValue.slice(pos)
+          const newCursorPos = startIndex + chosen.length + 1
+
+          lastConversionRef.current = {
+            original: activeWord,
+            converted: chosen,
+            startIndex,
+            endIndex: newCursorPos,
+          }
+          setCanUndo(true)
+          onChange(newText)
+          setActiveWord('')
+          setCandidates([])
+
+          requestAnimationFrame(() => {
+            if (textareaRef.current) {
+              textareaRef.current.selectionStart = newCursorPos
+              textareaRef.current.selectionEnd = newCursorPos
+              textareaRef.current.focus()
+            }
+          })
+          return
+        }
+      }
+    }
+
+    onChange(newValue)
     lastConversionRef.current = null
     setCanUndo(false)
   }

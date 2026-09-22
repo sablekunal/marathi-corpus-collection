@@ -5,7 +5,6 @@ import { forms } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
 import HeroSection from '@/components/HeroSection'
 import ImpactStats from '@/components/ImpactStats'
-import DialectCards from '@/components/DialectCards'
 import PrivacyCard from '@/components/PrivacyCard'
 
 async function getPublishedFormSlug(): Promise<string> {
@@ -31,9 +30,6 @@ export default async function HomePage() {
 
       {/* ── Live Stats Strip ───────────────────────────────────────── */}
       <ImpactStats />
-
-      {/* ── Dialect Cards ──────────────────────────────────────────── */}
-      <DialectCards />
 
       {/* ── Info Cards ─────────────────────────────────────────────── */}
       <div className="max-w-3xl mx-auto px-4 mt-8 md:mt-12 mb-8 md:mb-12">
