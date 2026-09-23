@@ -57,7 +57,7 @@ export async function assignQuestions(
   const [form] = await db.select({ questionsPerForm: forms.questionsPerForm }).from(forms).where(eq(forms.id, formId))
   if (!form) throw new Error(`Form ${formId} not found`)
   
-  const targetCount = form.questionsPerForm ?? 4
+  const targetCount = form.questionsPerForm ?? 3
 
   // Get ALL enabled questions for this form
   const pool = await db
