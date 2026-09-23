@@ -37,14 +37,11 @@ import {
 
 const CATEGORIES = [
   'Opinion',
-  'Description',
   'Experience',
+  'Descriptive',
+  'Philosophical',
+  'Cultural',
   'Imagination',
-  'Instruction',
-  'Dialogue',
-  'Regional',
-  'Comparison',
-  'Future',
 ]
 
 interface FormRule {

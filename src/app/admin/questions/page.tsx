@@ -45,14 +45,11 @@ import {
 const CATEGORIES = [
   'All',
   'Opinion',
-  'Description',
   'Experience',
+  'Descriptive',
+  'Philosophical',
+  'Cultural',
   'Imagination',
-  'Instruction',
-  'Dialogue',
-  'Regional',
-  'Comparison',
-  'Future',
 ]
 
 interface QuestionRecord {

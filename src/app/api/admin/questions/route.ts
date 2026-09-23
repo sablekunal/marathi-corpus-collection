@@ -5,7 +5,7 @@ import { eq, and, desc, like, sql } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
 import { z } from 'zod'
 
-const CATEGORIES = ['Opinion', 'Description', 'Experience', 'Imagination', 'Instruction', 'Dialogue', 'Regional', 'Comparison', 'Future'] as const
+const CATEGORIES = ['Opinion', 'Experience', 'Descriptive', 'Philosophical', 'Cultural', 'Imagination'] as const
 
 const QuestionSchema = z.object({
   category: z.enum(CATEGORIES),

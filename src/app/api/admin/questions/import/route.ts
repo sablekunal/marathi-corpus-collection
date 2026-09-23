@@ -4,7 +4,7 @@ import { questions } from '@/lib/db/schema'
 import { nanoid } from 'nanoid'
 import { z } from 'zod'
 
-const CATEGORIES = ['Opinion', 'Description', 'Experience', 'Imagination', 'Instruction', 'Dialogue', 'Regional', 'Comparison', 'Future'] as const
+const CATEGORIES = ['Opinion', 'Experience', 'Descriptive', 'Philosophical', 'Cultural', 'Imagination'] as const
 
 const ImportItemSchema = z.object({
   category: z.enum(CATEGORIES),
