@@ -77,12 +77,12 @@ export default function ImpactStats() {
     fetchStats();
   }, []);
 
-  if (loading || !stats) return null;
+  const animatedResponses = useCountUp(stats?.totalResponses || 0);
+  const animatedContributors = useCountUp(stats?.totalSubmissions || 0);
+  const animatedDistricts = useCountUp(stats?.districtCount || 0);
+  const animatedWords = useCountUp(stats?.totalWords || 0);
 
-  const animatedResponses = useCountUp(stats.totalResponses);
-  const animatedContributors = useCountUp(stats.totalSubmissions);
-  const animatedDistricts = useCountUp(stats.districtCount);
-  const animatedWords = useCountUp(stats.totalWords);
+  if (loading || !stats) return null;
 
   return (
     <section className="py-8 md:py-12 px-4 bg-gradient-to-b from-blue-50 to-white">
