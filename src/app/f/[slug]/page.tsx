@@ -82,7 +82,14 @@ export default function FormRespondentPage({
     async function initSession() {
       try {
         setLoading(true)
-        const storedSession = localStorage.getItem(`session_${slug}`)
+        
+        let storedSession: string | null = null
+        try {
+          storedSession = localStorage.getItem(`session_${slug}`)
+        } catch (e) {
+          console.warn('localStorage is blocked by privacy settings')
+        }
+
         const url = storedSession
           ? `/api/forms/${slug}/session?sessionId=${storedSession}`
           : `/api/forms/${slug}/session`
@@ -109,14 +116,20 @@ export default function FormRespondentPage({
 
         if (data.alreadySubmitted) {
           // Auto-reset the session lock and reload for shared devices (cyber cafes, families)
-          localStorage.removeItem(`session_${slug}`)
+          try {
+            localStorage.removeItem(`session_${slug}`)
+          } catch(e) {}
           window.location.reload()
           return
         }
 
         setForm(data.form)
         setSessionId(data.session.id)
-        localStorage.setItem(`session_${slug}`, data.session.id)
+        
+        try {
+          localStorage.setItem(`session_${slug}`, data.session.id)
+        } catch(e) {}
+        
         setQuestions(data.questions || [])
 
         // If metadata is empty or not required, jump to questions
@@ -220,7 +233,9 @@ export default function FormRespondentPage({
 
       setStep('completed')
       clearDraft() // Clear saved draft
-      localStorage.removeItem(`session_${slug}`) // Clear session lock for next user
+      try {
+        localStorage.removeItem(`session_${slug}`) // Clear session lock for next user
+      } catch (e) {}
     } catch (err) {
       console.error(err)
       alert('इंटरनेट त्रुटी आली. कृपया पुन्हा प्रयत्न करा.')
