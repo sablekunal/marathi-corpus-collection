@@ -99,16 +99,10 @@ export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCo
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
           <Button 
-            onClick={() => {
-              const slug = window.location.pathname.split('/').pop()
-              if (slug) {
-                localStorage.removeItem(`session_${slug}`)
-                window.location.reload()
-              }
-            }}
+            onClick={() => window.location.reload()}
             className="gap-2 text-xs bg-[oklch(0.42_0.16_250)] text-white hover:bg-blue-700 w-full sm:w-auto"
           >
-            कुटुंबातील दुसऱ्या व्यक्तीसाठी फॉर्म भरा
+            नवीन प्रतिसाद सुरू करा
           </Button>
 
           <Link href="/">
