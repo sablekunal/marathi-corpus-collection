@@ -17,6 +17,7 @@ const noto = Noto_Serif_Devanagari({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://marathi-corpus.vercel.app'),
   title: {
     default: 'मराठी भाषा संग्रह | Marathi Corpus Collection',
     template: '%s | मराठी भाषा संग्रह',
