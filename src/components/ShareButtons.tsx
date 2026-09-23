@@ -24,7 +24,7 @@ export function ShareButtons({ formUrl, compact = false }: ShareButtonsProps) {
   useEffect(() => {
     // Determine the URL on the client to avoid hydration mismatch
     if (!formUrl) {
-      setUrl(`${window.location.origin}/f/marathi-pilot-2026`)
+      setUrl(`${window.location.origin}`)
     }
     
     // Check if native share is supported on the client

@@ -14,7 +14,7 @@ interface FormCompletionProps {
 
 export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCompletionProps) {
   const formUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}${window.location.pathname}`
+    ? `${window.location.origin}`
     : ''
 
   return (
