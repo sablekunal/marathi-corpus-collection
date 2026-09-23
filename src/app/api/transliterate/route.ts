@@ -1,3 +1,5 @@
+export const runtime = 'edge'
+
 import { NextRequest, NextResponse } from 'next/server'
 import { getFromCache } from '@/lib/transliteration/highFreqCache'
 import { romanToMarathi } from '@/lib/transliteration/mapper'

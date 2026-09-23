@@ -2,6 +2,42 @@
 
 import { useEffect, useState } from 'react';
 
+// Easing function for smooth decelration
+const easeOutQuart = (x: number): number => 1 - Math.pow(1 - x, 4);
+
+function useCountUp(endValue: number, durationMs: number = 1500) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (endValue === 0) return;
+    
+    let startTimestamp: number | null = null;
+    let animationFrame: number;
+    
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / durationMs, 1);
+      
+      setCount(Math.floor(easeOutQuart(progress) * endValue));
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(step);
+      }
+    };
+    
+    const timer = setTimeout(() => {
+      animationFrame = window.requestAnimationFrame(step);
+    }, 100);
+    
+    return () => {
+      clearTimeout(timer);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, [endValue, durationMs]);
+
+  return count;
+}
+
 interface Stats {
   totalSubmissions: number;
   totalResponses: number;
@@ -43,6 +79,11 @@ export default function ImpactStats() {
 
   if (loading || !stats) return null;
 
+  const animatedResponses = useCountUp(stats.totalResponses);
+  const animatedContributors = useCountUp(stats.totalSubmissions);
+  const animatedDistricts = useCountUp(stats.districtCount);
+  const animatedWords = useCountUp(stats.totalWords);
+
   return (
     <section className="py-8 md:py-12 px-4 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-4xl mx-auto">
@@ -57,7 +98,7 @@ export default function ImpactStats() {
           {/* Responses Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-blue-600">
-              {stats.totalResponses.toLocaleString()}
+              {animatedResponses.toLocaleString()}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">उत्तरे</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Responses</p>
@@ -66,7 +107,7 @@ export default function ImpactStats() {
           {/* Contributors Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-green-600">
-              {stats.totalSubmissions.toLocaleString()}
+              {animatedContributors.toLocaleString()}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">सहभागी</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Contributors</p>
@@ -75,7 +116,7 @@ export default function ImpactStats() {
           {/* Districts Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-orange-600">
-              {stats.districtCount.toLocaleString()}
+              {animatedDistricts.toLocaleString()}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">जिल्हे</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Districts</p>
@@ -84,7 +125,7 @@ export default function ImpactStats() {
           {/* Words Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-purple-600">
-              {stats.totalWords > 1000 ? `${(stats.totalWords / 1000).toFixed(0)}K` : stats.totalWords}
+              {animatedWords > 1000 ? `${(animatedWords / 1000).toFixed(0)}K` : animatedWords}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">शब्द</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Words</p>
