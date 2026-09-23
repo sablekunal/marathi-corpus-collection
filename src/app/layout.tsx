@@ -69,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="mr" suppressHydrationWarning>
+    <html lang="mr" translate="no" className="notranslate" suppressHydrationWarning>
       <body className={`${inter.variable} ${noto.variable} font-sans`}>
         {children}
         <Toaster />
