@@ -11,6 +11,7 @@ import {
   assignedQuestionSets,
   formQuestionRules,
   questions,
+  forms,
 } from '@/lib/db/schema'
 import { nanoid } from 'nanoid'
 import { eq, and } from 'drizzle-orm'
@@ -52,61 +53,67 @@ export async function assignQuestions(
   formId: string,
   sessionId: string,
 ): Promise<AssignedQuestion[]> {
-  // Get form's question rules (category → count)
-  const rules = await db
-    .select()
-    .from(formQuestionRules)
-    .where(eq(formQuestionRules.formId, formId))
+  // Get the target number of questions for this form
+  const [form] = await db.select({ questionsPerForm: forms.questionsPerForm }).from(forms).where(eq(forms.id, formId))
+  if (!form) throw new Error(`Form ${formId} not found`)
+  
+  const targetCount = form.questionsPerForm ?? 4
 
-  if (rules.length === 0) {
-    throw new Error(`No question rules configured for form ${formId}`)
+  // Get ALL enabled questions for this form
+  const pool = await db
+    .select()
+    .from(questions)
+    .where(eq(questions.enabled, true))
+
+  if (pool.length === 0) {
+    throw new Error(`No enabled questions found for form ${formId}`)
   }
 
-  const assigned: AssignedQuestion[] = []
+  // Group by category
+  const byCategory: Record<string, typeof pool> = {}
+  for (const q of pool) {
+    if (!byCategory[q.category]) byCategory[q.category] = []
+    byCategory[q.category].push(q)
+  }
+
+  // Get unique categories and shuffle them
+  const categories = Object.keys(byCategory)
+  const shuffledCategories = shuffle(categories)
+
+  // Pick up to targetCount distinct categories
+  const selectedCategories = shuffledCategories.slice(0, targetCount)
+
+  let assigned: AssignedQuestion[] = []
   let order = 0
 
-  for (const rule of rules) {
-    // Get all enabled questions in this category
-    const pool = await db
-      .select()
-      .from(questions)
-      .where(
-        and(
-          eq(questions.category, rule.category),
-          eq(questions.enabled, true),
-        ),
-      )
+  for (const cat of selectedCategories) {
+    // Pick 1 random question from this category
+    const catQuestions = byCategory[cat]
+    const shuffledQs = shuffle(catQuestions)
+    const q = shuffledQs[0]
 
-    if (pool.length === 0) continue
+    // Store in DB
+    await db.insert(assignedQuestionSets).values({
+      id: nanoid(),
+      sessionId,
+      questionId: q.id,
+      questionOrder: order,
+    })
 
-    // Randomly shuffle the pool and take the required count
-    const shuffled = shuffle(pool)
-    const selected = shuffled.slice(0, rule.count ?? 1)
-
-    for (const q of selected) {
-      // Store in DB
-      await db.insert(assignedQuestionSets).values({
-        id: nanoid(),
-        sessionId,
-        questionId: q.id,
-        questionOrder: order,
-      })
-
-      assigned.push({
-        questionId: q.id,
-        category: q.category,
-        question: q.question,
-        description: q.description || '',
-        required: q.required ?? true,
-        minWords: q.minWords ?? 8,
-        maxWords: q.maxWords ?? 50,
-        estimatedTime: q.estimatedTime ?? 30,
-        order: order++,
-      })
-    }
+    assigned.push({
+      questionId: q.id,
+      category: q.category,
+      question: q.question,
+      description: q.description || '',
+      required: q.required ?? true,
+      minWords: q.minWords ?? 8,
+      maxWords: q.maxWords ?? 50,
+      estimatedTime: q.estimatedTime ?? 30,
+      order: order++,
+    })
   }
 
-  // Sort by order
+  // Ensure they are strictly ordered before returning
   assigned.sort((a, b) => a.order - b.order)
   return assigned
 }
