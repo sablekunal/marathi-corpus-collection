@@ -16,6 +16,7 @@ import {
   X,
   BookType,
 } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -36,8 +37,8 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
     <aside className="flex flex-col h-full bg-white border-r border-[oklch(0.88_0.02_250)] w-64">
       {/* Brand */}
       <div className="flex items-center gap-3 px-5 py-5 border-b border-[oklch(0.88_0.02_250)]">
-        <div className="w-8 h-8 bg-[oklch(0.42_0.16_250)] rounded-lg flex items-center justify-center flex-shrink-0">
-          <BookOpen className="w-4 h-4 text-white" />
+        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0 relative overflow-hidden shadow-xs border border-slate-100">
+          <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
         </div>
         <div className="min-w-0">
           <div className="font-marathi font-bold text-sm text-[oklch(0.20_0.04_250)] leading-tight">

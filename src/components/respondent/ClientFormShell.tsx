@@ -6,8 +6,9 @@ import dynamic from 'next/dynamic'
 import { Progress } from '@/components/ui/progress'
 import { QuestionCard } from '@/components/respondent/QuestionCard'
 import { MetadataForm } from '@/components/respondent/MetadataForm'
-import { BookOpen, Sparkles, Loader2, AlertCircle } from 'lucide-react'
+import { Sparkles, Loader2, AlertCircle } from 'lucide-react'
 import { useDraftAutoSave } from '@/hooks/useDraftAutoSave'
+import Image from 'next/image'
 
 // Lazy-load FormCompletion to save initial JS bundle size
 const FormCompletion = dynamic(() => import('@/components/respondent/FormCompletion').then(mod => mod.FormCompletion), {
@@ -245,8 +246,8 @@ export function ClientFormShell({ slug, initialForm }: ClientFormShellProps) {
         {/* Header Branding (Always visible instantly due to SSR props) */}
         <div className="flex items-center justify-between bg-white/80 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-[oklch(0.42_0.16_250)] rounded-xl flex items-center justify-center shadow-xs">
-              <BookOpen className="w-4 h-4 text-white" />
+            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm overflow-hidden border border-slate-100 p-1 relative">
+              <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
             </div>
             <div>
               <h1 className="font-marathi font-bold text-sm text-slate-900 leading-tight">

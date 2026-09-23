@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: 'मराठी भाषा संग्रह',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/logo.png',
         width: 1200,
         height: 630,
         alt: 'Marathi Language Corpus - AI Research Project',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'मराठी भाषा संग्रह | Marathi Corpus Collection',
     description: 'मराठी भाषेच्या संगणकीय प्रक्रियेसाठी मजकूर डेटासंच संकलन व्यासपीठ.',
-    images: ['/og-image.jpg'],
+    images: ['/logo.png'],
   },
   manifest: '/manifest.json',
   appleWebApp: {

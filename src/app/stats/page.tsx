@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 import Link from 'next/link'
-import { BookOpen, ArrowLeft, Target, Users, Globe, BarChart3 } from 'lucide-react'
+import { ArrowLeft, Target, Users, Globe, BarChart3 } from 'lucide-react'
+import Image from 'next/image'
 import { ShareButtons } from '@/components/ShareButtons'
 
 interface StatsData {
@@ -69,8 +70,8 @@ export default async function StatsPage() {
               </p>
             </div>
           </div>
-          <div className="w-9 h-9 bg-[oklch(0.42_0.16_250)] rounded-xl flex items-center justify-center shadow-sm">
-            <BookOpen className="w-4 h-4 text-white" />
+          <div className="w-9 h-9 bg-white rounded-xl flex items-center justify-center shadow-sm relative overflow-hidden border border-slate-100">
+            <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
           </div>
         </div>
 

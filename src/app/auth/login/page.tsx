@@ -3,7 +3,8 @@
 import { Suspense, useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { BookOpen, Eye, EyeOff, Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -112,8 +113,8 @@ export default function LoginPage() {
       <div className="w-full max-w-sm animate-fade-in-up">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-[oklch(0.42_0.16_250)] rounded-2xl shadow-lg mb-4">
-            <BookOpen className="w-7 h-7 text-white" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-white rounded-2xl shadow-lg mb-4 border border-slate-100 relative overflow-hidden">
+            <Image src="/logo.png" alt="Logo" fill className="object-contain p-1.5" />
           </div>
           <h1 className="font-marathi text-2xl font-bold text-[oklch(0.20_0.04_250)]">
             मराठी भाषा संग्रह
