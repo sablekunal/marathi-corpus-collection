@@ -11,9 +11,17 @@ import { createClient } from '@libsql/client'
 import { drizzle } from 'drizzle-orm/libsql'
 import * as schema from './schema'
 
+console.log('[DB_INIT] DATABASE_URL during initialization:', process.env.DATABASE_URL);
+
 const client = createClient({
   url: process.env.DATABASE_URL || 'file:local.db',
   authToken: process.env.DATABASE_AUTH_TOKEN,
+  fetch: (url: any, options: any) => {
+    return fetch(url, {
+      ...options,
+      cache: 'no-store',
+    })
+  },
 })
 
 export const db = drizzle(client, { schema })

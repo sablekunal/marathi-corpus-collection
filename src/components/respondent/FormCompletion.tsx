@@ -13,9 +13,7 @@ interface FormCompletionProps {
 }
 
 export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCompletionProps) {
-  const formUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}`
-    : ''
+  // formUrl is handled internally by ShareButtons to avoid hydration mismatch
 
   return (
     <motion.div
@@ -71,7 +69,7 @@ export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCo
           </p>
           
           <div className="pt-3 w-full max-w-sm mx-auto">
-            <ShareButtons formUrl={formUrl} />
+            <ShareButtons />
           </div>
         </div>
       </div>
