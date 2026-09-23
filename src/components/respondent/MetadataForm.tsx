@@ -266,6 +266,7 @@ export function MetadataForm({ metadataConfig = {}, onSubmit }: MetadataFormProp
                 <SelectValue placeholder="वयोगट निवडा" />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="<18">18 वर्षांखालील</SelectItem>
                 <SelectItem value="18-24">18 – 24 वर्षे</SelectItem>
                 <SelectItem value="25-34">25 – 34 वर्षे</SelectItem>
                 <SelectItem value="35-44">35 – 44 वर्षे</SelectItem>
