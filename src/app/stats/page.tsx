@@ -19,10 +19,10 @@ interface StatsData {
 
 async function fetchStats(): Promise<StatsData> {
   // Use absolute URL for server-side fetch during SSR
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}` 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000'
-  
+
   try {
     const res = await fetch(`${baseUrl}/api/stats`, {
       cache: 'no-store',

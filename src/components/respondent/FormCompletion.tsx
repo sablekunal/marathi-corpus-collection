@@ -52,6 +52,30 @@ export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCo
         </p>
       </div>
 
+      {/* ── Share CTA (Viral Loop) - Moved UP and made PROMINENT ───────────────────────────────────── */}
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-4 my-8 relative overflow-hidden">
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-100 rounded-full opacity-50 blur-2xl pointer-events-none" />
+        <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-indigo-100 rounded-full opacity-50 blur-2xl pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+          <div className="inline-flex items-center justify-center gap-2 text-lg font-bold text-blue-900 bg-blue-100/50 px-4 py-1.5 rounded-full mb-1">
+            <Target className="w-5 h-5 text-blue-600" />
+            <span>आम्हाला ५०० प्रतिसाद मिळवायला मदत करा!</span>
+          </div>
+          
+          <p className="text-sm md:text-base font-semibold text-blue-800 leading-relaxed max-w-md">
+            तुमचे मित्र, कुटुंबीय आणि सहकाऱ्यांना या प्रकल्पात सहभागी होण्यासाठी आत्ताच शेअर करा.
+            <span className="block text-xs md:text-sm text-blue-600 mt-1 font-sans font-medium">
+              Help us reach 500 responses — share with friends and family!
+            </span>
+          </p>
+          
+          <div className="pt-3 w-full max-w-sm mx-auto">
+            <ShareButtons formUrl={formUrl} />
+          </div>
+        </div>
+      </div>
+
       {/* Summary stats */}
       <div className="grid grid-cols-2 gap-4 bg-slate-50 border border-slate-100 rounded-xl p-4">
         <div>
@@ -70,21 +94,6 @@ export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCo
             एकूण शब्द योगदान
           </div>
         </div>
-      </div>
-
-      {/* ── Share CTA (Viral Loop) ───────────────────────────────────── */}
-      <div className="bg-blue-50/80 border border-blue-200/60 rounded-xl p-5 space-y-3">
-        <div className="flex items-center justify-center gap-2 text-sm font-semibold text-blue-900">
-          <Target className="w-4 h-4 text-blue-600" />
-          <span>आम्हाला ५०० प्रतिसाद मिळवायला मदत करा!</span>
-        </div>
-        <p className="text-xs text-blue-800 leading-relaxed">
-          तुमचे मित्र, कुटुंबीय आणि सहकाऱ्यांना या प्रकल्पात सहभागी होण्यासाठी शेअर करा.
-          <span className="block text-blue-700 mt-0.5">
-            Help us reach 500 responses — share with friends and family!
-          </span>
-        </p>
-        <ShareButtons formUrl={formUrl} compact />
       </div>
 
       <div className="space-y-3 pt-2">
