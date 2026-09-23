@@ -38,6 +38,16 @@ function useCountUp(endValue: number, durationMs: number = 1500) {
   return count;
 }
 
+// Formats 1234 -> "1.2K+", 384000 -> "384K+", 900 -> "900"
+function formatK(num: number): string {
+  if (num >= 1000) {
+    const kVal = num / 1000;
+    // Number() cleanly removes trailing zeros e.g. "384.0" -> "384"
+    return `${Number(kVal.toFixed(1))}K+`;
+  }
+  return num.toString();
+}
+
 interface Stats {
   totalSubmissions: number;
   totalResponses: number;
@@ -98,7 +108,7 @@ export default function ImpactStats() {
           {/* Responses Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-blue-600">
-              {animatedResponses.toLocaleString()}
+              {formatK(animatedResponses)}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">उत्तरे</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Responses</p>
@@ -107,7 +117,7 @@ export default function ImpactStats() {
           {/* Contributors Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-green-600">
-              {animatedContributors.toLocaleString()}
+              {formatK(animatedContributors)}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">सहभागी</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Contributors</p>
@@ -116,7 +126,7 @@ export default function ImpactStats() {
           {/* Districts Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-orange-600">
-              {animatedDistricts.toLocaleString()}
+              {formatK(animatedDistricts)}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">जिल्हे</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Districts</p>
@@ -125,7 +135,7 @@ export default function ImpactStats() {
           {/* Words Card */}
           <div className="text-center p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
             <div className="text-2xl md:text-3xl font-bold text-purple-600">
-              {animatedWords > 1000 ? `${(animatedWords / 1000).toFixed(0)}K` : animatedWords}
+              {formatK(animatedWords)}
             </div>
             <p className="text-gray-700 text-xs md:text-sm font-medium mt-1 md:mt-2">शब्द</p>
             <p className="text-gray-500 text-[10px] md:text-xs">Words</p>
