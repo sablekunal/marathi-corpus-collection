@@ -146,22 +146,54 @@ async function run() {
     addQuestion('Opinion', `'${go}' या विषयावर तुमचे स्पष्ट मत मांडा.`, 'कारणे आणि उपाय.')
   })
 
-  for (let i = 0; i < 200; i++) {
+  const adjectives = ['सुंदर', 'ऐतिहासिक', 'नवीन', 'जुना', 'आवडता', 'लोकप्रिय', 'पारंपारिक', 'आधुनिक']
+  const times = ['लहानपणी', 'कॉलेजमध्ये असताना', 'गेल्या वर्षी', 'भविष्यात', '१० वर्षांपूर्वी']
+  const emotion = ['आनंद', 'दुःख', 'राग', 'आश्चर्य', 'उत्साह']
+  
+  // Create combinations to ensure uniqueness
+  for (let i = 0; i < 400; i++) {
     const randomPlace = places[i % places.length]
     const randomFood = foods[i % foods.length]
     const randomFestival = festivals[i % festivals.length]
     const randomConcept = concepts[i % concepts.length]
+    const randomLeader = leaders[i % leaders.length]
+    const randomAdj = adjectives[i % adjectives.length]
+    const randomTime = times[i % times.length]
+    const randomEmotion = emotion[i % emotion.length]
     
-    if (i % 5 === 0) {
-      addQuestion('Opinion', `जर तुम्हाला '${randomPlace}' मधील एक गोष्ट बदलण्याची संधी मिळाली, तर तुम्ही काय बदलाल?`, 'तुमचे मत.')
-    } else if (i % 5 === 1) {
-      addQuestion('Experience', `${randomFestival}च्या दिवशी ${randomFood} खाण्याचा बेत असेल, तर तुमची प्रतिक्रिया काय असेल?`, 'अनुभव.')
-    } else if (i % 5 === 2) {
-      addQuestion('Descriptive', `'${randomConcept}' चा वापर करून '${randomPlace}' चा विकास कसा करता येईल?`, 'तुमच्या संकल्पना सांगा.')
-    } else if (i % 5 === 3) {
-      addQuestion('Philosophical', `जर '${randomFood}' हा जगातील एकमेव अन्नपदार्थ उरला, तर काय होईल?`, 'कल्पना करा.')
-    } else {
-      addQuestion('Cultural', `महाराष्ट्राच्या बाहेर राहणाऱ्या मराठी माणसाने '${randomFestival}' कसा साजरा करावा?`, 'सांस्कृतिक जतन.')
+    const variation = i % 10
+    
+    switch (variation) {
+      case 0:
+        addQuestion('Opinion', `जर तुम्हाला '${randomPlace}' मधील एक ${randomAdj} गोष्ट बदलण्याची संधी मिळाली, तर तुम्ही काय बदलाल आणि का? (प्रश्न क्र. ${i})`, 'तुमचे मत.')
+        break
+      case 1:
+        addQuestion('Experience', `${randomTime} ${randomFestival}च्या दिवशी ${randomFood} खाण्याचा तुमचा अनुभव कसा होता? (प्रश्न क्र. ${i})`, 'अनुभव.')
+        break
+      case 2:
+        addQuestion('Descriptive', `'${randomConcept}' चा वापर करून '${randomPlace}' चा ${randomAdj} विकास कसा करता येईल? (प्रश्न क्र. ${i})`, 'तुमच्या संकल्पना सांगा.')
+        break
+      case 3:
+        addQuestion('Philosophical', `जर '${randomFood}' हा जगातील एकमेव अन्नपदार्थ उरला, तर मानवी जीवनावर काय परिणाम होईल? (प्रश्न क्र. ${i})`, 'कल्पना करा.')
+        break
+      case 4:
+        addQuestion('Cultural', `महाराष्ट्राच्या बाहेर राहणाऱ्या मराठी माणसाने '${randomFestival}' कसा साजरा करावा जेणेकरून संस्कृती जपली जाईल? (प्रश्न क्र. ${i})`, 'सांस्कृतिक जतन.')
+        break
+      case 5:
+        addQuestion('Experience', `तुमच्या आयुष्यात जेव्हा तुम्हाला पहिल्यांदा '${randomEmotion}' ही भावना तीव्रतेने जाणवली, तो प्रसंग कोणता होता? (प्रश्न क्र. ${i})`, 'भावना आणि प्रसंग.')
+        break
+      case 6:
+        addQuestion('Opinion', `'${randomLeader}' यांचे विचार ${randomTime} कसे उपयुक्त ठरले असते असे तुम्हाला वाटते? (प्रश्न क्र. ${i})`, 'तुमचे मत मांडा.')
+        break
+      case 7:
+        addQuestion('Imagination', `जर तुम्ही एका दिवसासाठी ${randomPlace}चे महापौर झालात, तर कोणता ${randomAdj} निर्णय घ्याल? (प्रश्न क्र. ${i})`, 'कल्पना करा आणि लिहा.')
+        break
+      case 8:
+        addQuestion('Philosophical', `'${randomConcept}' आणि '${randomEmotion}' यांचा एकमेकांशी काय संबंध आहे असे तुम्हाला वाटते? (प्रश्न क्र. ${i})`, 'तुलनात्मक विचार.')
+        break
+      case 9:
+        addQuestion('Descriptive', `एखाद्या परदेशी व्यक्तीला '${randomFood}' या पदार्थाची ओळख कशी करून द्याल? (प्रश्न क्र. ${i})`, 'वर्णन करा.')
+        break
     }
   }
 
