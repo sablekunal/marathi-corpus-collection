@@ -28,18 +28,13 @@ export interface AssignedQuestion {
 }
 
 /**
- * Seeded pseudo-random shuffle using session ID as seed (reproducible).
+ * Standard Fisher-Yates shuffle using Math.random.
+ * (Reproducibility is not needed as assigned sets are persisted in DB)
  */
-function seededShuffle<T>(arr: T[], seed: string): T[] {
-  // Simple seeded LCG random
-  let s = seed.split('').reduce((a, c) => a + c.charCodeAt(0), 0)
-  const random = () => {
-    s = (s * 1664525 + 1013904223) & 0xffffffff
-    return (s >>> 0) / 0xffffffff
-  }
+function shuffle<T>(arr: T[]): T[] {
   const result = [...arr]
   for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1))
+    const j = Math.floor(Math.random() * (i + 1))
     ;[result[i], result[j]] = [result[j], result[i]]
   }
   return result
@@ -84,8 +79,8 @@ export async function assignQuestions(
 
     if (pool.length === 0) continue
 
-    // Seeded shuffle so same session always gets same questions
-    const shuffled = seededShuffle(pool, `${sessionId}:${rule.category}`)
+    // Randomly shuffle the pool and take the required count
+    const shuffled = shuffle(pool)
     const selected = shuffled.slice(0, rule.count ?? 1)
 
     for (const q of selected) {
