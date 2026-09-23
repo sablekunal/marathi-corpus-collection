@@ -75,6 +75,7 @@ export default function FormRespondentPage({
     >
   >({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isAlreadySubmitted, setIsAlreadySubmitted] = useState(false)
 
   // Fetch session & assigned questions
   useEffect(() => {
@@ -108,6 +109,7 @@ export default function FormRespondentPage({
 
         if (data.alreadySubmitted) {
           setError('आपण आधीच या फॉर्मचा प्रतिसाद नोंदवला आहे. धन्यवाद!')
+          setIsAlreadySubmitted(true)
           setLoading(false)
           return
         }
@@ -242,6 +244,17 @@ export default function FormRespondentPage({
           <AlertCircle className="w-10 h-10 text-rose-500 mx-auto" />
           <h2 className="text-lg font-bold text-slate-800">माहिती</h2>
           <p className="text-sm text-slate-600">{error}</p>
+          {isAlreadySubmitted && (
+            <button
+              onClick={() => {
+                localStorage.removeItem(`session_${slug}`)
+                window.location.reload()
+              }}
+              className="mt-6 px-6 py-2.5 bg-[oklch(0.42_0.16_250)] text-white font-semibold rounded-lg hover:opacity-90 transition-all w-full text-sm"
+            >
+              कुटुंबातील दुसऱ्या व्यक्तीसाठी फॉर्म भरा
+            </button>
+          )}
         </div>
       </div>
     )

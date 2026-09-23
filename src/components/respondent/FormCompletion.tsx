@@ -97,16 +97,29 @@ export function FormCompletion({ totalQuestions, totalWords, sessionId }: FormCo
           Session ID: {sessionId}
         </div>
 
-        <div className="flex items-center justify-center gap-3 pt-4">
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+          <Button 
+            onClick={() => {
+              const slug = window.location.pathname.split('/').pop()
+              if (slug) {
+                localStorage.removeItem(`session_${slug}`)
+                window.location.reload()
+              }
+            }}
+            className="gap-2 text-xs bg-[oklch(0.42_0.16_250)] text-white hover:bg-blue-700 w-full sm:w-auto"
+          >
+            कुटुंबातील दुसऱ्या व्यक्तीसाठी फॉर्म भरा
+          </Button>
+
           <Link href="/">
             <Button variant="outline" className="gap-2 text-xs">
               <Home className="w-3.5 h-3.5" />
-              मुख्य पानावर जा
+              मुख्य पान
             </Button>
           </Link>
           <Link href="/stats">
             <Button variant="outline" className="gap-2 text-xs">
-              आकडेवारी पहा
+              आकडेवारी
             </Button>
           </Link>
         </div>
