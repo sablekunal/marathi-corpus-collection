@@ -21,7 +21,7 @@ export default function HeroSection({ formSlug }: { formSlug: string }) {
         <div className="flex justify-center w-full px-4 sm:px-0">
           <a
             href={`/f/${formSlug}`}
-            className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 md:px-12 md:py-5 bg-white text-blue-600 font-bold text-xl md:text-2xl rounded-xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1 hover:shadow-2xl font-marathi"
+            className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 md:px-14 md:py-6 bg-white text-blue-600 font-bold text-2xl md:text-3xl rounded-2xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1 hover:shadow-2xl font-marathi"
           >
             योगदान द्या →
           </a>

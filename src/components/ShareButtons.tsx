@@ -109,28 +109,28 @@ export function ShareButtons({ formUrl, compact = false }: ShareButtonsProps) {
   }
 
   return (
-    <div className="space-y-3">
-      <p className="text-sm font-semibold text-slate-800">
+    <div className="space-y-4">
+      <p className="text-base font-semibold text-slate-800">
         📢 मित्र आणि कुटुंबीयांना शेअर करा:
       </p>
-      <div className="flex flex-wrap gap-2.5">
+      <div className="flex flex-wrap gap-3">
         {/* WhatsApp — Primary CTA */}
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-emerald-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3.5 rounded-xl text-base font-bold hover:bg-emerald-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
-          <MessageCircle className="w-4 h-4" />
+          <MessageCircle className="w-5 h-5" />
           WhatsApp वर शेअर करा
         </a>
 
         {/* Copy Link */}
         <button
           onClick={handleCopyLink}
-          className="inline-flex items-center gap-2 bg-slate-100 text-slate-800 px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-200 border border-slate-200 transition-all"
+          className="inline-flex items-center gap-2 bg-slate-100 text-slate-800 px-6 py-3.5 rounded-xl text-base font-bold hover:bg-slate-200 border border-slate-200 transition-all"
         >
-          {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+          {copied ? <Check className="w-5 h-5 text-emerald-600" /> : <Copy className="w-5 h-5" />}
           {copied ? 'लिंक कॉपी झाली!' : 'लिंक कॉपी करा'}
         </button>
 
@@ -139,7 +139,7 @@ export function ShareButtons({ formUrl, compact = false }: ShareButtonsProps) {
           href={linkedinUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-800 transition-all shadow-sm"
+          className="inline-flex items-center gap-2 bg-blue-700 text-white px-6 py-3.5 rounded-xl text-base font-bold hover:bg-blue-800 transition-all shadow-sm"
         >
           LinkedIn
         </a>

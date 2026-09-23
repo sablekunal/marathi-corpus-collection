@@ -175,9 +175,9 @@ export function QuestionCard({
           variant="outline"
           onClick={onPrev}
           disabled={questionIndex === 0 || isSubmitting}
-          className="gap-2 text-xs"
+          className="gap-2 text-sm h-12 px-6"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-4 h-4" />
           मागील प्रश्न
         </Button>
 
@@ -185,7 +185,7 @@ export function QuestionCard({
           type="button"
           onClick={handleNextClick}
           disabled={!isMinMet || isSubmitting}
-          className={`gap-2 text-xs sm:text-sm px-6 h-11 ${
+          className={`gap-2 text-sm sm:text-base md:text-lg font-bold px-8 sm:px-10 h-14 ${
             isLast
               ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md'
               : 'bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.14_250)] text-white'
