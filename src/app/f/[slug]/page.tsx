@@ -39,7 +39,7 @@ export default async function FormRespondentPage({
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-4 font-marathi">
         <div className="bg-white border border-rose-200 rounded-2xl p-8 max-w-md w-full text-center shadow-lg space-y-4">
           <h2 className="text-lg font-bold text-slate-800">माहिती (Info)</h2>
-          <p className="text-sm text-slate-600">हा फॉर्म सध्या प्रकाशित झालेला नाही. (This form is not published yet.)</p>
+          <p className="text-base text-slate-600">हा फॉर्म सध्या प्रकाशित झालेला नाही. (This form is not published yet.)</p>
         </div>
       </div>
     )
@@ -50,7 +50,7 @@ export default async function FormRespondentPage({
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-4 font-marathi">
         <div className="bg-white border border-rose-200 rounded-2xl p-8 max-w-md w-full text-center shadow-lg space-y-4">
           <h2 className="text-lg font-bold text-slate-800">माहिती (Info)</h2>
-          <p className="text-sm text-slate-600">हा फॉर्म आता बंद झाला आहे. (This form is now closed.)</p>
+          <p className="text-base text-slate-600">हा फॉर्म आता बंद झाला आहे. (This form is now closed.)</p>
         </div>
       </div>
     )

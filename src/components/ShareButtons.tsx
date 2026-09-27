@@ -79,7 +79,7 @@ export function ShareButtons({ formUrl, compact = false }: ShareButtonsProps) {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3.5 py-2 rounded-lg text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-sm"
+          className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3.5 py-2 rounded-lg text-base font-semibold hover:bg-emerald-700 transition-colors shadow-sm"
         >
           <MessageCircle className="w-3.5 h-3.5" />
           WhatsApp
@@ -88,7 +88,7 @@ export function ShareButtons({ formUrl, compact = false }: ShareButtonsProps) {
         {/* Copy Link */}
         <button
           onClick={handleCopyLink}
-          className="inline-flex items-center gap-1.5 bg-slate-600 text-white px-3.5 py-2 rounded-lg text-xs font-semibold hover:bg-slate-700 transition-colors shadow-sm"
+          className="inline-flex items-center gap-1.5 bg-slate-600 text-white px-3.5 py-2 rounded-lg text-base font-semibold hover:bg-slate-700 transition-colors shadow-sm"
         >
           {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
           {copied ? 'Copied!' : 'Copy Link'}
@@ -98,7 +98,7 @@ export function ShareButtons({ formUrl, compact = false }: ShareButtonsProps) {
         {isNativeShareSupported && (
           <button
             onClick={handleNativeShare}
-            className="inline-flex items-center gap-1.5 bg-[oklch(0.42_0.16_250)] text-white px-3.5 py-2 rounded-lg text-xs font-semibold hover:bg-[oklch(0.35_0.14_250)] transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 bg-blue-600 text-white px-3.5 py-2 rounded-lg text-base font-semibold hover:bg-blue-700 transition-colors shadow-sm"
           >
             <Share2 className="w-3.5 h-3.5" />
             Share
@@ -148,7 +148,7 @@ export function ShareButtons({ formUrl, compact = false }: ShareButtonsProps) {
         {isNativeShareSupported && (
           <button
             onClick={handleNativeShare}
-            className="inline-flex items-center gap-2 bg-[oklch(0.42_0.16_250)] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[oklch(0.35_0.14_250)] transition-all shadow-sm"
+            className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl text-base font-semibold hover:bg-blue-700 transition-all shadow-sm"
           >
             <Share2 className="w-4 h-4" />
             इतर अॅप्स

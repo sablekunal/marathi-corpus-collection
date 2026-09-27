@@ -40,7 +40,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-[oklch(0.88_0.02_250)] p-8">
+    <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
       <h2 className="text-lg font-semibold text-[oklch(0.20_0.04_250)] mb-6">
         Sign in to continue
       </h2>
@@ -84,14 +84,14 @@ function LoginForm() {
         </div>
 
         {error && (
-          <div className="text-sm text-[oklch(0.58_0.22_27)] bg-[oklch(0.97_0.05_27)] border border-[oklch(0.88_0.08_27)] rounded-lg px-3 py-2 font-marathi">
+          <div className="text-base text-[oklch(0.58_0.22_27)] bg-[oklch(0.97_0.05_27)] border border-[oklch(0.88_0.08_27)] rounded-lg px-3 py-2 font-marathi">
             {error}
           </div>
         )}
 
         <Button
           type="submit"
-          className="w-full h-11 bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.14_250)] text-white font-medium"
+          className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium"
           disabled={loading}
         >
           {loading ? (
@@ -109,7 +109,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[oklch(0.97_0.01_250)] to-[oklch(0.93_0.03_250)] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-sm animate-fade-in-up">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -119,7 +119,7 @@ export default function LoginPage() {
           <h1 className="font-marathi text-2xl font-bold text-[oklch(0.20_0.04_250)]">
             मराठी भाषा संग्रह
           </h1>
-          <p className="text-sm text-[oklch(0.52_0.04_250)] mt-1">Admin Portal</p>
+          <p className="text-base text-[oklch(0.52_0.04_250)] mt-1">Admin Portal</p>
         </div>
 
         <Suspense fallback={<div className="text-center py-8 text-slate-400">Loading...</div>}>

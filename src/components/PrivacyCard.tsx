@@ -17,7 +17,7 @@ export default function PrivacyCard() {
               <span className="text-green-600 font-bold text-lg mt-1">✓</span>
               <div>
                 <p className="font-semibold text-gray-900 font-marathi">नाव आवश्यक नाही</p>
-                <p className="text-sm text-gray-600">No name required</p>
+                <p className="text-base text-gray-600">No name required</p>
               </div>
             </div>
 
@@ -25,7 +25,7 @@ export default function PrivacyCard() {
               <span className="text-green-600 font-bold text-lg mt-1">✓</span>
               <div>
                 <p className="font-semibold text-gray-900 font-marathi">ईमेल आवश्यक नाही</p>
-                <p className="text-sm text-gray-600">No email required</p>
+                <p className="text-base text-gray-600">No email required</p>
               </div>
             </div>
 
@@ -33,7 +33,7 @@ export default function PrivacyCard() {
               <span className="text-green-600 font-bold text-lg mt-1">✓</span>
               <div>
                 <p className="font-semibold text-gray-900 font-marathi">IP Address हॅश केला जातो</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-base text-gray-600">
                   Your IP address is anonymized with SHA-256 hashing
                 </p>
               </div>
@@ -45,7 +45,7 @@ export default function PrivacyCard() {
                 <p className="font-semibold text-gray-900 font-marathi">
                   १८० दिवसांनंतर आपोआप हटवला जातो
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-base text-gray-600">
                   IP data automatically deleted after 180 days
                 </p>
               </div>
@@ -57,7 +57,7 @@ export default function PrivacyCard() {
                 <p className="font-semibold text-gray-900 font-marathi">
                   मराठी NLP संशोधनासाठी वापरली जाते
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-base text-gray-600">
                   Responses used for Marathi NLP and AI research (CC BY 4.0)
                 </p>
               </div>

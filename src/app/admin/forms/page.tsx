@@ -249,13 +249,13 @@ export default function FormsAdminPage() {
           <h1 className="text-2xl font-bold text-[oklch(0.20_0.04_250)]">
             Form Management
           </h1>
-          <p className="text-sm text-[oklch(0.52_0.04_250)] mt-0.5">
+          <p className="text-base text-[oklch(0.52_0.04_250)] mt-0.5">
             Configure randomized question distribution and collection parameters
           </p>
         </div>
         <Button
           onClick={openCreateModal}
-          className="gap-2 text-xs h-10 bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.14_250)] text-white shadow-xs"
+          className="gap-2 text-base h-10 bg-blue-600 hover:bg-blue-700 text-white shadow-xs"
         >
           <Plus className="w-4 h-4" />
           Create Form
@@ -263,16 +263,16 @@ export default function FormsAdminPage() {
       </div>
 
       {/* Forms Table */}
-      <div className="bg-white rounded-xl border border-[oklch(0.88_0.02_250)] overflow-hidden shadow-xs">
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
         <Table>
           <TableHeader>
             <TableRow className="bg-slate-50/80">
-              <TableHead className="text-xs font-bold text-slate-600">Form Title &amp; Slug</TableHead>
-              <TableHead className="w-32 text-xs font-bold text-slate-600 text-center">Questions / Set</TableHead>
-              <TableHead className="w-28 text-xs font-bold text-slate-600 text-center">Transliteration</TableHead>
-              <TableHead className="w-28 text-xs font-bold text-slate-600 text-center">Anti-Paste</TableHead>
-              <TableHead className="w-24 text-xs font-bold text-slate-600 text-center">Status</TableHead>
-              <TableHead className="w-36 text-xs font-bold text-slate-600 text-right">Share &amp; Actions</TableHead>
+              <TableHead className="text-base font-bold text-slate-600">Form Title &amp; Slug</TableHead>
+              <TableHead className="w-32 text-base font-bold text-slate-600 text-center">Questions / Set</TableHead>
+              <TableHead className="w-28 text-base font-bold text-slate-600 text-center">Transliteration</TableHead>
+              <TableHead className="w-28 text-base font-bold text-slate-600 text-center">Anti-Paste</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600 text-center">Status</TableHead>
+              <TableHead className="w-36 text-base font-bold text-slate-600 text-right">Share &amp; Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -285,7 +285,7 @@ export default function FormsAdminPage() {
               </TableRow>
             ) : forms.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-12 text-slate-400 text-sm font-medium">
+                <TableCell colSpan={6} className="text-center py-12 text-slate-400 text-base font-medium">
                   No forms created yet. Click &quot;Create Form&quot; to build one.
                 </TableCell>
               </TableRow>
@@ -296,28 +296,28 @@ export default function FormsAdminPage() {
                     <div className="font-semibold text-slate-800 text-base">
                       {f.title}
                     </div>
-                    <div className="text-xs font-mono text-slate-400 mt-0.5">
+                    <div className="text-base font-mono text-slate-400 mt-0.5">
                       /f/{f.slug}
                     </div>
                   </TableCell>
                   <TableCell className="text-center">
-                    <span className="font-semibold text-sm text-[oklch(0.42_0.16_250)] bg-blue-50 px-2.5 py-1 rounded-md">
+                    <span className="font-semibold text-base text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
                       {f.questionsPerForm} Qs
                     </span>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant={f.transliterationEnabled ? 'default' : 'secondary'} className="text-[10px]">
+                    <Badge variant={f.transliterationEnabled ? 'default' : 'secondary'} className="text-base">
                       {f.transliterationEnabled ? 'Enabled' : 'Disabled'}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant={f.antiPasteEnabled ? 'default' : 'secondary'} className="text-[10px]">
+                    <Badge variant={f.antiPasteEnabled ? 'default' : 'secondary'} className="text-base">
                       {f.antiPasteEnabled ? 'Protected' : 'Off'}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-center">
                     <Badge
-                      className={`text-[10px] ${
+                      className={`text-base ${
                         f.isPublished
                           ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
                           : 'bg-slate-100 text-slate-500'
@@ -387,7 +387,7 @@ export default function FormsAdminPage() {
 
           <form onSubmit={handleSave} className="space-y-5 pt-2">
             <div className="space-y-1.5">
-              <Label className="text-xs font-semibold">Form Title</Label>
+              <Label className="text-base font-semibold">Form Title</Label>
               <Input
                 required
                 value={title}
@@ -397,36 +397,36 @@ export default function FormsAdminPage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs font-semibold">Description</Label>
+              <Label className="text-base font-semibold">Description</Label>
               <Textarea
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 placeholder="Instructions displayed to respondents before starting..."
-                className="text-xs min-h-[70px]"
+                className="text-base min-h-[70px]"
               />
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs font-semibold">URL Slug</Label>
+              <Label className="text-base font-semibold">URL Slug</Label>
               <div className="flex items-center gap-1.5">
-                <span className="text-xs text-slate-400 font-mono">/f/</span>
+                <span className="text-base text-slate-400 font-mono">/f/</span>
                 <Input
                   required
                   value={slug}
                   onChange={e => setSlug(handleSlugify(e.target.value))}
                   placeholder="marathi-pilot-2026"
-                  className="font-mono text-xs"
+                  className="font-mono text-base"
                 />
               </div>
             </div>
 
             {/* Question Randomization Rules */}
             <div className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+              <div className="flex items-center gap-2 text-base font-bold text-slate-700">
                 <Sparkles className="w-4 h-4 text-blue-600" />
                 <span>Randomized Question Allocation Rules</span>
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-base text-slate-500">
                 When a respondent opens the form, the system randomly selects questions per category:
               </p>
 
@@ -436,7 +436,7 @@ export default function FormsAdminPage() {
                   return (
                     <div
                       key={cat}
-                      className={`p-2.5 rounded-lg border text-xs flex flex-col justify-between gap-1 transition-all ${
+                      className={`p-2.5 rounded-lg border text-base flex flex-col justify-between gap-1 transition-all ${
                         count > 0
                           ? 'bg-blue-50/60 border-blue-200 text-blue-900 font-medium'
                           : 'bg-white border-slate-200 text-slate-600'
@@ -447,7 +447,7 @@ export default function FormsAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleRuleCountChange(cat, count - 1)}
-                          className="w-6 h-6 rounded bg-slate-200 hover:bg-slate-300 font-bold flex items-center justify-center text-xs"
+                          className="w-6 h-6 rounded bg-slate-200 hover:bg-slate-300 font-bold flex items-center justify-center text-base"
                         >
                           -
                         </button>
@@ -455,7 +455,7 @@ export default function FormsAdminPage() {
                         <button
                           type="button"
                           onClick={() => handleRuleCountChange(cat, count + 1)}
-                          className="w-6 h-6 rounded bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center text-xs"
+                          className="w-6 h-6 rounded bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center text-base"
                         >
                           +
                         </button>
@@ -465,7 +465,7 @@ export default function FormsAdminPage() {
                 })}
               </div>
 
-              <div className="text-right text-xs font-semibold text-blue-700 pt-1">
+              <div className="text-right text-base font-semibold text-blue-700 pt-1">
                 Total Questions Assigned per Respondent:{' '}
                 {Object.values(rules).reduce((a, b) => a + b, 0)}
               </div>
@@ -475,8 +475,8 @@ export default function FormsAdminPage() {
             <div className="space-y-3 pt-2">
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-xs font-semibold">Marathi Transliteration</Label>
-                  <p className="text-[11px] text-slate-400">
+                  <Label className="text-base font-semibold">Marathi Transliteration</Label>
+                  <p className="text-base text-slate-400">
                     Allows users to type Roman &quot;namaste&quot; and converts to &quot;नमस्ते&quot;
                   </p>
                 </div>
@@ -488,8 +488,8 @@ export default function FormsAdminPage() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-xs font-semibold">Anti-Paste Protection</Label>
-                  <p className="text-[11px] text-slate-400">
+                  <Label className="text-base font-semibold">Anti-Paste Protection</Label>
+                  <p className="text-base text-slate-400">
                     Disables paste/drag to prevent AI text dumps &amp; logs attempts
                   </p>
                 </div>
@@ -501,8 +501,8 @@ export default function FormsAdminPage() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-xs font-semibold">Published</Label>
-                  <p className="text-[11px] text-slate-400">
+                  <Label className="text-base font-semibold">Published</Label>
+                  <p className="text-base text-slate-400">
                     Allow public respondents to access via URL
                   </p>
                 </div>
@@ -517,7 +517,7 @@ export default function FormsAdminPage() {
               <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="bg-[oklch(0.42_0.16_250)] text-white">
+              <Button type="submit" className="bg-blue-600 text-white">
                 {editingId ? 'Save Changes' : 'Create Form'}
               </Button>
             </DialogFooter>

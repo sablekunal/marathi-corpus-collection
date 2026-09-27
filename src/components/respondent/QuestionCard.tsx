@@ -2,11 +2,8 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { WordProgressRing } from './WordProgressRing'
 import { TransliterateTextarea } from './TransliterateTextarea'
 import { checkQuality } from '@/lib/quality/checks'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { ArrowLeft, ArrowRight, CheckCircle, AlertTriangle } from 'lucide-react'
 
 interface QuestionCardProps {
@@ -67,13 +64,13 @@ export function QuestionCard({
   const qualityReport = checkQuality(value, question.minWords)
 
   // Encouraging microcopy
-  let microcopy = 'विचारपूर्वक व स्वतःच्या शब्दात उत्तर द्या.'
+  let microcopy = ''
   if (isLast && isMinMet) {
-    microcopy = '🎉 उत्तम! आता शेवटचा प्रश्न पूर्ण झाला असून सबमिट करू शकता.'
+    microcopy = '🎉 उत्तम! सबमिट करू शकता.'
   } else if (isMinMet) {
-    microcopy = '✓ छान! पुढील प्रश्नाकडे जाण्यासाठी सज्ज.'
+    microcopy = '✓ छान! पुढे जाण्यासाठी सज्ज.'
   } else if (currentWords > 0) {
-    microcopy = `अजून ${question.minWords - currentWords} शब्द पूर्ण करा.`
+    microcopy = `अजून ${question.minWords - currentWords} शब्द लिहा.`
   }
 
   const handleNextClick = () => {
@@ -85,128 +82,110 @@ export function QuestionCard({
     }
   }
 
+  const progressPct = Math.round(((questionIndex + 1) / totalQuestions) * 100)
+
   return (
     <motion.div
       key={question.questionId}
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.3 }}
-      className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 sm:p-8 shadow-sm space-y-6"
+      transition={{ duration: 0.25 }}
+      className="flex flex-col justify-between h-full py-3"
     >
-      {/* Category header & question counter */}
-      <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-4">
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-semibold px-2.5 py-1 rounded-md">
-            {question.category}
-          </Badge>
-          <span className="text-xs text-slate-500 font-medium">
-            प्रश्न {questionIndex + 1} / {totalQuestions}
-          </span>
+      {/* ── Slim Progress Strip ── */}
+      <div className="mb-3 flex-shrink-0">
+        <div className="flex justify-between items-center text-xs text-slate-500 mb-1.5">
+          <span>प्रश्न {questionIndex + 1} / {totalQuestions}</span>
+          {question.estimatedTime && (
+            <span>~{question.estimatedTime} सेकंद</span>
+          )}
         </div>
-        {question.estimatedTime && (
-          <span className="text-[11px] text-slate-400 font-medium">
-            {question.estimatedTime < 60
-              ? `~${question.estimatedTime} सेकंद`
-              : `~${Math.round(question.estimatedTime / 60)} मिनिट`}
-          </span>
-        )}
+        <div className="w-full h-[3px] bg-slate-200 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-orange-500 rounded-full transition-all duration-300"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
       </div>
 
-      {/* Question prompt */}
-      <div className="space-y-2">
-        <h3 className="question-text text-xl sm:text-2xl text-slate-900 leading-relaxed font-bold">
+      {/* ── Question & Micro-hint ── */}
+      <div className="mb-3 flex-shrink-0">
+        <h2 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug mb-1.5">
           {question.question}
-        </h3>
+        </h2>
         {question.description && (
-          <p className="text-sm text-slate-600 font-normal leading-normal">
+          <p className="text-xs text-slate-500 leading-relaxed mb-1">
             {question.description}
           </p>
         )}
+        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5 inline-block">
+          💡 तुमच्या बोलीभाषेत १-२ वाक्यांत लिहा. व्याकरण नियम नाहीत!
+        </p>
       </div>
 
-      {/* Word progress ring indicator */}
-      <div className="flex items-center justify-between">
-        <span className="text-[11px] text-slate-400 italic font-marathi">
-          💡 आपल्या स्वतःच्या बोलीभाषेत लिहा (Write in your dialect)
-        </span>
-        <WordProgressRing
-          currentWords={currentWords}
+      {/* ── Transliteration Textarea (compact) ── */}
+      <div className="flex-1 min-h-0 flex flex-col gap-2">
+        <TransliterateTextarea
+          value={value}
+          onChange={(val) => {
+            onChange(val)
+            if (!touched) setTouched(true)
+          }}
+          onPasteAttempt={onPasteAttempt}
+          onMetricsUpdate={onMetricsUpdate}
+          transliterationDefault={transliterationEnabled}
+          antiPasteEnabled={antiPasteEnabled}
           minWords={question.minWords}
-          maxWords={question.maxWords}
         />
       </div>
 
-      {/* Transliteration Textarea */}
-      <TransliterateTextarea
-        value={value}
-        onChange={(val) => {
-          onChange(val)
-          if (!touched) setTouched(true)
-        }}
-        onPasteAttempt={onPasteAttempt}
-        onMetricsUpdate={onMetricsUpdate}
-        transliterationDefault={transliterationEnabled}
-        antiPasteEnabled={antiPasteEnabled}
-        minWords={question.minWords}
-      />
-
-      {/* Warnings / Guidance */}
-      {touched && qualityReport.warnings.length > 0 && currentWords > 5 && (
-        <div className="space-y-1 bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 text-xs text-amber-800">
-          {qualityReport.warnings.map((w, idx) => (
-            <div key={idx} className="flex items-center gap-1.5 font-marathi">
-              <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-              <span>{w}</span>
-            </div>
-          ))}
+      {/* ── Inline word counter + quality warnings ── */}
+      <div className="mt-2 flex-shrink-0 space-y-1.5">
+        <div className="flex items-center justify-between px-0.5">
+          <span className={`text-xs font-medium ${isMinMet ? 'text-emerald-600' : 'text-slate-400'}`}>
+            शब्द: {currentWords}/{question.minWords} {isMinMet ? '✓' : `(किमान ${question.minWords} आवश्यक)`}
+          </span>
+          {microcopy && (
+            <span className="text-xs text-slate-400">{microcopy}</span>
+          )}
         </div>
-      )}
 
-      {/* Encouragement microcopy */}
-      <div className="text-xs text-slate-500 font-medium text-center font-marathi">
-        {microcopy}
+        {touched && qualityReport.warnings.length > 0 && currentWords > 5 && (
+          <div className="flex flex-wrap gap-1">
+            {qualityReport.warnings.map((w, idx) => (
+              <div key={idx} className="flex items-center gap-1 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-0.5">
+                <AlertTriangle className="w-3 h-3 shrink-0" />
+                <span>{w}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Action buttons */}
-      <div className="flex items-center justify-between gap-4 pt-4 border-t border-slate-100">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={onPrev}
-          disabled={questionIndex === 0 || isSubmitting}
-          className="gap-2 text-sm h-12 px-6"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          मागील प्रश्न
-        </Button>
-
-        <Button
+      {/* ── Bottom Controls ── */}
+      <div className="mt-3 flex-shrink-0">
+        <button
           type="button"
           onClick={handleNextClick}
           disabled={!isMinMet || isSubmitting}
-          className={`gap-2 text-sm sm:text-base md:text-lg font-bold px-8 sm:px-10 h-14 ${
-            isLast
-              ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md'
-              : 'bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.14_250)] text-white'
-          }`}
+          className="w-full bg-orange-600 hover:bg-orange-700 active:bg-orange-800 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold py-2.5 rounded-xl text-sm transition-colors flex justify-center items-center gap-2 shadow-sm"
         >
           {isLast ? (
-            isSubmitting ? (
-              'सबमिट होत आहे...'
-            ) : (
-              <>
-                <span>संपूर्ण प्रतिसाद सबमिट करा</span>
-                <CheckCircle className="w-4 h-4" />
-              </>
-            )
+            isSubmitting ? 'सबमिट होत आहे...' : <><span>संपूर्ण प्रतिसाद सबमिट करा</span><CheckCircle className="w-4 h-4" /></>
           ) : (
-            <>
-              <span>पुढील प्रश्न</span>
-              <ArrowRight className="w-4 h-4" />
-            </>
+            <><span>पुढील प्रश्न</span><ArrowRight className="w-4 h-4" /></>
           )}
-        </Button>
+        </button>
+
+        <button
+          type="button"
+          onClick={onPrev}
+          disabled={questionIndex === 0 || isSubmitting}
+          className="w-full mt-2 py-1.5 text-xs font-medium text-slate-400 hover:text-slate-600 disabled:opacity-0 transition-colors flex justify-center items-center gap-1"
+        >
+          <ArrowLeft className="w-3 h-3" /> मागील प्रश्न
+        </button>
       </div>
     </motion.div>
   )

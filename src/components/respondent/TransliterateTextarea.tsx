@@ -368,44 +368,35 @@ export function TransliterateTextarea({
   }
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       {/* Top Controls Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 px-1 text-xs">
-        <div className="flex items-center gap-2">
-          <Languages className="w-4 h-4 text-[oklch(0.42_0.16_250)]" />
+      <div className="flex items-center justify-between gap-2 px-1">
+        <div className="flex items-center gap-1.5">
+          <Languages className="w-3.5 h-3.5 text-blue-600 shrink-0" />
           <Label htmlFor="transliterate-toggle" className="text-xs text-slate-700 font-semibold cursor-pointer">
-            मराठी टायपिंग सहाय्यक (Google Transliteration)
+            मराठी टायपिंग (kuthe → कुठे)
           </Label>
+        </div>
+        <div className="flex items-center gap-1.5">
+          {isTransliterationOn && (
+            <span className="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-100 font-medium hidden sm:inline">
+              सक्रिय
+            </span>
+          )}
           <Switch
             id="transliterate-toggle"
             checked={isTransliterationOn}
             onCheckedChange={setIsTransliterationOn}
-            className="scale-75 origin-left"
+            className="scale-75 origin-right"
           />
         </div>
-
-        {isTransliterationOn ? (
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
-              <Sparkles className="w-3 h-3 text-emerald-500" />
-              सक्रिय: &quot;kuthe&quot; → &quot;कुठे&quot;
-            </span>
-            <span className="hidden sm:inline-block text-[10px] text-slate-400 font-mono">
-              (Ctrl+G चालू/बंद)
-            </span>
-          </div>
-        ) : (
-          <span className="text-[11px] text-slate-500 italic">
-            स्थानिक मराठी कीबोर्ड चालू आहे (English typing)
-          </span>
-        )}
       </div>
 
       {/* ── Mobile-First Touch Candidate Strip ── */}
       {isTransliterationOn && candidates.length > 0 && (
         <div className="relative z-10 animate-fade-in">
           <div className="flex items-center gap-1.5 p-1.5 bg-slate-900/90 backdrop-blur-md text-white rounded-xl shadow-lg overflow-x-auto whitespace-nowrap scrollbar-none border border-slate-700/50">
-            <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider px-2 shrink-0">
+            <span className="text-base text-slate-400 uppercase font-bold tracking-wider px-2 shrink-0">
               पर्याय:
             </span>
 
@@ -419,13 +410,13 @@ export function TransliterateTextarea({
                   onTouchStart={e => e.preventDefault()}
                   onMouseDown={e => e.preventDefault()}
                   onClick={() => commitCandidate(cand, ' ')}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-marathi font-medium transition-all flex items-center gap-1.5 shrink-0 ${
+                  className={`px-3 py-1.5 rounded-lg text-base font-marathi font-medium transition-all flex items-center gap-1.5 shrink-0 ${
                     isSelected
-                      ? 'bg-[oklch(0.42_0.16_250)] text-white shadow-xs font-semibold'
+                      ? 'bg-blue-600 text-white shadow-xs font-semibold'
                       : 'bg-slate-800/80 hover:bg-slate-700 text-slate-200'
                   }`}
                 >
-                  <span className="text-[10px] opacity-60 font-mono">{idx + 1}.</span>
+                  <span className="text-base opacity-60 font-mono">{idx + 1}.</span>
                   <span>{cand}</span>
                   {isSelected && <Check className="w-3 h-3 text-white/80 shrink-0" />}
                 </button>
@@ -448,14 +439,14 @@ export function TransliterateTextarea({
           onDrop={handleDrop}
           disabled={disabled}
           placeholder={placeholder}
-          rows={6}
-          className="w-full min-h-[170px] p-4 text-base md:text-lg font-marathi leading-relaxed text-slate-900 bg-white border border-[oklch(0.88_0.02_250)] rounded-xl shadow-inner focus:outline-hidden focus:ring-2 focus:ring-[oklch(0.42_0.16_250)] focus:border-transparent transition-all placeholder:font-sans placeholder:text-slate-400 placeholder:text-sm resize-y"
+          rows={3}
+          className="w-full min-h-[96px] max-h-[160px] p-3 text-sm font-marathi leading-relaxed text-slate-900 bg-white border border-slate-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all placeholder:text-slate-400 placeholder:text-sm resize-none"
           style={{ fontFeatureSettings: '"kern" 1, "liga" 1' }}
         />
 
         {/* Anti-paste Warning Popup */}
         {pasteWarning && (
-          <div className="absolute bottom-3 left-3 right-3 bg-amber-500/95 text-white text-xs px-3.5 py-2 rounded-lg flex items-center gap-2 shadow-lg animate-fade-in-up backdrop-blur-xs z-20">
+          <div className="absolute bottom-3 left-3 right-3 bg-amber-500/95 text-white text-base px-3.5 py-2 rounded-lg flex items-center gap-2 shadow-lg animate-fade-in-up backdrop-blur-xs z-20">
             <ShieldAlert className="w-4 h-4 shrink-0" />
             <span>
               गुणवत्तेच्या खात्रीसाठी कृपया मजकूर पेस्ट न करता स्वतः मराठीत टाईप करा.
@@ -465,17 +456,14 @@ export function TransliterateTextarea({
       </div>
 
       {/* Mobile Hint Subtext */}
-      <div className="flex items-center justify-between px-1 text-[11px] text-slate-400">
-        <span>
-          💡 इंग्रजी अक्षरांमध्ये टाईप करा (उदा. <em>namaskar</em>) व <strong>Space</strong> दाबा.
-        </span>
-        {canUndo && (
-          <span className="inline-flex items-center gap-1 text-slate-500 font-medium">
+      {isTransliterationOn && canUndo && (
+        <div className="flex justify-end px-1">
+          <span className="inline-flex items-center gap-1 text-xs text-slate-400">
             <Undo2 className="w-3 h-3" />
-            Backspace दाबल्यास इंग्रजी शब्द परत येईल
+            Backspace → इंग्रजी शब्द परत येईल
           </span>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -65,7 +65,7 @@ export default function DialectCards() {
           {dialects.map((dialect) => (
             <div
               key={dialect.name}
-              className="p-5 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200 hover:shadow-md transition"
+              className="p-5 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-colors"
             >
               {/* Dialect Name */}
               <h3 className="text-lg font-bold text-gray-900 mb-1 font-marathi">
@@ -73,17 +73,17 @@ export default function DialectCards() {
               </h3>
 
               {/* English Name */}
-              <p className="text-sm text-gray-700 font-medium mb-3">
+              <p className="text-base text-gray-700 font-medium mb-3">
                 {dialect.nameEnglish}
               </p>
 
               {/* Region Badge */}
-              <div className="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full mb-3 font-marathi">
+              <div className="inline-block px-3 py-1 bg-blue-600 text-white text-base font-semibold rounded-full mb-3 font-marathi">
                 {dialect.regionMarathi}
               </div>
 
               {/* Description */}
-              <p className="text-xs text-gray-700 leading-relaxed">
+              <p className="text-base text-gray-700 leading-relaxed">
                 {dialect.description}
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function DialectCards() {
           <p className="text-gray-800 font-medium font-marathi">
             ✓ वऱ्हाडी, अहिराणी, मालवणी, कोकणी, मराठवाडी — कोणत्याही बोलीभाषेतील मराठी मौल्यवान आहे.
           </p>
-          <p className="text-gray-600 text-sm mt-2">
+          <p className="text-gray-600 text-base mt-2">
             Write in any Marathi dialect. All are equally valuable to our research.
           </p>
         </div>

@@ -1,19 +1,19 @@
 export default function HeroSection({ formSlug }: { formSlug: string }) {
   return (
-    <section className="relative bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 md:py-20 px-4">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="border-b border-gray-200 bg-white text-gray-900 py-10 md:py-16 px-4">
+      <div className="max-w-3xl mx-auto text-center">
         {/* Main Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 font-marathi">
-          तुमच्या मराठीला <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">AI च्या भविष्यात</span> स्थान द्या.
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4 font-marathi leading-tight">
+          तुमच्या मराठीला AI च्या भविष्यात स्थान द्या.
         </h1>
 
         {/* Subheading (English) */}
-        <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-4 md:mb-6">
+        <p className="text-lg text-gray-700 mb-3">
           Help build better AI for Marathi.
         </p>
 
         {/* Secondary Message */}
-        <p className="text-base sm:text-lg text-blue-100 mb-6 md:mb-8 font-marathi">
+        <p className="text-base text-gray-600 mb-6 font-marathi">
           एक छोटंसं योगदान. मराठी भाषेसाठी मोठा डेटासंच.
         </p>
 
@@ -21,14 +21,14 @@ export default function HeroSection({ formSlug }: { formSlug: string }) {
         <div className="flex justify-center w-full px-4 sm:px-0">
           <a
             href={`/f/${formSlug}`}
-            className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-5 md:px-14 md:py-6 bg-white text-blue-600 font-bold text-2xl md:text-3xl rounded-2xl hover:bg-blue-50 transition-all shadow-xl hover:-translate-y-1 hover:shadow-2xl font-marathi"
+            className="inline-flex items-center justify-center w-full sm:w-auto min-h-12 px-8 py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 transition-colors font-marathi"
           >
             योगदान द्या →
           </a>
         </div>
 
         {/* Badges Below CTA */}
-        <div className="flex justify-center gap-2 sm:gap-4 mt-6 text-xs sm:text-sm text-blue-100 flex-wrap font-marathi">
+        <div className="flex justify-center gap-3 sm:gap-6 mt-6 text-base text-gray-600 flex-wrap font-marathi">
           <span>✓ ५ मिनिटे</span>
           <span>✓ पूर्णपणे निनावी</span>
           <span>✓ CC BY 4.0</span>

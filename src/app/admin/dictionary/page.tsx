@@ -101,7 +101,7 @@ export default function DictionaryAdminPage() {
           <BookType className="w-6 h-6 text-blue-600" />
           Custom Transliteration Dictionary
         </h1>
-        <p className="text-sm text-[oklch(0.52_0.04_250)] mt-1 max-w-2xl">
+        <p className="text-base text-[oklch(0.52_0.04_250)] mt-1 max-w-2xl">
           Define exact phonetic overrides for words that automated engines get wrong (e.g. loanwords). 
           These rules bypass the AI transliteration engine and instantly apply your exact output.
         </p>
@@ -111,11 +111,11 @@ export default function DictionaryAdminPage() {
         
         {/* Add New Override Form */}
         <div className="md:col-span-1">
-          <form onSubmit={handleAdd} className="bg-white p-5 rounded-xl border border-[oklch(0.88_0.02_250)] shadow-xs space-y-4 sticky top-6">
-            <h2 className="text-sm font-bold text-slate-800">Add New Override</h2>
+          <form onSubmit={handleAdd} className="bg-white p-5 rounded-xl border border-gray-200 shadow-xs space-y-4 sticky top-6">
+            <h2 className="text-base font-bold text-slate-800">Add New Override</h2>
             
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-600">English / Roman Word</label>
+              <label className="text-base font-semibold text-slate-600">English / Roman Word</label>
               <Input
                 placeholder="e.g. social"
                 value={newWord}
@@ -125,17 +125,17 @@ export default function DictionaryAdminPage() {
             </div>
             
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-600">Exact Marathi Output</label>
+              <label className="text-base font-semibold text-slate-600">Exact Marathi Output</label>
               <Input
                 placeholder="e.g. सोशल"
                 value={newOverride}
                 onChange={e => setNewOverride(e.target.value)}
-                className="bg-slate-50 border-slate-200 h-9 font-marathi text-sm"
+                className="bg-slate-50 border-slate-200 h-9 font-marathi text-base"
               />
             </div>
 
             {error && (
-              <div className="text-xs text-rose-600 font-medium bg-rose-50 p-2 rounded">
+              <div className="text-base text-rose-600 font-medium bg-rose-50 p-2 rounded">
                 {error}
               </div>
             )}
@@ -143,7 +143,7 @@ export default function DictionaryAdminPage() {
             <Button
               type="submit"
               disabled={adding || !newWord || !newOverride}
-              className="w-full bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.16_250)] text-white h-9"
+              className="w-full bg-blue-600 hover:bg-[oklch(0.35_0.16_250)] text-white h-9"
             >
               {adding ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4 mr-1" />}
               Add Rule
@@ -153,13 +153,13 @@ export default function DictionaryAdminPage() {
 
         {/* Overrides Table */}
         <div className="md:col-span-2">
-          <div className="bg-white rounded-xl border border-[oklch(0.88_0.02_250)] overflow-hidden shadow-xs">
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
             <Table>
               <TableHeader>
                 <TableRow className="bg-slate-50/80">
-                  <TableHead className="text-xs font-bold text-slate-600">Roman Word</TableHead>
-                  <TableHead className="text-xs font-bold text-slate-600">Marathi Override</TableHead>
-                  <TableHead className="text-xs font-bold text-slate-600 text-right w-20">Actions</TableHead>
+                  <TableHead className="text-base font-bold text-slate-600">Roman Word</TableHead>
+                  <TableHead className="text-base font-bold text-slate-600">Marathi Override</TableHead>
+                  <TableHead className="text-base font-bold text-slate-600 text-right w-20">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -172,7 +172,7 @@ export default function DictionaryAdminPage() {
                   </TableRow>
                 ) : overrides.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={3} className="text-center py-12 text-slate-400 text-sm font-medium">
+                    <TableCell colSpan={3} className="text-center py-12 text-slate-400 text-base font-medium">
                       No custom rules defined yet.
                     </TableCell>
                   </TableRow>
@@ -182,7 +182,7 @@ export default function DictionaryAdminPage() {
                       <TableCell className="font-medium text-slate-700">
                         {o.word}
                       </TableCell>
-                      <TableCell className="font-marathi font-bold text-[oklch(0.42_0.16_250)] text-base">
+                      <TableCell className="font-marathi font-bold text-blue-600 text-base">
                         {o.override}
                       </TableCell>
                       <TableCell className="text-right">

@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import { Progress } from '@/components/ui/progress'
 import { QuestionCard } from '@/components/respondent/QuestionCard'
 import { MetadataForm } from '@/components/respondent/MetadataForm'
-import { Sparkles, Loader2, AlertCircle } from 'lucide-react'
+import { Loader2, AlertCircle } from 'lucide-react'
 import { useDraftAutoSave } from '@/hooks/useDraftAutoSave'
 import Image from 'next/image'
 
@@ -241,39 +241,19 @@ export function ClientFormShell({ slug, initialForm }: ClientFormShellProps) {
   // Early returns for loading/error states
   // We keep the branding shell visible even during loading for SSR effect
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-[oklch(0.97_0.01_250)] to-slate-100 py-8 px-4 sm:px-6">
-      <div className="max-w-2xl mx-auto space-y-6">
-        {/* Header Branding (Always visible instantly due to SSR props) */}
-        <div className="flex items-center justify-between bg-white/80 backdrop-blur-md px-5 py-3.5 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm overflow-hidden border border-slate-100 p-1 relative">
-              <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
-            </div>
-            <div>
-              <h1 className="font-marathi font-bold text-sm text-slate-900 leading-tight">
-                {form.title}
-              </h1>
-              <p className="text-[11px] text-slate-500 font-medium">
-                मराठी भाषा संशोधन प्रकल्प
-              </p>
-            </div>
-          </div>
-          <span className="inline-flex items-center gap-1 text-[11px] text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full font-medium border border-blue-100">
-            <Sparkles className="w-3 h-3 text-blue-500" />
-            LLM Corpus
-          </span>
-        </div>
+    <div className={`${step === 'questions' ? 'h-[100dvh] overflow-hidden bg-[#FAFAFA]' : 'min-h-screen bg-gray-50 py-6 px-4 sm:px-6'}`}>
+      <div className={`${step === 'questions' ? 'h-full flex flex-col max-w-md mx-auto px-4' : 'max-w-[720px] mx-auto space-y-6'}`}>
 
         {error ? (
           <div className="bg-white border border-rose-200 rounded-2xl p-8 text-center shadow-lg space-y-4">
             <AlertCircle className="w-10 h-10 text-rose-500 mx-auto" />
             <h2 className="text-lg font-bold text-slate-800">माहिती</h2>
-            <p className="text-sm text-slate-600">{error}</p>
+            <p className="text-base text-slate-600">{error}</p>
           </div>
         ) : loading ? (
           <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center shadow-sm flex flex-col items-center">
-            <Loader2 className="w-8 h-8 animate-spin text-[oklch(0.42_0.16_250)] mb-3" />
-            <p className="text-slate-600 font-medium text-sm">फॉर्म लोड होत आहे...</p>
+            <Loader2 className="w-8 h-8 animate-spin text-blue-600 mb-3" />
+            <p className="text-slate-600 font-medium text-base">फॉर्म लोड होत आहे...</p>
           </div>
         ) : questions.length === 0 ? (
           <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center shadow-sm">
@@ -281,22 +261,12 @@ export function ClientFormShell({ slug, initialForm }: ClientFormShellProps) {
           </div>
         ) : (
           <>
-            {/* Global Progress Bar when in Question step */}
-            {step === 'questions' && (
-              <div className="space-y-1.5 px-1">
-                <div className="flex justify-between text-xs font-semibold text-slate-600">
-                  <span>प्रगती (Overall Progress)</span>
-                  <span>{currentIndex + 1} of {questions.length}</span>
-                </div>
-                <Progress value={Math.round(((currentIndex + 1) / questions.length) * 100)} className="h-2 bg-slate-200" />
-              </div>
-            )}
 
             {/* Flow Switcher */}
             {step === 'metadata' && (
-              <div className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 sm:p-8 shadow-sm space-y-6">
+              <div className="bg-white rounded-lg border border-gray-200 p-5 sm:p-8 space-y-6">
                 {form.description && (
-                  <div className="text-sm text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  <div className="text-base text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100">
                     {form.description}
                   </div>
                 )}
@@ -338,16 +308,6 @@ export function ClientFormShell({ slug, initialForm }: ClientFormShellProps) {
           </>
         )}
 
-        {/* Footer */}
-        <div className="text-center pt-2">
-          <Link
-            href="/privacy"
-            target="_blank"
-            className="text-[11px] text-slate-400 hover:text-slate-600 underline transition-colors"
-          >
-            गोपनीयता धोरण व डेटा हक्क (Privacy Policy & Data Ethics)
-          </Link>
-        </div>
       </div>
     </div>
   )

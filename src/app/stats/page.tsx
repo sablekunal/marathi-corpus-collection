@@ -50,7 +50,7 @@ export default async function StatsPage() {
   const maxDialectCount = Math.max(...stats.dialectBreakdown.map(d => d.count), 1)
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[oklch(0.97_0.01_250)] via-white to-[oklch(0.93_0.03_250)]">
+    <main className="min-h-screen bg-white">
       <div className="max-w-4xl mx-auto px-4 py-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -65,7 +65,7 @@ export default async function StatsPage() {
               <h1 className="font-marathi text-2xl sm:text-3xl font-bold text-[oklch(0.20_0.04_250)]">
                 मराठी संग्रह — आकडेवारी
               </h1>
-              <p className="text-xs sm:text-sm text-slate-500">
+              <p className="text-base sm:text-base text-slate-500">
                 Marathi Corpus Collection — Live Statistics
               </p>
             </div>
@@ -76,30 +76,29 @@ export default async function StatsPage() {
         </div>
 
         {/* ── Goal Progress ────────────────────────────────────────── */}
-        <div className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 mb-6 shadow-sm">
-          <div className="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-3">
-            <Target className="w-4 h-4 text-[oklch(0.42_0.16_250)]" />
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6 shadow-sm">
+          <div className="flex items-center gap-2 text-base font-semibold text-slate-800 mb-3">
+            <Target className="w-4 h-4 text-blue-600" />
             <span>लक्ष्य: ५०० प्रतिसाद (Goal: 500 Responses)</span>
           </div>
           <div className="relative h-4 bg-slate-100 rounded-full overflow-hidden mb-2">
             <div
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-[oklch(0.42_0.16_250)] to-emerald-500 rounded-full transition-all duration-700"
+              className="absolute inset-y-0 left-0 bg-blue-600 rounded-full transition-all duration-700"
               style={{ width: `${stats.progressPercent}%` }}
             />
           </div>
-          <div className="flex justify-between text-xs text-slate-500">
+          <div className="flex justify-between text-base text-slate-500">
             <span>{stats.totalSubmissions} of {stats.goal} responses</span>
-            <span className="font-semibold text-[oklch(0.42_0.16_250)]">{stats.progressPercent}%</span>
+            <span className="font-semibold text-blue-600">{stats.progressPercent}%</span>
           </div>
         </div>
 
         {/* ── KPI Cards ────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-          <StatCard icon="📝" value={stats.totalSubmissions} label="Responses" />
-          <StatCard icon="🗣️" value={stats.dialectCount} label="Dialects" />
-          <StatCard icon="📍" value={stats.districtCount} label="Districts" />
+          <StatCard value={stats.totalSubmissions} label="Responses" />
+          <StatCard value={stats.dialectCount} label="Dialects" />
+          <StatCard value={stats.districtCount} label="Districts" />
           <StatCard
-            icon="✍️"
             value={stats.totalWords > 1000 ? `${Math.round(stats.totalWords / 1000)}K` : String(stats.totalWords)}
             label="Words"
           />
@@ -109,10 +108,10 @@ export default async function StatsPage() {
         <div className="bg-emerald-50/70 border border-emerald-200/60 rounded-xl p-4 mb-6 flex items-center gap-3">
           <span className="text-xl">🔥</span>
           <div>
-            <span className="text-sm font-semibold text-emerald-900">
+            <span className="text-base font-semibold text-emerald-900">
               आज {stats.todayCount} नवीन प्रतिसाद
             </span>
-            <span className="text-xs text-emerald-700 block">
+            <span className="text-base text-emerald-700 block">
               {stats.todayCount} new responses today
             </span>
           </div>
@@ -120,24 +119,24 @@ export default async function StatsPage() {
 
         {/* ── Dialect Distribution ──────────────────────────────────── */}
         {stats.dialectBreakdown.length > 0 && (
-          <div className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 mb-6 shadow-sm">
-            <div className="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-4">
-              <Users className="w-4 h-4 text-[oklch(0.42_0.16_250)]" />
+          <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6 shadow-sm">
+            <div className="flex items-center gap-2 text-base font-semibold text-slate-800 mb-4">
+              <Users className="w-4 h-4 text-blue-600" />
               <span>बोलीभाषा वितरण (Dialect Distribution)</span>
             </div>
             <div className="space-y-2.5">
               {stats.dialectBreakdown.map((d) => (
                 <div key={d.name} className="flex items-center gap-3">
-                  <div className="w-36 sm:w-48 text-xs text-slate-700 font-medium truncate shrink-0">
+                  <div className="w-36 sm:w-48 text-base text-slate-700 font-medium truncate shrink-0">
                     {d.name}
                   </div>
                   <div className="flex-1 h-5 bg-slate-100 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-[oklch(0.42_0.16_250)] rounded-full transition-all"
+                      className="h-full bg-blue-600 rounded-full transition-all"
                       style={{ width: `${(d.count / maxDialectCount) * 100}%` }}
                     />
                   </div>
-                  <div className="w-8 text-right text-xs text-slate-600 font-semibold">
+                  <div className="w-8 text-right text-base text-slate-600 font-semibold">
                     {d.count}
                   </div>
                 </div>
@@ -148,8 +147,8 @@ export default async function StatsPage() {
 
         {/* ── District Coverage ─────────────────────────────────────── */}
         {stats.districtBreakdown.length > 0 && (
-          <div className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 mb-6 shadow-sm">
-            <div className="flex items-center gap-2 text-sm font-semibold text-slate-800 mb-4">
+          <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6 shadow-sm">
+            <div className="flex items-center gap-2 text-base font-semibold text-slate-800 mb-4">
               <Globe className="w-4 h-4 text-emerald-600" />
               <span>जिल्हा कव्हरेज (District Coverage)</span>
             </div>
@@ -157,10 +156,10 @@ export default async function StatsPage() {
               {stats.districtBreakdown.map((d) => (
                 <span
                   key={d.name}
-                  className="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-700 font-medium"
+                  className="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-base text-slate-700 font-medium"
                 >
                   <span>{d.name}</span>
-                  <span className="text-[oklch(0.42_0.16_250)] font-bold">{d.count}</span>
+                  <span className="text-blue-600 font-bold">{d.count}</span>
                 </span>
               ))}
             </div>
@@ -169,10 +168,10 @@ export default async function StatsPage() {
 
         {/* ── Share CTA ────────────────────────────────────────────── */}
         <div className="bg-blue-50/80 border border-blue-200/60 rounded-2xl p-6 mb-6">
-          <p className="text-sm font-semibold text-blue-900 mb-1 text-center">
+          <p className="text-base font-semibold text-blue-900 mb-1 text-center">
             आम्हाला ५०० प्रतिसाद मिळवायला मदत करा!
           </p>
-          <p className="text-xs text-blue-700 text-center mb-4">
+          <p className="text-base text-blue-700 text-center mb-4">
             Help us reach 500 responses — share with friends and family on WhatsApp!
           </p>
           <div className="flex justify-center">
@@ -184,12 +183,12 @@ export default async function StatsPage() {
         <div className="text-center space-y-2">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-[oklch(0.42_0.16_250)] hover:underline font-medium"
+            className="inline-flex items-center gap-2 text-base text-blue-600 hover:underline font-medium"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             मुख्य पानावर जा (Back to Home)
           </Link>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-base text-slate-400">
             Last updated: {new Date().toLocaleDateString('en-IN')}
           </p>
         </div>
@@ -198,12 +197,11 @@ export default async function StatsPage() {
   )
 }
 
-function StatCard({ icon, value, label }: { icon: string; value: number | string; label: string }) {
+function StatCard({ value, label }: { value: number | string; label: string }) {
   return (
-    <div className="bg-white rounded-xl border border-[oklch(0.88_0.02_250)] p-4 text-center shadow-sm">
-      <div className="text-2xl mb-1.5">{icon}</div>
+    <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
       <div className="text-xl sm:text-2xl font-bold text-[oklch(0.20_0.04_250)]">{value}</div>
-      <div className="text-[11px] text-slate-500 font-medium mt-0.5">{label}</div>
+      <div className="text-base text-slate-500 font-medium mt-0.5">{label}</div>
     </div>
   )
 }

@@ -1,99 +1,72 @@
 import Link from 'next/link'
-import { BookOpen, ArrowRight, BarChart3, Shield, Users, Globe, Sparkles } from 'lucide-react'
-import { db } from '@/lib/db'
-import { forms } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
-import HeroSection from '@/components/HeroSection'
-import ImpactStats from '@/components/ImpactStats'
-import PrivacyCard from '@/components/PrivacyCard'
 
-async function getPublishedFormSlug(): Promise<string> {
-  try {
-    const [publishedForm] = await db
-      .select({ slug: forms.slug })
-      .from(forms)
-      .where(eq(forms.isPublished, true))
-      .limit(1)
-    return publishedForm?.slug || 'marathi-pilot-2026'
-  } catch {
-    return 'marathi-pilot-2026'
-  }
-}
-
-export default async function HomePage() {
-  const formSlug = await getPublishedFormSlug()
-
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[oklch(0.97_0.01_250)] via-white to-[oklch(0.93_0.03_250)] pb-12">
-      {/* ── Hero Section ───────────────────────────────────────────── */}
-      <HeroSection formSlug={formSlug} />
+    <main className="w-full flex-1 flex flex-col max-w-md mx-auto px-4 py-8">
+      
+      {/* Hero Section */}
+      <h1 className="text-2xl sm:text-3xl font-bold text-center text-slate-900 leading-snug">
+        तुमच्या मराठीला <span className="text-orange-600">AI च्या भविष्यात</span> स्थान द्या.
+      </h1>
+      
+      <p className="text-sm text-center text-slate-600 mt-2">
+        मराठी भाषेच्या AI संशोधनासाठी उच्च-दर्जाचा मुक्त डेटासंच.<br/>
+        <span className="text-xs text-slate-400">(Help build better AI for Marathi.)</span>
+      </p>
 
-      {/* ── Live Stats Strip ───────────────────────────────────────── */}
-      <ImpactStats />
+      {/* CTA Button */}
+      <Link 
+        href="/f/marathi-pilot-2026" 
+        className="w-full mt-5 block text-center bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3.5 px-6 rounded-xl shadow-sm text-base transition-colors"
+      >
+        योगदान द्या (५ मिनिटे) →
+      </Link>
 
-      {/* ── Info Cards ─────────────────────────────────────────────── */}
-      <div className="max-w-3xl mx-auto px-4 mt-8 md:mt-12 mb-8 md:mb-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 md:mb-10">
-          <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm">
-            <div className="w-9 h-9 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
-              <Globe className="w-4.5 h-4.5 text-[oklch(0.42_0.16_250)]" />
-            </div>
-            <h3 className="font-semibold text-sm text-slate-900 mb-1.5 font-marathi">प्रकल्पाविषयी</h3>
-            <p className="text-xs text-slate-600 leading-relaxed font-marathi">
-              मराठी भाषेच्या कृत्रिम बुद्धिमत्ता मॉडेल्ससाठी उच्च-दर्जाचा मजकूर डेटासंच तयार करण्यासाठी हा प्रकल्प आहे.
-              <span className="block mt-1 text-slate-500 font-sans">
-                Building a high-quality text corpus for Marathi AI models and academic research.
-              </span>
-            </p>
-          </div>
-
-          <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm">
-            <div className="w-9 h-9 bg-emerald-50 rounded-lg flex items-center justify-center mb-3">
-              <Shield className="w-4.5 h-4.5 text-emerald-600" />
-            </div>
-            <h3 className="font-semibold text-sm text-slate-900 mb-1.5 font-marathi">गोपनीयता</h3>
-            <p className="text-xs text-slate-600 leading-relaxed font-marathi">
-              आपले प्रतिसाद निनावी ठेवले जातात. IP पत्ता SHA-256 हॅश केला जातो आणि १८० दिवसांनंतर हटवला जातो.
-              <span className="block mt-1 text-slate-500 font-sans">
-                Responses are anonymized. IP addresses are hashed and auto-deleted after 180 days.
-              </span>
-            </p>
-          </div>
-
-          <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm">
-            <div className="w-9 h-9 bg-amber-50 rounded-lg flex items-center justify-center mb-3">
-              <Users className="w-4.5 h-4.5 text-amber-600" />
-            </div>
-            <h3 className="font-semibold text-sm text-slate-900 mb-1.5 font-marathi">सहभागी कसे व्हावे</h3>
-            <p className="text-xs text-slate-600 leading-relaxed font-marathi">
-              ३-५ प्रश्नांची मराठी उत्तरे आपल्या बोलीभाषेत लिहा — व्याकरणाची चिंता नाही!
-              <span className="block mt-1 text-slate-500 font-sans">
-                Answer 3-5 questions in your natural Marathi dialect. No grammar worries!
-              </span>
-            </p>
-          </div>
-        </div>
+      {/* Trust Strip */}
+      <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-[12px] text-slate-500 font-medium">
+        <span className="flex items-center gap-1">⚡ ३ मिनिटे</span>
+        <span className="opacity-40">•</span>
+        <span className="flex items-center gap-1">🔒 १००% निनावी</span>
+        <span className="opacity-40">•</span>
+        <span className="flex items-center gap-1">🌐 CC BY 4.0</span>
       </div>
 
-      {/* ── Privacy Card ───────────────────────────────────────────── */}
-      <PrivacyCard />
+      {/* Live Counter & Info */}
+      <div className="w-full mt-10 space-y-4">
+        
+        {/* Counter Card */}
+        <div className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center shadow-sm">
+          <div className="flex items-center gap-2 text-[13px] font-medium text-slate-700">
+            <span className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              संकलन सुरू
+            </span>
+            <span className="text-slate-300">•</span>
+            <span>५१ उत्तरे</span>
+            <span className="text-slate-300">•</span>
+            <span>१२ सहभागी</span>
+          </div>
+        </div>
 
-      {/* ── Footer ───────────────────────────────────────────────── */}
-      <div className="max-w-3xl mx-auto px-4">
-        <div className="text-center pt-6 border-t border-slate-100 space-y-2 mt-8 md:mt-12">
-          <div className="flex items-center justify-center gap-4 text-xs text-slate-500 font-marathi">
-            <Link href="/privacy" className="hover:text-[oklch(0.42_0.16_250)] underline transition-colors">
-              गोपनीयता धोरण (Privacy Policy)
-            </Link>
-            <span>|</span>
-            <Link href="/admin" className="hover:text-[oklch(0.42_0.16_250)] transition-colors font-sans">
-              Admin
+        {/* Info Card */}
+        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden text-sm">
+          <div className="p-4 border-b border-slate-100">
+            <h3 className="font-semibold text-slate-900 mb-1">सहभागी कसे व्हावे & प्रकल्प माहिती</h3>
+            <p className="text-slate-700 leading-relaxed">
+              कोणत्याही व्याकरणाची चिंता न करता ३-५ प्रश्नांची उत्तरे आपल्या नैसर्गिक बोलीभाषेत लिहा. गोळा केलेला डेटा CC BY 4.0 अंतर्गत मराठी AI संशोधनासाठी खुला केला जाईल.
+            </p>
+          </div>
+          <div className="p-4 bg-slate-50">
+            <h3 className="font-semibold text-slate-900 mb-1">डेटा गोपनीयता</h3>
+            <p className="text-slate-700 leading-relaxed mb-3">
+              नाव किंवा ईमेल आवश्यक नाही. IP पत्ता SHA-256 द्वारे हॅश केला जातो व १८० दिवसांनंतर आपोआप नष्ट होतो.
+            </p>
+            <Link href="/privacy" className="text-indigo-600 font-medium hover:underline inline-flex items-center gap-1">
+              गोपनीयता धोरण (Privacy Policy) वाचा →
             </Link>
           </div>
-          <p className="text-[11px] text-slate-400 font-sans">
-            CC-BY-4.0 License • Marathi Corpus Research Team
-          </p>
         </div>
+        
       </div>
     </main>
   )

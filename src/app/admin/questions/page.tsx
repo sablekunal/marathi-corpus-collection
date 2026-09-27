@@ -263,7 +263,7 @@ export default function QuestionsAdminPage() {
           <h1 className="text-2xl font-bold text-[oklch(0.20_0.04_250)]">
             Question Bank
           </h1>
-          <p className="text-sm text-[oklch(0.52_0.04_250)] mt-0.5">
+          <p className="text-base text-[oklch(0.52_0.04_250)] mt-0.5">
             Manage, categorize, and bulk-import research prompts
           </p>
         </div>
@@ -271,14 +271,14 @@ export default function QuestionsAdminPage() {
           <Button
             variant="outline"
             onClick={() => setIsImportOpen(true)}
-            className="gap-2 text-xs h-10 border-[oklch(0.88_0.02_250)]"
+            className="gap-2 text-base h-10 border-gray-200"
           >
             <FileUp className="w-4 h-4 text-slate-600" />
             Import JSON
           </Button>
           <Button
             onClick={openCreateModal}
-            className="gap-2 text-xs h-10 bg-[oklch(0.42_0.16_250)] hover:bg-[oklch(0.35_0.14_250)] text-white shadow-xs"
+            className="gap-2 text-base h-10 bg-blue-600 hover:bg-blue-700 text-white shadow-xs"
           >
             <Plus className="w-4 h-4" />
             Add Question
@@ -287,30 +287,30 @@ export default function QuestionsAdminPage() {
       </div>
 
       {/* Filters Bar */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 bg-white p-4 rounded-xl border border-[oklch(0.88_0.02_250)] shadow-xs">
+      <div className="flex flex-col sm:flex-row items-center gap-4 bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <Input
             placeholder="Search questions by keyword..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="pl-9 bg-slate-50 border-none text-sm h-10 w-full"
+            className="pl-9 bg-slate-50 border-none text-base h-10 w-full"
           />
         </div>
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <span className="text-xs font-semibold text-slate-500 shrink-0">Category:</span>
+          <span className="text-base font-semibold text-slate-500 shrink-0">Category:</span>
           <Select
             value={selectedCategory}
             onValueChange={(val: string | null) => {
               if (val) setSelectedCategory(val)
             }}
           >
-            <SelectTrigger className="w-full sm:w-44 bg-slate-50 border-none text-xs h-10">
+            <SelectTrigger className="w-full sm:w-44 bg-slate-50 border-none text-base h-10">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
               {CATEGORIES.map(c => (
-                <SelectItem key={c} value={c} className="text-xs">
+                <SelectItem key={c} value={c} className="text-base">
                   {c}
                 </SelectItem>
               ))}
@@ -320,16 +320,16 @@ export default function QuestionsAdminPage() {
       </div>
 
       {/* Questions Data Table */}
-      <div className="bg-white rounded-xl border border-[oklch(0.88_0.02_250)] overflow-hidden shadow-xs">
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
         <Table>
           <TableHeader>
             <TableRow className="bg-slate-50/80">
-              <TableHead className="w-28 text-xs font-bold text-slate-600">Category</TableHead>
-              <TableHead className="text-xs font-bold text-slate-600">Marathi Question</TableHead>
-              <TableHead className="w-24 text-xs font-bold text-slate-600 text-center">Words</TableHead>
-              <TableHead className="w-24 text-xs font-bold text-slate-600 text-center">Difficulty</TableHead>
-              <TableHead className="w-24 text-xs font-bold text-slate-600 text-center">Status</TableHead>
-              <TableHead className="w-28 text-xs font-bold text-slate-600 text-right">Actions</TableHead>
+              <TableHead className="w-28 text-base font-bold text-slate-600">Category</TableHead>
+              <TableHead className="text-base font-bold text-slate-600">Marathi Question</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600 text-center">Words</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600 text-center">Difficulty</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600 text-center">Status</TableHead>
+              <TableHead className="w-28 text-base font-bold text-slate-600 text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -342,7 +342,7 @@ export default function QuestionsAdminPage() {
               </TableRow>
             ) : questions.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-12 text-slate-400 text-sm font-medium">
+                <TableCell colSpan={6} className="text-center py-12 text-slate-400 text-base font-medium">
                   No questions found. Click &quot;Add Question&quot; or &quot;Import JSON&quot; to begin.
                 </TableCell>
               </TableRow>
@@ -350,7 +350,7 @@ export default function QuestionsAdminPage() {
               questions.map(q => (
                 <TableRow key={q.id} className="hover:bg-slate-50/50">
                   <TableCell>
-                    <Badge variant="outline" className="text-[11px] font-semibold bg-blue-50/50 text-blue-700 border-blue-200">
+                    <Badge variant="outline" className="text-base font-semibold bg-blue-50/50 text-blue-700 border-blue-200">
                       {q.category}
                     </Badge>
                   </TableCell>
@@ -359,23 +359,23 @@ export default function QuestionsAdminPage() {
                       {q.question}
                     </div>
                     {q.description && (
-                      <div className="text-xs text-slate-400 line-clamp-1 mt-0.5">
+                      <div className="text-base text-slate-400 line-clamp-1 mt-0.5">
                         {q.description}
                       </div>
                     )}
                   </TableCell>
-                  <TableCell className="text-center text-xs font-medium text-slate-600">
+                  <TableCell className="text-center text-base font-medium text-slate-600">
                     {q.minWords}–{q.maxWords}
                   </TableCell>
                   <TableCell className="text-center">
-                    <span className="text-[11px] capitalize text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded-full">
+                    <span className="text-base capitalize text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded-full">
                       {q.difficulty}
                     </span>
                   </TableCell>
                   <TableCell className="text-center">
                     <button
                       onClick={() => handleToggleEnabled(q.id, q.enabled)}
-                      className={`text-[11px] font-semibold px-2 py-0.5 rounded-full cursor-pointer transition-colors ${
+                      className={`text-base font-semibold px-2 py-0.5 rounded-full cursor-pointer transition-colors ${
                         q.enabled
                           ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                           : 'bg-slate-100 text-slate-400 border border-slate-200'
@@ -412,8 +412,8 @@ export default function QuestionsAdminPage() {
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between bg-white p-4 rounded-xl border border-[oklch(0.88_0.02_250)] shadow-xs">
-        <div className="text-sm text-slate-500">
+      <div className="flex items-center justify-between bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
+        <div className="text-base text-slate-500">
           Showing page {page} of {totalPages} ({totalRecords} total questions)
         </div>
         <div className="flex gap-2">
@@ -438,7 +438,7 @@ export default function QuestionsAdminPage() {
 
           <form onSubmit={handleSaveQuestion} className="space-y-4 pt-2">
             <div className="space-y-1.5">
-              <Label className="text-xs font-semibold">Category</Label>
+              <Label className="text-base font-semibold">Category</Label>
               <Select
                 value={formData.category}
                 onValueChange={(val: string | null) => {
@@ -459,7 +459,7 @@ export default function QuestionsAdminPage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs font-semibold">Question Text (मराठी)</Label>
+              <Label className="text-base font-semibold">Question Text (मराठी)</Label>
               <Textarea
                 required
                 value={formData.question}
@@ -470,7 +470,7 @@ export default function QuestionsAdminPage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-xs font-semibold">Description / Guidance (Optional)</Label>
+              <Label className="text-base font-semibold">Description / Guidance (Optional)</Label>
               <Input
                 value={formData.description}
                 onChange={e => setFormData(p => ({ ...p, description: e.target.value }))}
@@ -480,7 +480,7 @@ export default function QuestionsAdminPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label className="text-xs font-semibold">Min Words</Label>
+                <Label className="text-base font-semibold">Min Words</Label>
                 <Input
                   type="number"
                   min={10}
@@ -489,7 +489,7 @@ export default function QuestionsAdminPage() {
                 />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs font-semibold">Max Words</Label>
+                <Label className="text-base font-semibold">Max Words</Label>
                 <Input
                   type="number"
                   min={50}
@@ -501,7 +501,7 @@ export default function QuestionsAdminPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label className="text-xs font-semibold">Difficulty</Label>
+                <Label className="text-base font-semibold">Difficulty</Label>
                 <Select
                   value={formData.difficulty}
                   onValueChange={(val: string | null) => {
@@ -520,7 +520,7 @@ export default function QuestionsAdminPage() {
               </div>
 
               <div className="flex items-center justify-between pt-6">
-                <Label className="text-xs font-semibold">Enabled</Label>
+                <Label className="text-base font-semibold">Enabled</Label>
                 <Switch
                   checked={formData.enabled}
                   onCheckedChange={v => setFormData(p => ({ ...p, enabled: v }))}
@@ -532,7 +532,7 @@ export default function QuestionsAdminPage() {
               <Button type="button" variant="outline" onClick={() => setIsFormOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="bg-[oklch(0.42_0.16_250)] text-white">
+              <Button type="submit" className="bg-blue-600 text-white">
                 {editingId ? 'Save Changes' : 'Create Question'}
               </Button>
             </DialogFooter>
@@ -562,18 +562,18 @@ export default function QuestionsAdminPage() {
     "maxWords": 250
   }
 ]`}
-              className="font-mono text-xs min-h-[220px]"
+              className="font-mono text-base min-h-[220px]"
             />
 
             {importError && (
-              <div className="flex items-center gap-2 text-xs text-rose-700 bg-rose-50 border border-rose-200 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-base text-rose-700 bg-rose-50 border border-rose-200 p-3 rounded-lg">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{importError}</span>
               </div>
             )}
 
             {importSuccess && (
-              <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-base text-emerald-700 bg-emerald-50 border border-emerald-200 p-3 rounded-lg">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
                 <span>{importSuccess}</span>
               </div>
@@ -591,7 +591,7 @@ export default function QuestionsAdminPage() {
             <Button
               onClick={handleImportSubmit}
               disabled={importing || !importJson.trim()}
-              className="bg-[oklch(0.42_0.16_250)] text-white"
+              className="bg-blue-600 text-white"
             >
               {importing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
               Validate &amp; Import

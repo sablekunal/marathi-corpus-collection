@@ -34,17 +34,17 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname()
 
   return (
-    <aside className="flex flex-col h-full bg-white border-r border-[oklch(0.88_0.02_250)] w-64">
+    <aside className="flex flex-col h-full bg-white border-r border-gray-200 w-64">
       {/* Brand */}
-      <div className="flex items-center gap-3 px-5 py-5 border-b border-[oklch(0.88_0.02_250)]">
+      <div className="flex items-center gap-3 px-5 py-5 border-b border-gray-200">
         <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0 relative overflow-hidden shadow-xs border border-slate-100">
           <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
         </div>
         <div className="min-w-0">
-          <div className="font-marathi font-bold text-sm text-[oklch(0.20_0.04_250)] leading-tight">
+          <div className="font-marathi font-bold text-base text-[oklch(0.20_0.04_250)] leading-tight">
             मराठी भाषा संग्रह
           </div>
-          <div className="text-[10px] text-[oklch(0.52_0.04_250)] uppercase tracking-wide">
+          <div className="text-base text-[oklch(0.52_0.04_250)] uppercase tracking-wide">
             Admin
           </div>
         </div>
@@ -66,13 +66,13 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
               href={item.href}
               onClick={onClose}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150',
+                'flex items-center gap-3 px-3 py-3 rounded-lg text-base font-medium transition-colors duration-150',
                 active
                   ? 'bg-[oklch(0.93_0.03_250)] text-[oklch(0.35_0.14_250)]'
                   : 'text-[oklch(0.45_0.04_250)] hover:bg-[oklch(0.96_0.01_250)] hover:text-[oklch(0.20_0.04_250)]',
               )}
             >
-              <Icon className={cn('w-4 h-4 flex-shrink-0', active ? 'text-[oklch(0.42_0.16_250)]' : '')} />
+              <Icon className={cn('w-4 h-4 flex-shrink-0', active ? 'text-blue-600' : '')} />
               {item.label}
             </Link>
           )
@@ -80,10 +80,10 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
       </nav>
 
       {/* Sign out */}
-      <div className="px-3 py-4 border-t border-[oklch(0.88_0.02_250)]">
+      <div className="px-3 py-4 border-t border-gray-200">
         <button
           onClick={() => signOut({ callbackUrl: '/auth/login' })}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[oklch(0.52_0.04_250)] hover:text-[oklch(0.58_0.22_27)] hover:bg-[oklch(0.97_0.05_27)] w-full transition-colors"
+          className="flex items-center gap-3 px-3 py-3 rounded-lg text-base font-medium text-gray-600 hover:text-red-700 hover:bg-red-50 w-full transition-colors"
         >
           <LogOut className="w-4 h-4" />
           Sign Out
@@ -97,7 +97,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[oklch(0.97_0.01_250)]">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       {/* Desktop sidebar */}
       <div className="hidden lg:flex admin-sidebar flex-shrink-0">
         <Sidebar />
@@ -124,14 +124,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main content */}
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         {/* Mobile topbar */}
-        <header className="lg:hidden flex items-center gap-3 px-4 py-3 bg-white border-b border-[oklch(0.88_0.02_250)] flex-shrink-0">
+        <header className="lg:hidden flex items-center gap-3 px-4 py-3 bg-white border-b border-gray-200 flex-shrink-0">
           <button
             onClick={() => setSidebarOpen(true)}
             className="text-[oklch(0.45_0.04_250)] hover:text-[oklch(0.20_0.04_250)] transition-colors p-1"
           >
             <Menu className="w-5 h-5" />
           </button>
-          <span className="font-marathi font-bold text-sm text-[oklch(0.20_0.04_250)]">
+          <span className="font-marathi font-bold text-base text-[oklch(0.20_0.04_250)]">
             मराठी भाषा संग्रह
           </span>
         </header>

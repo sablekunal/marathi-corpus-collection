@@ -151,39 +151,39 @@ export default function ResponsesAdminPage() {
         <h1 className="text-2xl font-bold text-[oklch(0.20_0.04_250)]">
           Responses &amp; Corpus Review
         </h1>
-        <p className="text-sm text-[oklch(0.52_0.04_250)] mt-0.5">
+        <p className="text-base text-[oklch(0.52_0.04_250)] mt-0.5">
           Inspect collected Marathi responses, quality flags, and typing metrics
         </p>
       </div>
 
       {/* Search bar */}
-      <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-[oklch(0.88_0.02_250)] shadow-xs">
+      <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <Input
             placeholder="Search responses by keyword, category, or district..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="pl-9 bg-slate-50 border-none text-sm h-10 w-full"
+            className="pl-9 bg-slate-50 border-none text-base h-10 w-full"
           />
         </div>
-        <div className="text-xs font-semibold text-slate-500">
+        <div className="text-base font-semibold text-slate-500">
           Total: {totalRecords} responses
         </div>
       </div>
 
       {/* Responses Table */}
-      <div className="bg-white rounded-xl border border-[oklch(0.88_0.02_250)] overflow-hidden shadow-xs">
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
         <Table>
           <TableHeader>
             <TableRow className="bg-slate-50/80">
-              <TableHead className="w-24 text-xs font-bold text-slate-600">Category</TableHead>
-              <TableHead className="text-xs font-bold text-slate-600">Marathi Text Preview</TableHead>
-              <TableHead className="w-24 text-xs font-bold text-slate-600 text-center">Words</TableHead>
-              <TableHead className="w-24 text-xs font-bold text-slate-600 text-center">Quality</TableHead>
-              <TableHead className="w-24 text-xs font-bold text-slate-600 text-center">Pastes</TableHead>
-              <TableHead className="w-28 text-xs font-bold text-slate-600 text-center">District</TableHead>
-              <TableHead className="w-20 text-xs font-bold text-slate-600 text-right">View</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600">Category</TableHead>
+              <TableHead className="text-base font-bold text-slate-600">Marathi Text Preview</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600 text-center">Words</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600 text-center">Quality</TableHead>
+              <TableHead className="w-24 text-base font-bold text-slate-600 text-center">Pastes</TableHead>
+              <TableHead className="w-28 text-base font-bold text-slate-600 text-center">District</TableHead>
+              <TableHead className="w-20 text-base font-bold text-slate-600 text-right">View</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -196,7 +196,7 @@ export default function ResponsesAdminPage() {
               </TableRow>
             ) : data.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center py-12 text-slate-400 text-sm font-medium">
+                <TableCell colSpan={7} className="text-center py-12 text-slate-400 text-base font-medium">
                   No responses recorded yet. Share a form link to begin collecting data.
                 </TableCell>
               </TableRow>
@@ -204,21 +204,21 @@ export default function ResponsesAdminPage() {
               data.map(r => (
                 <TableRow key={r.responseId} className="hover:bg-slate-50/50">
                   <TableCell>
-                    <Badge variant="outline" className="text-[11px] bg-blue-50/50 text-blue-700 border-blue-200">
+                    <Badge variant="outline" className="text-base bg-blue-50/50 text-blue-700 border-blue-200">
                       {r.category}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="font-marathi text-sm text-slate-800 line-clamp-2 max-w-lg leading-relaxed">
+                    <div className="font-marathi text-base text-slate-800 line-clamp-2 max-w-lg leading-relaxed">
                       {r.responseText}
                     </div>
                   </TableCell>
-                  <TableCell className="text-center font-semibold text-xs text-slate-700">
+                  <TableCell className="text-center font-semibold text-base text-slate-700">
                     {r.wordCount}
                   </TableCell>
                   <TableCell className="text-center">
                     <span
-                      className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                      className={`text-base font-bold px-2 py-0.5 rounded-full ${
                         r.qualityScore >= 80
                           ? 'bg-emerald-50 text-emerald-700'
                           : r.qualityScore >= 50
@@ -231,15 +231,15 @@ export default function ResponsesAdminPage() {
                   </TableCell>
                   <TableCell className="text-center">
                     {r.pasteAttempts > 0 ? (
-                      <span className="text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full flex items-center justify-center gap-1">
+                      <span className="text-base font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full flex items-center justify-center gap-1">
                         <ShieldAlert className="w-3 h-3" />
                         {r.pasteAttempts}
                       </span>
                     ) : (
-                      <span className="text-xs text-slate-400">0</span>
+                      <span className="text-base text-slate-400">0</span>
                     )}
                   </TableCell>
-                  <TableCell className="text-center text-xs font-medium text-slate-600 font-marathi">
+                  <TableCell className="text-center text-base font-medium text-slate-600 font-marathi">
                     {r.metadata.district || '—'}
                   </TableCell>
                   <TableCell className="text-right">
@@ -260,8 +260,8 @@ export default function ResponsesAdminPage() {
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between bg-white p-4 rounded-xl border border-[oklch(0.88_0.02_250)] shadow-xs">
-        <div className="text-sm text-slate-500">
+      <div className="flex items-center justify-between bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
+        <div className="text-base text-slate-500">
           Showing page {page} of {totalPages} ({totalRecords} total responses)
         </div>
         <div className="flex gap-2">
@@ -281,7 +281,7 @@ export default function ResponsesAdminPage() {
             <DialogHeader>
               <div className="flex items-center justify-between pr-8">
                 <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700">
+                  <Badge variant="outline" className="text-base bg-blue-50 text-blue-700">
                     {selectedResponse.category}
                   </Badge>
                   <DialogTitle className="text-base font-semibold">
@@ -289,31 +289,31 @@ export default function ResponsesAdminPage() {
                   </DialogTitle>
                 </div>
                 {!isEditing ? (
-                  <Button variant="outline" size="sm" onClick={() => handleEditStart(selectedResponse)} className="h-8 gap-1.5 text-xs">
+                  <Button variant="outline" size="sm" onClick={() => handleEditStart(selectedResponse)} className="h-8 gap-1.5 text-base">
                     <Edit2 className="w-3.5 h-3.5" />
                     Edit
                   </Button>
                 ) : (
                   <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" onClick={() => setIsEditing(false)} disabled={saving} className="h-8 gap-1.5 text-xs text-slate-500 hover:text-slate-700">
+                    <Button variant="ghost" size="sm" onClick={() => setIsEditing(false)} disabled={saving} className="h-8 gap-1.5 text-base text-slate-500 hover:text-slate-700">
                       <X className="w-3.5 h-3.5" />
                       Cancel
                     </Button>
-                    <Button variant="default" size="sm" onClick={handleEditSave} disabled={saving} className="h-8 gap-1.5 text-xs bg-[oklch(0.42_0.16_250)] text-white">
+                    <Button variant="default" size="sm" onClick={handleEditSave} disabled={saving} className="h-8 gap-1.5 text-base bg-blue-600 text-white">
                       {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
                       Save
                     </Button>
                   </div>
                 )}
               </div>
-              <DialogDescription className="text-xs">
+              <DialogDescription className="text-base">
                 Submission ID: {selectedResponse.responseId}
               </DialogDescription>
             </DialogHeader>
 
             {/* Prompt */}
             <div className="space-y-1 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-              <span className="text-[11px] font-bold text-slate-500 uppercase">Question Prompt</span>
+              <span className="text-base font-bold text-slate-500 uppercase">Question Prompt</span>
               <p className="font-marathi font-bold text-slate-900 text-base">
                 {selectedResponse.questionText}
               </p>
@@ -321,7 +321,7 @@ export default function ResponsesAdminPage() {
 
             {/* Response Text */}
             <div className="space-y-1.5">
-              <span className="text-[11px] font-bold text-slate-500 uppercase">
+              <span className="text-base font-bold text-slate-500 uppercase">
                 Respondent Marathi Text ({selectedResponse.wordCount} words)
               </span>
               {isEditing ? (
@@ -341,19 +341,19 @@ export default function ResponsesAdminPage() {
             {isEditing && (
               <div className="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-semibold text-slate-600">Manual Quality Score</Label>
+                  <Label className="text-base font-semibold text-slate-600">Manual Quality Score</Label>
                   <Input 
                     type="number" 
                     min={0} 
                     max={100} 
                     value={editForm.qualityScore}
                     onChange={e => setEditForm({ ...editForm, qualityScore: Number(e.target.value) })}
-                    className="h-8 text-sm"
+                    className="h-8 text-base"
                   />
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between pt-1">
-                    <Label className="text-xs font-semibold text-slate-600">Flag Response</Label>
+                    <Label className="text-base font-semibold text-slate-600">Flag Response</Label>
                     <Switch
                       checked={editForm.flagged}
                       onCheckedChange={v => setEditForm({ ...editForm, flagged: v })}
@@ -364,7 +364,7 @@ export default function ResponsesAdminPage() {
                       placeholder="Reason for flag..."
                       value={editForm.flagReason}
                       onChange={e => setEditForm({ ...editForm, flagReason: e.target.value })}
-                      className="h-8 text-xs border-rose-200 focus-visible:ring-rose-500"
+                      className="h-8 text-base border-rose-200 focus-visible:ring-rose-500"
                     />
                   )}
                 </div>
@@ -373,7 +373,7 @@ export default function ResponsesAdminPage() {
 
             {/* Quality Flags View Mode */}
             {!isEditing && selectedResponse.flagged && (
-              <div className="bg-rose-50 border border-rose-200 p-3 rounded-xl flex items-center gap-2 text-xs text-rose-800">
+              <div className="bg-rose-50 border border-rose-200 p-3 rounded-xl flex items-center gap-2 text-base text-rose-800">
                 <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
                 <span>Flag Reason: {selectedResponse.flagReason || 'Quality check alert'}</span>
               </div>
@@ -382,25 +382,25 @@ export default function ResponsesAdminPage() {
             {/* Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-center">
               <div>
-                <div className="text-xs text-slate-500">Quality Score</div>
+                <div className="text-base text-slate-500">Quality Score</div>
                 <div className="text-base font-bold text-slate-800">{selectedResponse.qualityScore}%</div>
               </div>
               <div>
-                <div className="text-xs text-slate-500">Typing Speed</div>
+                <div className="text-base text-slate-500">Typing Speed</div>
                 <div className="text-base font-bold text-blue-700 flex items-center justify-center gap-1">
                   <Zap className="w-3.5 h-3.5" />
                   {selectedResponse.typingSpeedWpm} WPM
                 </div>
               </div>
               <div>
-                <div className="text-xs text-slate-500">Active Duration</div>
+                <div className="text-base text-slate-500">Active Duration</div>
                 <div className="text-base font-bold text-slate-800 flex items-center justify-center gap-1">
                   <Clock className="w-3.5 h-3.5" />
                   {Math.round(selectedResponse.activeDurationMs / 1000)}s
                 </div>
               </div>
               <div>
-                <div className="text-xs text-slate-500">Paste Attempts</div>
+                <div className="text-base text-slate-500">Paste Attempts</div>
                 <div className="text-base font-bold text-amber-700">{selectedResponse.pasteAttempts}</div>
               </div>
             </div>
@@ -408,8 +408,8 @@ export default function ResponsesAdminPage() {
             {/* Demographics / Metadata */}
             {Object.keys(selectedResponse.metadata).length > 0 && (
               <div className="space-y-1.5 pt-1">
-                <span className="text-[11px] font-bold text-slate-500 uppercase">Demographics Profile</span>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                <span className="text-base font-bold text-slate-500 uppercase">Demographics Profile</span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-base">
                   {Object.entries(selectedResponse.metadata).map(([k, v]) => (
                     <div key={k} className="p-2 bg-slate-50 border border-slate-100 rounded-md">
                       <span className="text-slate-400 capitalize">{k}: </span>

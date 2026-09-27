@@ -72,8 +72,8 @@ export default function AnalyticsAdminPage() {
   if (loading) {
     return (
       <div className="p-12 text-center text-slate-400">
-        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-[oklch(0.42_0.16_250)]" />
-        <p className="text-sm font-medium">Loading research analytics...</p>
+        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-blue-600" />
+        <p className="text-base font-medium">Loading research analytics...</p>
       </div>
     )
   }
@@ -87,61 +87,61 @@ export default function AnalyticsAdminPage() {
         <h1 className="text-2xl font-bold text-[oklch(0.20_0.04_250)]">
           Corpus Research Analytics
         </h1>
-        <p className="text-sm text-[oklch(0.52_0.04_250)] mt-0.5">
+        <p className="text-base text-[oklch(0.52_0.04_250)] mt-0.5">
           Real-time dataset health, quality controls, and distribution trends
         </p>
       </div>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs space-y-2">
+        <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs space-y-2">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-semibold">Total Submissions</span>
+            <span className="text-base font-semibold">Total Submissions</span>
             <Users className="w-4 h-4 text-blue-600" />
           </div>
           <div className="text-2xl font-bold text-slate-900">
             {data.totalSubmissions.toLocaleString()}
           </div>
-          <div className="text-[11px] text-slate-500 font-medium">
+          <div className="text-base text-slate-500 font-medium">
             Started: {data.totalStarted}
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs space-y-2">
+        <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs space-y-2">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-semibold">Completion Rate</span>
+            <span className="text-base font-semibold">Completion Rate</span>
             <CheckCircle className="w-4 h-4 text-emerald-600" />
           </div>
           <div className="text-2xl font-bold text-emerald-600">
             {data.completionRate}%
           </div>
-          <div className="text-[11px] text-slate-500 font-medium">
+          <div className="text-base text-slate-500 font-medium">
             Form finish conversion
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs space-y-2">
+        <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs space-y-2">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-semibold">Avg. Word Length</span>
+            <span className="text-base font-semibold">Avg. Word Length</span>
             <FileText className="w-4 h-4 text-indigo-600" />
           </div>
           <div className="text-2xl font-bold text-slate-900">
             {data.avgWordCount}
           </div>
-          <div className="text-[11px] text-slate-500 font-medium">
+          <div className="text-base text-slate-500 font-medium">
             Words per response
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs space-y-2">
+        <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-xs space-y-2">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-xs font-semibold">Pastes Intercepted</span>
+            <span className="text-base font-semibold">Pastes Intercepted</span>
             <ShieldAlert className="w-4 h-4 text-amber-600" />
           </div>
           <div className="text-2xl font-bold text-amber-600">
             {data.totalPasteAttempts}
           </div>
-          <div className="text-[11px] text-slate-500 font-medium">
+          <div className="text-base text-slate-500 font-medium">
             Anti-bot protection events
           </div>
         </div>
@@ -150,15 +150,15 @@ export default function AnalyticsAdminPage() {
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Category Breakdown */}
-        <div className="bg-white p-6 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs space-y-4">
+        <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-base text-slate-800">Category Distribution</h3>
-            <span className="text-xs text-slate-400">Responses by prompt type</span>
+            <span className="text-base text-slate-400">Responses by prompt type</span>
           </div>
 
           <div className="h-[280px] w-full">
             {data.categoryDistribution.length === 0 ? (
-              <div className="h-full flex items-center justify-center text-xs text-slate-400">
+              <div className="h-full flex items-center justify-center text-base text-slate-400">
                 No response data available
               </div>
             ) : (
@@ -175,15 +175,15 @@ export default function AnalyticsAdminPage() {
         </div>
 
         {/* Daily Trend */}
-        <div className="bg-white p-6 rounded-2xl border border-[oklch(0.88_0.02_250)] shadow-xs space-y-4">
+        <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-base text-slate-800">Daily Submissions Trend</h3>
-            <span className="text-xs text-slate-400">Past 30 days</span>
+            <span className="text-base text-slate-400">Past 30 days</span>
           </div>
 
           <div className="h-[280px] w-full">
             {data.dailyTrend.length === 0 ? (
-              <div className="h-full flex items-center justify-center text-xs text-slate-400">
+              <div className="h-full flex items-center justify-center text-base text-slate-400">
                 No submissions in past 30 days
               </div>
             ) : (
@@ -208,22 +208,22 @@ export default function AnalyticsAdminPage() {
 
       {/* ── Transliteration Robustness (3-Tier Reliability) ── */}
       {data.transliterationMetrics && (
-        <div className="bg-white rounded-2xl border border-[oklch(0.88_0.02_250)] p-6 shadow-xs space-y-5">
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-50 text-[oklch(0.42_0.16_250)] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
                 <Languages className="w-4 h-4" />
               </div>
               <div>
                 <h3 className="font-bold text-base text-slate-800">
                   Transliteration Robustness &amp; 3-Tier Telemetry
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-base text-slate-400">
                   Real-time uptime and latency across Cache, Google Input Tools, and Local Fallback
                 </p>
               </div>
             </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+            <span className="inline-flex items-center gap-1 text-base font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
               <ShieldCheck className="w-3.5 h-3.5" />
               {data.transliterationMetrics.successRate}% Success Rate
             </span>
@@ -234,8 +234,8 @@ export default function AnalyticsAdminPage() {
               <div className="text-2xl font-bold text-emerald-600">
                 {data.transliterationMetrics.cacheHitRate}%
               </div>
-              <div className="text-xs font-semibold text-slate-700 mt-0.5">Tier 1: Cache Hit Rate</div>
-              <div className="text-[11px] text-slate-400 mt-1">
+              <div className="text-base font-semibold text-slate-700 mt-0.5">Tier 1: Cache Hit Rate</div>
+              <div className="text-base text-slate-400 mt-1">
                 ({data.transliterationMetrics.cacheHits} / {data.transliterationMetrics.totalAttempts} words)
               </div>
             </div>
@@ -244,8 +244,8 @@ export default function AnalyticsAdminPage() {
               <div className="text-2xl font-bold text-blue-600">
                 {data.transliterationMetrics.googleHitRate}%
               </div>
-              <div className="text-xs font-semibold text-slate-700 mt-0.5">Tier 2: Google API Rate</div>
-              <div className="text-[11px] text-slate-400 mt-1">
+              <div className="text-base font-semibold text-slate-700 mt-0.5">Tier 2: Google API Rate</div>
+              <div className="text-base text-slate-400 mt-1">
                 ({data.transliterationMetrics.googleHits} words via API)
               </div>
             </div>
@@ -255,15 +255,15 @@ export default function AnalyticsAdminPage() {
                 <Zap className="w-4 h-4 text-amber-500" />
                 <span>{data.transliterationMetrics.avgLatencyMs}ms</span>
               </div>
-              <div className="text-xs font-semibold text-slate-700 mt-0.5">Average Latency</div>
-              <div className="text-[11px] text-slate-400 mt-1">
+              <div className="text-base font-semibold text-slate-700 mt-0.5">Average Latency</div>
+              <div className="text-base text-slate-400 mt-1">
                 (Cache: &lt;1ms, Google: ~90ms)
               </div>
             </div>
           </div>
 
           {/* 3-Tier Breakdown Table */}
-          <div className="border border-slate-200 rounded-xl overflow-hidden text-xs">
+          <div className="border border-slate-200 rounded-xl overflow-hidden text-base">
             <table className="w-full text-left">
               <thead className="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
                 <tr>

@@ -1,16 +1,16 @@
 {
-  "name": "मराठी भाषा संग्रह | Marathi Corpus Collection",
-  "short_name": "Marathi Corpus",
-  "description": "A specialized platform for collecting Marathi text corpus for LLM research.",
+  "name": "मराठी भाषा संग्रह | Marathi Language Corpus",
+  "short_name": "मभस",
+  "description": "A specialized platform for collecting Marathi language text corpus for NLP and LLM research.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#3b5fa0",
+  "background_color": "#FAFAFA",
+  "theme_color": "#EA580C",
   "icons": [
     {
-      "src": "/icon.svg",
+      "src": "/logo.png",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ]
 }
