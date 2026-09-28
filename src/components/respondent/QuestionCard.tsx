@@ -119,9 +119,14 @@ export function QuestionCard({
             {question.description}
           </p>
         )}
-        <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5 inline-block font-medium">
-          💡 तुमच्या बोलीभाषेत १-२ वाक्यांत लिहा (मराठी किंवा रोमन लिपीतही चालेल). कोणतेही कडक व्याकरण नियम नाहीत!
-        </p>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-2.5">
+          <p className="text-xs text-amber-950 font-semibold leading-relaxed font-marathi">
+            💡 तुमच्याकडे बोलल्या जाणाऱ्या बोलीभाषेत (उदा. कोकणी, वऱ्हाडी,...) उत्तर लिहा; शुद्ध मराठीचा वापर टाळा.
+          </p>
+          <p className="text-[11px] text-amber-800 mt-0.5">
+            (मराठी देवनागरी किंवा &quot;mala aamba avadto&quot; सारख्या रोमन लिपीतही चालेल. कोणतेही कडक व्याकरण नियम नाहीत.)
+          </p>
+        </div>
       </div>
 
       {/* ── Transliteration Textarea (compact) ── */}
