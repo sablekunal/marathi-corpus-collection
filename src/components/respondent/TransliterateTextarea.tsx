@@ -29,7 +29,7 @@ export function TransliterateTextarea({
   onMetricsUpdate,
   disabled = false,
   antiPasteEnabled = true,
-  placeholder = 'येथे तुमचे उत्तर लिहा... (मराठी किंवा "mla aamba vadto" सारख्या रोमन लिपीतही चालेल)',
+  placeholder = 'येथे तुमचे उत्तर लिहा... (मराठी किंवा "mala aamba avadto" सारख्या रोमन लिपीतही चालेल)',
 }: TransliterateTextareaProps) {
   const [pasteWarning, setPasteWarning] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)

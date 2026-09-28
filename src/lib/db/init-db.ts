@@ -121,6 +121,15 @@ async function init() {
     );
   `)
 
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS transliteration_overrides (
+      id TEXT PRIMARY KEY,
+      word TEXT NOT NULL UNIQUE,
+      override TEXT NOT NULL,
+      created_at TEXT DEFAULT (datetime('now'))
+    );
+  `)
+
   // Migrate existing databases if columns are missing
   try {
     await client.execute(`ALTER TABLE respondent_sessions ADD COLUMN consent_research INTEGER DEFAULT 0;`)
