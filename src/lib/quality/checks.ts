@@ -55,10 +55,6 @@ export function checkQuality(text: string, minWords: number): QualityReport {
     warnings.push('अक्षरांची जास्त पुनरावृत्ती आढळली (उदा. aaaaaaa).')
     score -= 15
   }
-  if (flags.mostlyEnglish) {
-    warnings.push('हे उत्तर मुख्यतः इंग्रजीत आहे. कृपया मराठीत लिहा.')
-    score -= 25
-  }
   if (flags.mostlyNumbers) {
     warnings.push('उत्तरात जास्त संख्या आढळल्या. कृपया पूर्ण वाक्ये लिहा.')
     score -= 20

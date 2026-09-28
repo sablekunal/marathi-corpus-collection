@@ -119,8 +119,8 @@ export function QuestionCard({
             {question.description}
           </p>
         )}
-        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5 inline-block">
-          💡 तुमच्या बोलीभाषेत १-२ वाक्यांत लिहा. व्याकरण नियम नाहीत!
+        <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5 inline-block font-medium">
+          💡 तुमच्या बोलीभाषेत १-२ वाक्यांत लिहा (मराठी किंवा रोमन लिपीतही चालेल). कोणतेही कडक व्याकरण नियम नाहीत!
         </p>
       </div>
 
